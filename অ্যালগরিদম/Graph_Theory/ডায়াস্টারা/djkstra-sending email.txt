@@ -1,0 +1,120 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#define max 20001
+#define INF 100100
+
+using namespace std;
+
+vector<int>G[max];
+vector<int>cost[max];
+int d[max];
+
+struct data
+{
+
+    int city,dist;
+    data(int a,int b)
+    {
+        city = a;
+        dist = b;
+
+    }
+    bool operator < (const data& p) const
+    {
+
+        return dist>p.dist;
+    }
+};
+
+void Dijkstra(int start,int node)
+{
+    int i,j,u,v;
+
+    for(j=0; j<=node; j++)
+        d[j] = INF;
+
+    priority_queue<data>Q;
+
+    Q.push(data(start,0));
+
+    d[start] =0;
+
+    while(!Q.empty())
+    {
+        data top = Q.top();
+        Q.pop();
+
+        u = top.city;
+
+        for(i=0; i<G[u].size(); i++)
+        {
+            v = G[u][i];
+
+            if(d[u]+cost[u][i]<d[v])
+            {
+                d[v] = d[u]+cost[u][i];
+
+                Q.push(data(v,d[v]));
+            }
+        }
+    }
+
+
+}
+
+
+int main()
+{
+    int node,edge,i,j,k,l,m,x,y,z,start,end,cas;
+
+    scanf("%d",&cas);
+
+    for(k=1; k<=cas; k++)
+    {
+
+        scanf("%d%d%d%d",&node,&edge,&start,&end);
+
+        for(i=0; i<edge; i++)
+        {
+            cin>>x>>y>>z;
+
+            G[x].push_back(y);
+            G[y].push_back(x);
+
+            cost[x].push_back(z);
+            cost[y].push_back(z);
+        }
+
+
+        Dijkstra(start,node);
+
+
+
+         if(d[end]==INF)
+            printf("Case #%d: unreachable\n",k);
+
+        else
+            printf("Case #%d: %d\n",k,d[end]);
+
+
+        memset(d,0,sizeof(d));
+
+        for(l =0; l<max; l++)
+        {
+            G[l].clear();
+        }
+
+        for(m =0; m<max; m++)
+        {
+            cost[m].clear();
+        }
+    }
+
+    return 0;
+
+
+}

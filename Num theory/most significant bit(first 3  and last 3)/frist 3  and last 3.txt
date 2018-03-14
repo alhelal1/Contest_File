@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<stdlib.h>
+#include<algorithm>
+
+using namespace std;
+typedef long long ll;
+
+int Pow(int a, int b)
+{
+    int ans = 1;
+    a %= 1000;
+    while(b)
+    {
+        if(b % 2 != 0)
+            ans = (ans * a) % 1000;
+        a = (a * a) % 1000;
+        b /= 2;
+    }
+    return ans;
+}//???
+
+int main()
+{
+    int t, n, k, p = 0;
+    scanf("%d", &t);
+    while(t--)
+    {
+        p++;
+        scanf("%d%d", &n, &k);
+        double m = k * log10(n) - (int)(k * log10(n));
+        m = pow(10, m);
+        int x = m * 100;
+        int y = Pow(n, k);
+        printf("Case %d: %d %03d\n", p, x, y);
+    }
+    return 0;
+}

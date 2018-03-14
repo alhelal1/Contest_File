@@ -1,0 +1,30 @@
+
+const int mx=11;
+int m,n,arr[mx];
+int dp[11][11];
+ 
+int call(int left,int prev)
+{
+    //cout<<left<<"--"<<prev<<endl;
+    if(!left) return 1;
+    int &ret=dp[left][prev];
+    if(ret!=-1) return ret;
+    ret=0;
+    rep(i,m) if(abs(prev-arr[i])<=2 || prev==0) ret+=call(left-1,arr[i]);
+    return ret;
+}
+ 
+int main()
+{
+    //read("in");
+    int test,kas=0; scanf("%d",&test);
+    while(test--)
+    {
+        scanf("%d%d",&m,&n);
+        rep(i,m) scanf("%d",&arr[i]);
+        mem(dp,-1);
+        printf("Case %d: %d\n",++kas,call(n,0));
+    }
+    return 0;
+}
+ 

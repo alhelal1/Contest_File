@@ -1,0 +1,67 @@
+
+
+LL n,m,c;
+
+LL a,b,r,rr;
+
+LL ar[305],br[305];
+map<  pair<LL,LL>,LL > A;
+
+const int  inf=1000000000;
+
+
+
+ int  go(LL idx,LL g)
+{
+    if(idx>=n)
+    {
+        if(g==1) return 0LL ;
+        else return    inf;
+    }
+
+    pair< LL,LL > BB;
+    BB=make_pair(idx,g);
+
+    if(A.find(BB)!=A.end())  return A[BB];
+
+
+
+
+        LL kk=__gcd(g,ar[idx]);
+        int ret=inf;
+
+
+        ret=min(ret,br[idx]+go(idx+1,kk));
+        ret=min(ret,go(idx+1,g));
+
+        return A[BB]=ret;
+
+
+}
+
+
+int main()
+{
+    FAST;
+
+    cin>>n;
+
+    for(int i=0;i<n;i++)cin>>ar[i];
+    for(int i=0;i<n;i++)cin>>br[i];
+
+    int ans=go(0,0);
+
+
+    if(ans==inf)cout<<-1;
+    else
+
+    cout<<ans;
+
+
+
+
+   return 0;
+
+}
+
+

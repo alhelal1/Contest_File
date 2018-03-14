@@ -1,0 +1,28 @@
+int main()
+{
+     int n,x,g,q;
+    cin>>n;
+    rep(i,1,n){
+        cin>>x;
+        set<int>     stmp = s;s.clear();
+        map<ll,ll> mtmp = MAP; MAP.clear();
+
+        for(set<int,int>::iterator it=stmp.begin();it!=stmp.end();it++){
+            g = __gcd(x,*it);
+            s.insert(g);
+            MAP[g]+= mtmp[ *it ];
+            tot[g]+= mtmp[ *it ];
+        }
+        s.insert(x);
+        MAP[x]++;
+        tot[x]++;
+    }
+
+    cin>>q;
+    rep(i,0,q-1){
+        cin>>x;
+        cout<<tot[x]<<endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,27 @@
+/**
+ll dp[100100];
+ll ar[100100];
+ll n;
+int LIS()
+ {
+    int i, j;
+    rep(i,n)
+    dp[i]=1;
+   rep(i,n)
+    {
+    for( j = i + 1; j < n; j++ )
+     {
+        if( ar[j]>ar[i] )
+         {
+            if( dp[j] < dp[i] + 1 )
+            dp[j] = dp[i] + 1;
+        }
+     }
+    }
+    ll mx = 0;
+    for( i = 0; i < n; i++ )
+        {
+        mx=max(mx,dp[i]);
+    }
+    return mx;
+}**/

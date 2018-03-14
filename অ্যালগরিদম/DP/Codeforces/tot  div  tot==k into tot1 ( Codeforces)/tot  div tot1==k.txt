@@ -1,0 +1,47 @@
+LL ar[101],br[101],cr[101];
+LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0,w;
+string  s;
+
+MII A[101][2];
+LL go(LL idx,LL tot,LL f)
+{
+
+    //DD(tot,f);
+    if(idx>=n)
+    {
+        if(tot==0  and f)  return 0;
+        else  return -1000000000;
+    }
+    if(A[idx][f][tot])  return A[idx][f][tot];
+
+    LL ret=-1000000000;
+
+    ret=max(ret,go(idx+1,tot,f));
+    ret=max(ret,ar[idx]+go(idx+1,tot+ar[idx]-br[idx]*m,1));
+
+    return  A[idx][f][tot]=ret;
+}
+
+int main()
+{
+    //Fast;
+
+    cin>>n;  cin>>m;
+
+    //A.clear();
+
+
+    rep(i,n) cin>>ar[i];
+    rep(i,n) cin>>br[i];
+
+
+    rep(i,n)
+          cr[i]=ar[i]-(br[i]*m*1LL);
+
+          LL ans=go(0,0,0);
+
+    if(ans<0) cout<<-1;
+    else cout<<ans;
+   return 0;
+
+}

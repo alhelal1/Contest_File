@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://accepted.com.cn/lightoj1065/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/ex" async=""></script><script charset="utf-8" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/main.js" async="" mod_name="tanxssp-main"></script><script charset="utf-8" async="" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/tanxssp.js"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/shares.php" charset="utf-8"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/hm.js"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/push.js"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/id.php" charset="utf-8"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/ca-pub-5823720730817262.js"></script><script type="text/javascript" charset="gbk" id="tanx-s-mm_54142854_9388102_31856578" async="" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/ex(1)"></script>
+    
+    
+    
+<meta charset="UTF-8">
+    <meta name="alexaVerifyID" content="heWd6hllJXL7gThSqtxqom1mU2Q"> 
+<meta name="description" content="Accepted题解网，提供POJ、HDOJ、ZOJ等著名OJ AC代码，大家交流学习"> 
+<meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="google-site-verification" content="hP3jKqGXJuFjwvfT8rRa0XBfaF_DEMbM2_CWwb3H-ZE">
+<!--<title>LIGHTOJ1065-Number Sequence | accepted题解网</title>-->
+<title>LIGHTOJ1065-Number Sequence   |  Accepted题解网</title>
+    <!--echo get_option('blogname'); if (is_home ()) echo get_option('blogdescription'); if ($paged > 1) echo '-Page ', $paged;-->
+<script>
+window._deel = {
+    name: 'accepted题解网',
+    url: 'http://accepted.com.cn/wp-content/themes/D8',
+    rss: '',
+    ajaxpager: '',
+    maillist: '',
+    maillistCode: '',
+    commenton: 0,
+    roll: [0,0]
+}
+</script>
+
+<!-- All in One SEO Pack 2.2.6.2 by Michael Torbert of Semper Fi Web Design[514,563] -->
+<meta name="description" itemprop="description" content="Let&#39;s define another number sequence, given by the following function: f(0) = a f(1) = b f(n) = f(n-1) + f(n-2), n &gt; 1 When a = 0 and b = 1, this">
+
+<meta name="keywords" itemprop="keywords" content="lightoj">
+
+<link rel="canonical" href="http://accepted.com.cn/lightoj1065/">
+<meta property="og:title" content="LIGHTOJ1065-Number Sequence | accepted题解网">
+<meta property="og:type" content="activity">
+<meta property="og:url" content="http://accepted.com.cn/lightoj1065/">
+<meta property="og:image" content="http://accepted.com.cn/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+<meta property="og:site_name" content="accepted题解网">
+<meta property="og:description" content="Let&#39;s define another number sequence, given by the following function: f(0) = a f(1) = b f(n) = f(n-1) + f(n-2), n &gt; 1 When a = 0 and b = 1, this sequence gives the Fibonacci sequence. Changing the values of a and b, you can get many different sequences. Given the values of a, b, you have to find the last m digits of f(n). Input Input starts with an integer T (≤ 10000), denoting the number of test cases. Each test case consists of a single line containing four integers a b n m. The values of a and b range in , value of n ranges in  and value of m ranges in . Output For each case, print the case number and the last m digits of f(n). However, do NOT print any leading zero.     Sample Input   Output for Sample Input    4 0 1 11 3 0 1 42 4 0 1 22 4 0 1 21 4 Case 1: 89 Case 2: 4296 Case 3: 7711 Case 4: 946        Special Thanks: Jane Alam Jan (Solution, Dataset)    ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Let&#39;s define another number sequence, given by the following function: f(0) = a f(1) = b f(n) = f(n-1) + f(n-2), n &gt; 1 When a = 0 and b = 1, this sequence gives the Fibonacci sequence. Changing the values of a and b, you can get many different sequences. Given the values of a, b, you have to find the last m digits of f(n). Input Input starts with an integer T (≤ 10000), denoting the number of test cases. Each test case consists of a single line containing four integers a b n m. The values of a and b range in , value of n ranges in  and value of m ranges in . Output For each case, print the case number and the last m digits of f(n). However, do NOT print any leading zero.     Sample Input   Output for Sample Input    4 0 1 11 3 0 1 42 4 0 1 22 4 0 1 21 4 Case 1: 89 Case 2: 4296 Case 3: 7711 Case 4: 946        Special Thanks: Jane Alam Jan (Solution, Dataset)    ">
+<meta itemprop="image" content="http://accepted.com.cn/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+<!-- /all in one seo pack -->
+<link rel="stylesheet" id="crayon-css" href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/monaco.css" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/jquery.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.7.0","is_admin":"0","ajaxurl":"http:\/\/accepted.com.cn\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u7528 %s \u7c98\u8d34\u3002","minimize":"\u70b9\u51fb\u5c55\u5f00\u4ee3\u7801"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/crayon.min.js"></script>
+<link rel="prev" title="LIGHTOJ1064-Throwing Dice" href="http://accepted.com.cn/lightoj1064/">
+<link rel="next" title="LIGHTOJ1066-Gathering Food" href="http://accepted.com.cn/lightoj1066/">
+<link rel="shortlink" href="http://accepted.com.cn/?p=33997">
+<meta name="keywords" content="lightoj, LIGHTOJ">
+<meta name="description" content="Let&#39;s define another number sequence, given by the following function:  f(0) = a  f(1) = b  f(n) = f(n-1) + f(n-2), n &gt; 1  When a = 0 and b = 1, this sequence gives the Fibonacci sequence. Changing the values of a and">
+<!--[if lt IE 9]><script src="http://accepted.com.cn/wp-content/themes/D8/js/html5.js"></script><![endif]-->
+</head>
+<body class="single single-post postid-33997 single-format-standard"><link href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/jiathis_counter.css" rel="stylesheet" type="text/css"><link href="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/jiathis_utility.html" style="display: none;"></iframe>
+<header class="header">
+	<div class="navbar">
+		<div class="logo" style="width:154px"><a href="http://accepted.com.cn/" title="accepted题解网-提供Accepted Code!">accepted题解网</a></div>
+		<ul class="nav">
+			<li id="menu-item-19557" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-19557"><a href="http://accepted.com.cn/">Home</a></li>
+<li id="menu-item-20838" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20838"><a href="http://accepted.com.cn/category/hdoj/">HDOJ</a></li>
+<li id="menu-item-66" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-66"><a href="http://accepted.com.cn/category/poj/">POJ</a>
+<ul class="sub-menu">
+	<li id="menu-item-34996" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34996"><a href="http://accepted.com.cn/category/poj_bailian/">BAILIAN</a></li>
+	<li id="menu-item-38616" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-38616"><a href="http://accepted.com.cn/category/noi/">NOI</a></li>
+	<li id="menu-item-67" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-67"><a href="http://accepted.com.cn/category/bailian/">程序设计导引及在线实践</a></li>
+</ul>
+</li>
+<li id="menu-item-20839" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20839"><a href="http://accepted.com.cn/category/zoj/">ZOJ</a></li>
+<li id="menu-item-26134" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-26134"><a href="http://accepted.com.cn/category/codeforces/">CODEFORCES</a></li>
+<li id="menu-item-2509" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2509"><a href="http://accepted.com.cn/category/othersources/">Other Sources</a>
+<ul class="sub-menu">
+	<li id="menu-item-23303" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-23303"><a href="http://accepted.com.cn/category/51nod/">51NOD</a></li>
+	<li id="menu-item-21380" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-21380"><a href="http://accepted.com.cn/category/bzoj/">BZOJ</a></li>
+	<li id="menu-item-36083" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36083"><a href="http://accepted.com.cn/category/codevs/">CODEVS</a></li>
+	<li id="menu-item-15295" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-15295"><a href="http://accepted.com.cn/category/leetcode/">LeetCode OJ</a></li>
+	<li id="menu-item-22462" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-22462"><a href="http://accepted.com.cn/category/lightoj/">LIGHTOJ</a></li>
+	<li id="menu-item-16362" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16362"><a href="http://accepted.com.cn/category/jobdu/">JOBDUOJ</a></li>
+	<li id="menu-item-21536" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-21536"><a href="http://accepted.com.cn/category/sgu/">SGU</a></li>
+	<li id="menu-item-20857" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20857"><a href="http://accepted.com.cn/category/spoj/">SPOJ</a></li>
+	<li id="menu-item-42459" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42459"><a href="http://accepted.com.cn/category/tyvj/">TYVJ</a></li>
+	<li id="menu-item-21560" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-21560"><a href="http://accepted.com.cn/category/vijos/">VIJOS</a></li>
+	<li id="menu-item-14722" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-14722"><a href="http://accepted.com.cn/category/uva/">UVA</a></li>
+</ul>
+</li>
+<li id="menu-item-30738" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30738"><a href="http://accepted.com.cn/friendlink/">FriendLinks</a></li>
+		</ul><div class="screen-mini"><button data-type="screen-nav" class="btn btn-inverse screen-nav"><i class="icon-tasks icon-white"></i></button></div>
+		<div class="menu pull-right">
+			<form method="get" class="dropdown search-form" action="http://accepted.com.cn/">
+				<input class="search-input" name="s" type="text" placeholder="输入关键字搜索" autofocus="" x-webkit-speech=""><input class="btn btn-success search-submit" type="submit" value="搜索">
+				<ul class="dropdown-menu search-suggest"></ul>
+			</form>
+			<div class="btn-group pull-left">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#feed">订阅</button>
+							</div>
+		</div>
+	</div>
+	<div class="speedbar">
+				<div class="toptip"><strong class="text-success">最新消息：</strong>HDOJ3700+ 、Codeforces2600+、 POJ 2400+ 、ZOJ 2100+ 、JOBDUOJ 440  and  Leetcode 260(All Free)  Accepted code! More than 16K++ code we shared!</div>
+	</div>
+</header>
+<section class="container">
+	<div class="banner banner-site"><script>QIHOO_UNION_SLOT={w:960, h:90, ls:"s6c9659dd7d",t: "link"};</script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/inlay.js" charset="utf-8"></script><div id="QIHOO_UNION_PLACEHOLDER_145446602835645.63265910837799" data-ls="s6c9659dd7d" data-rurl="http://accepted.com.cn/lightoj1065/" style="display: block; border: none; box-sizing: content-box; visibility: visible; background: none;"><iframe id="QIHOO_UNION_1454466028356" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/throw.html" width="960" height="90" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" align="center,center" allowtransparency="true" style="display:block;border:none;"></iframe></div>
+</div><div class="content-wrap">
+	<div class="content">
+		<div class="breadcrumbs">你的位置：<a href="http://accepted.com.cn/">accepted题解网</a> <small>&gt;</small> <a href="http://accepted.com.cn/category/lightoj/" title="查看 LIGHTOJ 中的全部文章">LIGHTOJ</a> <small>&gt;</small> <span class="muted">LIGHTOJ1065-Number Sequence</span></div>
+				<header class="article-header">
+			<h1 class="article-title"><a href="http://accepted.com.cn/lightoj1065/">LIGHTOJ1065-Number Sequence</a></h1>
+			<div class="meta">
+				<span class="muted"><a href="http://accepted.com.cn/category/lightoj/"><i class="icon-list-alt icon12"></i> LIGHTOJ</a></span>				<span class="muted"><i class="icon-user icon12"></i> <a href="http://accepted.com.cn/author/admin/">admin</a></span>
+				<time class="muted"><i class="ico icon-time icon12"></i> 2个月前 (11-29)</time>
+				<span class="muted"><i class="ico icon-eye-open icon12"></i> 19浏览</span>
+											</div>
+		</header>
+
+		<div class="banner banner-post"><script async="" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/adsbygoogle.js"></script>
+<!-- homepage1 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5823720730817262" data-ad-slot="2444055638" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/javascript">var jd_union_unid="262760006",jd_ad_ids="505:6",jd_union_pid="CIyl5NvPKRDGzKV9GgAgr/XLiQEqAA==";var jd_width=960;var jd_height=90;var jd_union_euid="";</script>
+<script type="text/javascript" charset="utf-8" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/auto.js"></script><iframe scrolling="no" frameborder="0" width="960" height="90" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/auto.html"></iframe>
+
+<script type="text/javascript">
+        document.write('<a style="display:none!important" id="tanx-a-mm_54142854_9388102_31856578"></a>');
+        tanx_s = document.createElement("script");
+        tanx_s.type = "text/javascript";
+        tanx_s.charset = "gbk";
+        tanx_s.id = "tanx-s-mm_54142854_9388102_31856578";
+        tanx_s.async = true;
+        tanx_s.src = "http://p.tanx.com/ex?i=mm_54142854_9388102_31856578";
+        tanx_h = document.getElementsByTagName("head")[0];
+        if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+</script><div id="tanxssp_con_mm_54142854_9388102_31856578" style="overflow:hidden;display:inline-block;position:relative;width:950px;height:90px;*display:inline;*zoom:1;"><iframe scrolling="no" frameborder="0" marginheight="0" marginwidth="0" border="0" style="width:950px;height:90px;" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/TB1zPmGIFXXXXbHXFXXO04pFXXX.html"></iframe><a id="iconmm_54142854_9388102_31856578" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_54142854_9388102_31856578" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;"><img src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" width="13"></span>   <span id="icon_bigmm_54142854_9388102_31856578" style="float:none;width:60px;height:13px;display: none;"><img src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" width="60" border="0/"></span></a></div><a style="display:none!important" id="tanx-a-mm_54142854_9388102_31856578"></a>
+
+</div>		
+		<article class="article-content">
+			<div>
+<p>Let's define another number sequence, given by the following function:</p>
+<p><strong>f(0) = a</strong></p>
+<p><strong>f(1) = b</strong></p>
+<p><strong>f(n) = f(n-1) + f(n-2), n &gt; 1</strong></p>
+<p>When <strong>a = 0</strong> and <strong>b = 1</strong>, this sequence gives the Fibonacci sequence. Changing the values of <strong>a</strong> and <strong>b</strong>, you can get many different sequences. Given the values of <strong>a, b</strong>, you have to find the last <strong>m</strong> digits of <strong>f(n)</strong>.</p>
+<h1>Input</h1>
+<p>Input starts with an integer <strong>T (</strong><strong>≤ 10000)</strong>, denoting the number of test cases.</p>
+<p>Each test case consists of a single line containing four integers <strong>a b n m</strong>. The values of <strong>a</strong> and <strong>b</strong> range in <strong>[0,100]</strong>, value of <strong>n</strong> ranges in <strong>[0, 10<sup>9</sup>]</strong> and value of <strong>m</strong> ranges in <strong>[1, 4]</strong>.</p>
+<h1>Output</h1>
+<p>For each case, print the case number and the last <strong>m</strong> digits of <strong>f(n)</strong>. However, do <strong>NOT</strong> print any leading zero.</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="319">
+<h1>Sample Input</h1>
+</td>
+<td valign="top" width="319">
+<h1>Output for Sample Input</h1>
+</td>
+</tr>
+<tr>
+<td valign="top" width="319">4<p></p>
+<p>0 1 11 3</p>
+<p>0 1 42 4</p>
+<p>0 1 22 4</p>
+<p>0 1 21 4</p></td>
+<td valign="top" width="319">Case 1: 89<p></p>
+<p>Case 2: 4296</p>
+<p>Case 3: 7711</p>
+<p>Case 4: 946</p></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+</div>
+<hr>
+<div>Special Thanks: Jane Alam Jan (Solution, Dataset)</div>
+<div>
+<!-- Crayon Syntax Highlighter v2.7.0 -->
+
+		<div id="crayon-56b1639acfbcd329527625" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">C++</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important; margin-top: -18px; display: none;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+int num,mod;
+struct matrix
+{
+       int a[5][5];
+}origin,answ;
+
+matrix multiply(matrix x,matrix y)
+{
+       matrix temp;
+       for(int i=1;i&lt;=num;i++)
+       {
+               for(int j=1;j&lt;=num;j++)
+               {
+                       int ans=0;
+                       for(int k=1;k&lt;=num;k++)
+                       {
+                               ans+=((x.a[i][k]*y.a[k][j])%mod);
+                       }
+                       temp.a[i][j]=ans%mod;
+               }
+       }
+
+       return temp;
+}
+
+matrix calc(int n)
+{
+     while(n)
+     {
+             if(n%2==1)
+                    answ=multiply(origin,answ);
+             origin=multiply(origin,origin);
+             n/=2;
+     }
+     return answ;
+}
+
+int main()
+{
+    int t,id,a,b,n,m;
+    scanf("%d",&amp;t);
+    for(id=1;id&lt;=t;id++)
+    {
+        scanf("%d%d%d%d",&amp;a,&amp;b,&amp;n,&amp;m);
+        num=2;
+        memset(answ.a,1,sizeof(answ.a));
+        memset(origin.a,1,sizeof(origin.a));
+        mod=1;
+        while(m--)
+            mod=mod*10;
+        answ.a[1][1]=a;
+        answ.a[2][1]=b;
+        origin.a[1][1]=0;
+        origin.a[1][2]=1;
+        origin.a[2][2]=1;
+        origin.a[2][1]=1;
+        printf("Case %d: ",id);
+        if(n==1)printf("%d\n",a%mod);
+        else if(n==2)printf("%d\n",b%mod);
+        else 
+        {
+            calc(n-2);
+            printf("%d\n",(answ.a[1][1]+answ.a[2][1])%mod);
+        }
+    }
+    return 0;
+
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-2">2</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-4">4</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-6">6</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-8">8</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-10">10</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-12">12</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-14">14</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-16">16</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-18">18</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-20">20</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-22">22</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-24">24</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-26">26</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-28">28</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-30">30</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-32">32</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-34">34</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-36">36</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-38">38</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-40">40</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-42">42</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-44">44</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-46">46</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-48">48</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-49">49</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-50">50</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-51">51</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-52">52</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-53">53</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-54">54</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-55">55</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-56">56</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-57">57</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-58">58</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-59">59</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-60">60</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-61">61</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-62">62</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-63">63</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-64">64</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-65">65</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-66">66</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-67">67</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-68">68</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-69">69</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-70">70</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-71">71</div><div class="crayon-num crayon-striped-num" data-line="crayon-56b1639acfbcd329527625-72">72</div><div class="crayon-num" data-line="crayon-56b1639acfbcd329527625-73">73</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-56b1639acfbcd329527625-1"><span class="crayon-p">#include&lt;stdio.h&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-2"><span class="crayon-p">#include&lt;string.h&gt;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-3"><span class="crayon-p">#include&lt;algorithm&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-4"><span class="crayon-r">using</span><span class="crayon-h"> </span><span class="crayon-t">namespace</span><span class="crayon-h"> </span><span class="crayon-v">std</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-6"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">num</span><span class="crayon-sy">,</span><span class="crayon-v">mod</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-7"><span class="crayon-t">struct</span><span class="crayon-h"> </span><span class="crayon-e">matrix</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-8"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-10"><span class="crayon-sy">}</span><span class="crayon-v">origin</span><span class="crayon-sy">,</span><span class="crayon-v">answ</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-12"><span class="crayon-e">matrix </span><span class="crayon-e">multiply</span><span class="crayon-sy">(</span><span class="crayon-i">matrix</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-sy">,</span><span class="crayon-i">matrix</span><span class="crayon-h"> </span><span class="crayon-v">y</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-13"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-e">matrix </span><span class="crayon-v">temp</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span><span class="crayon-v">i</span><span class="crayon-o">&lt;=</span><span class="crayon-v">num</span><span class="crayon-sy">;</span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">j</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span><span class="crayon-v">j</span><span class="crayon-o">&lt;=</span><span class="crayon-v">num</span><span class="crayon-sy">;</span><span class="crayon-v">j</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">ans</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">k</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span><span class="crayon-v">k</span><span class="crayon-o">&lt;=</span><span class="crayon-v">num</span><span class="crayon-sy">;</span><span class="crayon-v">k</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">ans</span><span class="crayon-o">+=</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">k</span><span class="crayon-sy">]</span><span class="crayon-o">*</span><span class="crayon-v">y</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">k</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-o">%</span><span class="crayon-v">mod</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">temp</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-v">ans</span><span class="crayon-o">%</span><span class="crayon-v">mod</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-27">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">temp</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-29"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-30">&nbsp;</div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-31"><span class="crayon-e">matrix </span><span class="crayon-e">calc</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">n</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-32"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">while</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">if</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-o">%</span><span class="crayon-cn">2</span><span class="crayon-o">==</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">answ</span><span class="crayon-o">=</span><span class="crayon-e">multiply</span><span class="crayon-sy">(</span><span class="crayon-v">origin</span><span class="crayon-sy">,</span><span class="crayon-v">answ</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">origin</span><span class="crayon-o">=</span><span class="crayon-e">multiply</span><span class="crayon-sy">(</span><span class="crayon-v">origin</span><span class="crayon-sy">,</span><span class="crayon-v">origin</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-38"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">n</span><span class="crayon-o">/=</span><span class="crayon-cn">2</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-39"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-40"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">answ</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-41"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-42">&nbsp;</div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-43"><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-44"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">,</span><span class="crayon-v">id</span><span class="crayon-sy">,</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-v">b</span><span class="crayon-sy">,</span><span class="crayon-v">n</span><span class="crayon-sy">,</span><span class="crayon-v">m</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-46"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">scanf</span><span class="crayon-sy">(</span><span class="crayon-s">"%d"</span><span class="crayon-sy">,</span><span class="crayon-v">&amp;t</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-v">id</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span><span class="crayon-v">id</span><span class="crayon-o">&lt;=</span><span class="crayon-v">t</span><span class="crayon-sy">;</span><span class="crayon-v">id</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-49"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">scanf</span><span class="crayon-sy">(</span><span class="crayon-s">"%d%d%d%d"</span><span class="crayon-sy">,</span><span class="crayon-v">&amp;a</span><span class="crayon-sy">,</span><span class="crayon-v">&amp;b</span><span class="crayon-sy">,</span><span class="crayon-v">&amp;n</span><span class="crayon-sy">,</span><span class="crayon-v">&amp;m</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-50"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">num</span><span class="crayon-o">=</span><span class="crayon-cn">2</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-51"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">memset</span><span class="crayon-sy">(</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-52"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">memset</span><span class="crayon-sy">(</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-53"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">mod</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-54"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">while</span><span class="crayon-sy">(</span><span class="crayon-v">m</span><span class="crayon-o">--</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-55"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">mod</span><span class="crayon-o">=</span><span class="crayon-v">mod</span><span class="crayon-o">*</span><span class="crayon-cn">10</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-56"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-v">a</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-57"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-v">b</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-58"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-59"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-60"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-61"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">origin</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">=</span><span class="crayon-cn">1</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-62"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">printf</span><span class="crayon-sy">(</span><span class="crayon-s">"Case %d: "</span><span class="crayon-sy">,</span><span class="crayon-v">id</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-63"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-o">==</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-e">printf</span><span class="crayon-sy">(</span><span class="crayon-s">"%d\n"</span><span class="crayon-sy">,</span><span class="crayon-v">a</span><span class="crayon-o">%</span><span class="crayon-v">mod</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-64"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-h"> </span><span class="crayon-st">if</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-o">==</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-e">printf</span><span class="crayon-sy">(</span><span class="crayon-s">"%d\n"</span><span class="crayon-sy">,</span><span class="crayon-v">b</span><span class="crayon-o">%</span><span class="crayon-v">mod</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-65"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-66"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-67"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">calc</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-o">-</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-68"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">printf</span><span class="crayon-sy">(</span><span class="crayon-s">"%d\n"</span><span class="crayon-sy">,</span><span class="crayon-sy">(</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">+</span><span class="crayon-v">answ</span><span class="crayon-sy">.</span><span class="crayon-v">a</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-o">%</span><span class="crayon-v">mod</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-69"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-70"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-71"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-56b1639acfbcd329527625-72">&nbsp;</div><div class="crayon-line" id="crayon-56b1639acfbcd329527625-73"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0294 seconds] -->
+<br>
+&nbsp;<p></p>
+</div>
+<div style="float:left"><!-- JiaThis Button BEGIN -->
+<div id="jiathis_style_32x32">
+	<a class="jiathis_button_qzone" data-original-title="" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+	<a class="jiathis_button_tsina" data-original-title="" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+	<a class="jiathis_button_tqq" data-original-title="" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+	<a class="jiathis_button_renren" data-original-title="" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+	<a class="jiathis_button_kaixin001" data-original-title="" title="分享到开心网"><span class="jiathis_txt jtico jtico_kaixin001"></span></a>
+	<a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank" data-original-title="" title=""></a>
+	<a class="jiathis_counter_style" data-original-title="" title=""><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_35" title="累计分享0次">0</span></a>
+</div>
+<script type="text/javascript" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/jia.js" charset="utf-8"></script><script type="text/javascript" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/plugin.client.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></div><p>转载请注明：<a href="http://accepted.com.cn/" data-original-title="" title="">accepted题解网</a> » <a href="http://accepted.com.cn/lightoj1065/" data-original-title="" title="">LIGHTOJ1065-Number Sequence</a></p>		</article>
+
+		
+		<footer class="article-footer">
+			<div class="article-tags">继续浏览有关 <a href="http://accepted.com.cn/tag/lightoj-2/" rel="tag">lightoj</a> 的文章</div>					</footer>
+
+		<nav class="article-nav">
+			<span class="article-nav-prev">上一篇 <a href="http://accepted.com.cn/lightoj1064/" rel="prev">LIGHTOJ1064-Throwing Dice</a></span>
+			<span class="article-nav-next"><a href="http://accepted.com.cn/lightoj1066/" rel="next">LIGHTOJ1066-Gathering Food</a> 下一篇</span>
+		</nav>
+
+		<div class="relates">
+			<h3>与本文相关的文章</h3>
+			<ul>
+<li><a href="http://accepted.com.cn/lightoj1402/">LIGHTOJ1402-Line Chart</a></li><li><a href="http://accepted.com.cn/lightoj1386/">LIGHTOJ1386-Jaguar King</a></li><li><a href="http://accepted.com.cn/lightoj1372/">LIGHTOJ1372-Hexagonal Bamboo Fort</a></li><li><a href="http://accepted.com.cn/lightoj1368/">LIGHTOJ1368-Truchet Tiling</a></li><li><a href="http://accepted.com.cn/lightoj1343/">LIGHTOJ1343-Aladdin and the Black Stones</a></li><li><a href="http://accepted.com.cn/lightoj1315/">LIGHTOJ1315-Game of Hyper Knights</a></li><li><a href="http://accepted.com.cn/lightoj1267/">LIGHTOJ1267-Points in Rectangle (II)</a></li><li><a href="http://accepted.com.cn/lightoj1165/">LIGHTOJ1165-Digit Dancing</a></li><li><a href="http://accepted.com.cn/lightoj1144/">LIGHTOJ1144-Ray Gun</a></li><li><a href="http://accepted.com.cn/lightoj1434/">LIGHTOJ1434-Patch Quilt</a></li><li><a href="http://accepted.com.cn/lightoj1432/">LIGHTOJ1432-Overlapping Sticks</a></li><li><a href="http://accepted.com.cn/lightoj1430/">LIGHTOJ1430-A Question of Time</a></li></ul>		</div>
+
+		
+		
+		
+	</div>
+</div>
+<aside class="sidebar">	
+		<div class="widget widget_recent_entries">		<h3 class="widget_tit">近期文章</h3>		<ul>
+				<li><a href="http://accepted.com.cn/codeforces618a/" title="CODEFORCES618A-Slime Combining">CODEFORCES618A-Slime Combining</a></li>
+				<li><a href="http://accepted.com.cn/codeforces618c/" title="CODEFORCES618C-Constellation">CODEFORCES618C-Constellation</a></li>
+				<li><a href="http://accepted.com.cn/codeforces618b/" title="CODEFORCES618B-Guess the Permutation">CODEFORCES618B-Guess the Permutation</a></li>
+				<li><a href="http://accepted.com.cn/codeforces618d/" title="CODEFORCES618D-Hamiltonian Spanning Tree">CODEFORCES618D-Hamiltonian Spanning Tree</a></li>
+				<li><a href="http://accepted.com.cn/codeforces618e/" title="CODEFORCES618E-Robot Arm">CODEFORCES618E-Robot Arm</a></li>
+				</ul>
+		</div><div class="widget d_tag"><h3 class="widget_tit">标签云</h3><div class="d_tags"><a href="http://accepted.com.cn/tag/hdoj-2/">hdoj (3763)</a><a href="http://accepted.com.cn/tag/codeforces-2/">codeforces (2650)</a><a href="http://accepted.com.cn/tag/poj-2/">poj (2409)</a><a href="http://accepted.com.cn/tag/zoj-2/">zoj (2111)</a><a href="http://accepted.com.cn/tag/codevs-2/">codevs (1464)</a><a href="http://accepted.com.cn/tag/bzoj-2/">bzoj (859)</a><a href="http://accepted.com.cn/tag/noi/">NOI (570)</a><a href="http://accepted.com.cn/tag/bailian-2/">bailian (553)</a><a href="http://accepted.com.cn/tag/vijos-2/">vijos (510)</a><a href="http://accepted.com.cn/tag/jobduoj/">jobduoj (440)</a><a href="http://accepted.com.cn/tag/lightoj-2/">lightoj (416)</a><a href="http://accepted.com.cn/tag/uva-2/">uva (383)</a><a href="http://accepted.com.cn/tag/sgu-2/">sgu (294)</a><a href="http://accepted.com.cn/tag/leetcode-2/">Leetcode (277)</a><a href="http://accepted.com.cn/tag/51nod-2/">51nod (257)</a><a href="http://accepted.com.cn/tag/spoj-2/">spoj (112)</a><a href="http://accepted.com.cn/tag/%e7%99%be%e7%82%bc/">百炼 (92)</a><a href="http://accepted.com.cn/tag/array/">Array (66)</a><a href="http://accepted.com.cn/tag/tyvj-2/">tyvj (46)</a><a href="http://accepted.com.cn/tag/string/">String (36)</a><a href="http://accepted.com.cn/tag/tree/">Tree (35)</a><a href="http://accepted.com.cn/tag/dynamic-programming/">Dynamic Programming (33)</a><a href="http://accepted.com.cn/tag/math/">Math (31)</a><a href="http://accepted.com.cn/tag/depth-first-search/">Depth-first Search (25)</a><a href="http://accepted.com.cn/tag/hash-table/">Hash Table (24)</a><a href="http://accepted.com.cn/tag/two-pointers/">Two Pointers (24)</a><a href="http://accepted.com.cn/tag/backtracking/">Backtracking (24)</a><a href="http://accepted.com.cn/tag/linked-list/">Linked List (23)</a><a href="http://accepted.com.cn/tag/binary-search/">Binary Search (22)</a><a href="http://accepted.com.cn/tag/stack/">Stack (15)</a><a href="http://accepted.com.cn/tag/breadth-first-search/">Breadth-first Search (13)</a><a href="http://accepted.com.cn/tag/database/">Database (13)</a><a href="http://accepted.com.cn/tag/bit-manipulation/">Bit Manipulation (11)</a><a href="http://accepted.com.cn/tag/sort/">Sort (10)</a><a href="http://accepted.com.cn/tag/divide-and-conquer/">Divide and Conquer (9)</a><a href="http://accepted.com.cn/tag/heap/">Heap (6)</a><a href="http://accepted.com.cn/tag/greedy/">Greedy (6)</a><a href="http://accepted.com.cn/tag/data-structure/">Data Structure (6)</a><a href="http://accepted.com.cn/tag/shell/">Shell (4)</a><a href="http://accepted.com.cn/tag/graph/">Graph (3)</a><a href="http://accepted.com.cn/tag/trie/">Trie (3)</a><a href="http://accepted.com.cn/tag/design/">Design (3)</a><a href="http://accepted.com.cn/tag/union-find/">Union Find (2)</a><a href="http://accepted.com.cn/tag/topological-sort/">Topological Sort (2)</a><a href="http://accepted.com.cn/tag/oj/">OJ (1)</a><a href="http://accepted.com.cn/tag/books/">books (1)</a></div></div><div class="widget widget_text"><h3 class="widget_tit">Sina Weibo</h3>			<div class="textwidget"><iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/index.html"></iframe></div>
+		</div><div class="widget widget_text"><h3 class="widget_tit"> </h3>			<div class="textwidget"><script type="text/javascript">var jd_union_unid="262760006",jd_ad_ids="536:6",jd_union_pid="CIuQ+9vPKRDGzKV9GgAgxu2oigEqAA==";var jd_width=360;var jd_height=300;var jd_union_euid="";</script><script type="text/javascript" charset="utf-8" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/auto.js"></script><iframe scrolling="no" frameborder="0" width="360" height="300" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/auto(1).html"></iframe></div>
+		</div><div class="widget d_slidebanner"><div class="slider-wrap" style="height:280px;"><ul class="slider-roll" style="width: 360px; left: 0px;"><li class="item active" style="position: relative; width: 360px; float: left; left: 0px;"><a href="http://s.click.taobao.com/t?e=m%3D2%26s%3Dc%2F0kyXVKWPwcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAmJ0R9j6AtsiM2CqctPx8scJ4SVJKX88QhjORgzWTm3LEuqSudOw%2BUorDFSmJy8RV%2Bdn1BbglxZYxUhy8exlzcq9AmARIwX9K%2BnbtOD3UdznPV1H2z0iQv9NkKVMHClW0QbMqOpFMIvnvjQXzzpXdTHGJe8N%2FwNpGw%3D%3D"><img src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/TB2E4_8eXXXXXcgXpXXXXXXXXXX_!!910404070.gif"></a></li></ul></div></div><div class="widget widget_meta"><h3 class="widget_tit">功能</h3>			<ul>
+						<li><a href="http://accepted.com.cn/wp-login.php">登录</a></li>
+			<li><a href="http://accepted.com.cn/feed/" title="使用 RSS 2.0 订阅本站点内容">文章 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://accepted.com.cn/comments/feed/" title="使用 RSS 订阅本站点的所有文章的近期评论">评论 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://cn.wordpress.org/" title="基于 WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li>
+						</ul>
+</div></aside></section>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="copyright pull-left">
+            版权所有，保留一切权利！ © 2016 <a href="http://accepted.com.cn/">accepted题解网</a>   <a href="http://www.miibeian.gov.cn/" target="_blank">皖ICP备15003912号</a>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255959721'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1255959721%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_1255959721"><a href="http://www.cnzz.com/stat/website.php?web_id=1255959721" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/pic.gif"></a></span><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/z_stat.php" type="text/javascript"></script><script src="./LIGHTOJ1065-Number Sequence _ Accepted题解网_files/core.php" charset="utf-8" type="text/javascript"></script>
+        </div>
+        <div class="trackcode pull-right">
+            <script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+            
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2cc18845143cd04c9a2becb259ed3214";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        </div>
+    </div>
+</footer>
+
+
+<div class="modal hide fade" id="feed" tabindex="-1" style="width:400px;margin-left:-200px;"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button><h3>订阅accepted题解网</h3></div><div class="modal-body"><p><strong>订阅地址</strong><br><input type="text" class="input-block-level" value="" readonly=""></p><p><strong>订阅到</strong><br><a class="btn btn-mini btn-success" target="_blank" href="http://mail.qq.com/cgi-bin/feed?u=http://">QQ邮箱</a> <a class="btn btn-mini btn-success" target="_blank" href="http://www.xianguo.com/subscribe.php?url=http://">鲜果</a> <a class="btn btn-mini btn-success" target="_blank" href="http://mail.qq.com/cgi-bin/feed?u=http://">抓虾</a></p></div></div><div class="rollto" style="display: block;"><button class="btn btn-inverse" data-type="totop" title="回顶部"><i class="icon-eject icon-white"></i></button></div></body></html>

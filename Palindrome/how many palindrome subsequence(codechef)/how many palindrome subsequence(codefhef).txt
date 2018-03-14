@@ -1,0 +1,36 @@
+#include<iostream>
+#define mod 1000000007
+using namespace std;
+long long int pow1(int base,int exp)
+{
+    long long int res=1;
+    for(int i=0;i<exp;i++)
+       res=(res<<1)%mod;
+    return res%mod;
+}
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+       string s;
+       int arr[26]={0};
+       cin>>s;
+       int l=s.length();
+       for(int i=0;i<l;i++)
+       {
+          arr[s[i]-'a']++;
+       }
+      long long int sum=0;
+       for(int i=0;i<26;i++)
+       {
+           if(arr[i]!=0)
+           sum+=(pow1(2,arr[i])-1)%(mod);
+       }
+ 
+       cout<<sum%mod<<endl;
+ 
+   }
+ return 0;
+}

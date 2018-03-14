@@ -1,0 +1,85 @@
+
+
+//LL ar[1000005],ar1[1000005];
+LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0;
+string  s,ss;
+
+
+LL ar[1000005],br[1000005];
+
+int main()
+{
+    //Fast;
+    //cin>>n;
+
+
+      cin>>n;
+
+
+      set<LL>st;
+
+      FORR(i,n)
+      {
+          cin>>ar[i];
+          st.insert(i);
+      }
+
+      cin>>m;
+      while(m--)
+      {
+          cin>>a>>b;
+
+          if(a==2)
+          {
+              cout<<br[b]<<"\n";
+          }
+
+
+          else
+          {
+              cin>>c;
+
+              while(c>0)
+              {
+
+                  if(st.lower_bound(b)==st.end())break;
+
+                  LL aa=*st.lower_bound(b);
+
+
+
+                  if(br[aa]+c<ar[aa])
+                  {
+                      br[aa]+=c;
+                      break;
+
+                  }
+
+                  else
+                  {
+
+
+
+                      st.erase(aa);
+
+
+                      c=c-(ar[aa]-br[aa]);
+                      br[aa]=ar[aa];
+
+                  }
+
+              }
+
+
+
+          }
+
+
+      }
+
+
+   return 0;
+
+}
+
+

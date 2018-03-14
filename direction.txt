@@ -1,0 +1,10 @@
+//ll month[]={-1,31,28,31,30,31,30,31,31,30,31,30,31};  //Not Leap Year
+//string monthName[]={"","JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
+//string dayName[]={"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
+// mp["monday"]=1;mp["tuesday"]=2;mp["wednesday"]=3;mp["thursday"]=4;mp["friday"]=5;
+   // mp["saturday"]=6;mp["sunday"]=7;
+//ll ax[]={1,0,-1,0};ll ay[]={0,1,0,-1}; //4 Direction
+//ll ax[]={1,1,0,-1,-1,-1,0,1};int ay[]={0,1,1,1,0,-1,-1,-1};//8 direction
+//ll ax[]={2,1,-1,-2,-2,-1,1,2};int ay[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+//ll ax[]={2,1,-1,-2,-1,1};int ay[]={0,1,1,0,-1,-1}; //Hexagonal Direction
+//ll month[]={31,28,31,30,31,30,31,31,30,31,30,31}; //month

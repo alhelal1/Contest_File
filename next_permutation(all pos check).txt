@@ -1,0 +1,45 @@
+int main()
+{
+
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+   // READ;WRITE;
+
+   cin>>n>>m;
+   rep(i,n)
+   {
+       cin>>s[i];
+       rep(j,m)
+       {
+           dp[i][j]=(s[i][j]-'0');
+       }
+   }
+   rep(i,m)ar[i]=i;
+   ll diff=inf;
+   ll ans=0;
+   do
+   {
+      
+       ll res=0;
+       mx=0,mn=inf;
+       rep(i,n)
+       {
+           ans=0;
+           rep(j,m)
+           {
+               ans=(ans*10)+dp[i][ar[j]];
+           }
+           mx=max(mx,ans);
+           mn=min(mn,ans);
+       }
+       diff=min(diff,mx-mn);
+       c++;
+
+   }while(next_permutation(ar,ar+m));
+
+   cout<<diff<<endl;
+
+
+
+    return 0;
+}

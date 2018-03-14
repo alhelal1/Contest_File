@@ -1,0 +1,60 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+
+string s,ss;
+
+int n,m;int cap;
+
+
+int dp[1005][1005];
+
+long long dpp[10000];
+//int MOD=
+
+long long MOD=10056;
+
+long long ncr(long long n,long long r)
+{
+    if(r==1)return n;
+    if(n==r)return 1;
+    if(dp[n][r]!=-1)return dp[n][r]%MOD;
+    long long p1=0,p2=0;
+    p1=ncr(n-1,r-1)%MOD;
+    p2=ncr(n-1,r)%MOD;
+
+    return dp[n][r]=(p1+p2)%MOD;
+}
+//long long res=0;
+long long com(long long n)
+{
+    if(n==0)return 1;
+    long long &res=dpp[n];
+    if(res!=-1)return res%MOD;
+
+    res=0;
+    for(int i=1;i<=n;i++)
+    {
+        res+=ncr(n,i)*com(n-i);
+        res%=MOD;
+    }
+
+    return res%MOD;
+}
+
+int ks=0;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+      memset(dp,-1,sizeof(dp));
+      memset(dpp,-1,sizeof(dpp));
+    while(t--)
+    {
+       long long  n,r;
+       cin>>n;
+
+       cout<<"Case "<<++ks<<": ";
+       cout<<com(n)%MOD<<endl;
+    }
+}

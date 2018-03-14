@@ -1,0 +1,68 @@
+
+ll tree[4006];
+
+
+void up(ll idx,ll val)
+{
+    while(idx<=1005)
+    {
+
+        tree[idx]+=val;
+        idx=idx+(idx&-idx);
+    }
+}
+
+ll query(ll idx)
+{
+    ll rr=0;
+
+    while(idx>0)
+    {
+        rr+=tree[idx];
+        idx=idx-(idx&-idx);
+    }
+
+    return rr;
+}
+
+
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+    cin>>n;
+
+    ll ks=0;
+    while(n--)
+    {
+        //cin>>m;
+
+
+        cin>>m;
+
+        //mem(ar,false);
+        mem(tree,false);
+        rep(i,m)
+        {
+           cin>>a>>b;
+           up(a,1);
+           up(b+1,-1);
+        }
+
+        ll r=0;
+        repp(i,1001)
+        {
+            r=max(r,query(i));
+        }
+        ll ans=r;
+        printf("Case %lld: %lld\n",++ks,ans);
+    }
+
+
+
+   return 0;
+
+}

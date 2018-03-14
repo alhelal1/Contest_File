@@ -1,0 +1,73 @@
+//http://codeforces.com/contest/580/problem/D
+
+
+ll ar[102];
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+//string s,s1;
+//mii A;
+
+ll dp1[19][19];
+ll dp[1<<19][19];
+
+
+ll go(ll mask,ll st)
+{
+    if(__builtin_popcount(mask)==m) return 0;
+
+
+
+    ll &ret=dp[mask][st];
+    if(ret!=-1)return ret;
+    ret=0;
+    rep(i,n)
+    {
+
+        ll aa=mask&(1LL<<i);
+        ll bb=mask|(1LL<<i);
+        if(aa==0)
+        {
+
+            //ll tt
+            ret=max(ret,go(bb,i)+dp1[st][i]+ar[i]+dp1[i][i]);
+        }
+
+    }
+
+    return ret;
+
+}
+
+int main()
+{
+
+    //Fast;
+
+
+    cin>>n>>m>>r;
+
+    rep(i,n)cin>>ar[i];
+
+    mem(dp,-1);mem(dp1,0);
+
+    rep(i,r)
+    {
+        cin>>a>>b;cin>>c;
+        a--,b--;
+
+        dp1[a][b]=c;
+    }
+
+    ll ans=0;
+
+    rep(i,n)
+    {
+       ans=max(ans,go(1LL<<i,i)+(ar[i]));
+    }
+
+    cout<<ans;
+
+
+
+   return 0;
+
+}

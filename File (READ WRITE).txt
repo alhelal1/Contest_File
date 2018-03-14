@@ -1,0 +1,2 @@
+#define READ freopen("input.txt","r",stdin)
+#define WRITE freopen("output.txt","w",stdout)

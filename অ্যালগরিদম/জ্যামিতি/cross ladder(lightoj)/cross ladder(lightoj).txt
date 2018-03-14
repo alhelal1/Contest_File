@@ -1,0 +1,42 @@
+//ll ar[2000005],ar1[2000005];
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+//string s,s1,s2;
+
+
+
+int main()
+{
+
+   //Fast;
+
+   ll test,ks=0;
+   scanf("%lld",&test);
+   double aa,bb,cc;
+   while(test--)
+   {
+       scanf("%lf%lf%lf",&aa,&bb,&cc);
+       double lo=0.0,hi=100000000000.0;
+       double mid;
+       rep(i,10000)
+       {
+            mid=(lo+hi)/2.0;
+           double a1=sqrt(aa*aa-mid*mid);
+
+           a1=1.0/a1;
+
+           double b1=sqrt(bb*bb-mid*mid);
+           b1=1.0/b1;
+
+           double c1=1.0/cc;
+           double d1=a1+b1;
+           if(d1<c1)lo=mid;
+           else hi=mid;
+       }
+
+       printf("Case %lld: %.8lf\n",++ks,hi);
+   }
+
+
+   return 0;
+
+}

@@ -1,0 +1,93 @@
+
+ll ar[12][12];
+ll ar1[1000005];
+
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+
+
+string s,s1;
+//mii A;
+
+
+
+
+vi v[300005];
+
+int main()
+{
+
+    //Fast;
+
+
+
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+
+
+        rep(i,8)
+        {
+            cin>>s;
+            ll aa=s[0]-'A';
+            ll bb=s[1]-'0';
+            bb--;
+
+            ar[aa][bb]=1;
+        }
+
+        ll f=0;
+
+
+
+
+
+        int rowMask = 0;
+int columnMask = 0;
+int diagonalMask0 = 0;
+int diagonalMask1 = 0;
+for(int i = 0; i < 8; i++)
+{
+    for(int j = 0; j < 8; j++)
+    {
+        if(ar[i][j])
+        {
+            // test row:
+            if(rowMask & (1 << i))
+                f=1;
+            rowMask |= 1 << i; // mark row set
+
+            // test column:
+            if(columnMask & (1 << j))
+                f=1;
+            columnMask |= 1 << j; // mark column set
+
+            // test first diagonal:
+            if(diagonalMask0 & (1 << (i + j)))
+                f=1;
+            diagonalMask0 |= 1 << (i + j); // mark diagonal set
+
+            // test first diagonal:
+            if(diagonalMask1 & (1 << (8 + i - j)))
+                f=1;
+            diagonalMask1 |= 1 << (8 + i - j); // mark diagonal set
+        }
+    }
+}
+        if(f)cout<<"Invalid\n";
+        else cout<<"Valid\n";
+
+
+        mem(ar,false);
+
+    }
+
+
+
+
+
+
+
+   return 0;
+
+}

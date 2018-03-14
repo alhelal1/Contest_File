@@ -1,0 +1,72 @@
+#include<string.h>
+#include<algorithm>
+using namespace std;
+ 
+int num,mod;
+struct matrix
+{
+       int a[5][5];
+}origin,answ;
+ 
+matrix multiply(matrix x,matrix y)
+{
+       matrix temp;
+       for(int i=1;i<=num;i++)
+       {
+               for(int j=1;j<=num;j++)
+               {
+                       int ans=0;
+                       for(int k=1;k<=num;k++)
+                       {
+                               ans+=((x.a[i][k]*y.a[k][j])%mod);
+                       }
+                       temp.a[i][j]=ans%mod;
+               }
+       }
+ 
+       return temp;
+}
+ 
+matrix calc(int n)
+{
+     while(n)
+     {
+             if(n%2==1)
+                    answ=multiply(origin,answ);
+             origin=multiply(origin,origin);
+             n/=2;
+     }
+     return answ;
+}
+ 
+int main()
+{
+    int t,id,a,b,n,m;
+    scanf("%d",&t);
+    for(id=1;id<=t;id++)
+    {
+        scanf("%d%d%d%d",&a,&b,&n,&m);
+        num=2;
+        memset(answ.a,1,sizeof(answ.a));
+        memset(origin.a,1,sizeof(origin.a));
+        mod=1;
+        while(m--)
+            mod=mod*10;
+        answ.a[1][1]=a;
+        answ.a[2][1]=b;
+        origin.a[1][1]=0;
+        origin.a[1][2]=1;
+        origin.a[2][2]=1;
+        origin.a[2][1]=1;
+        printf("Case %d: ",id);
+        if(n==1)printf("%d\n",a%mod);
+        else if(n==2)printf("%d\n",b%mod);
+        else 
+        {
+            calc(n-2);
+            printf("%d\n",(answ.a[1][1]+answ.a[2][1])%mod);
+        }
+    }
+    return 0;
+ 
+}

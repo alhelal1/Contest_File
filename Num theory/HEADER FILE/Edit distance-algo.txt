@@ -1,0 +1,9 @@
+int count(string s1, string s2, int m, int n)
+{
+	if (n == s2.length()) return s1.length()-m;
+	if (m == s1.length()) return s2.length()-n; 	
+	if (s1[m] == s2[n]) return count(s1,s2,m+1,n+1);
+	if (s1[m] != s2[n]) {
+		return 1+min(min(count(s1,s2,m,n+1), count(s1,s2,m+1,n)), count(s1,s2,m+1,n+1));	
+	}
+}

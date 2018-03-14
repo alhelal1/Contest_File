@@ -1,0 +1,100 @@
+LL ar[1000001],br[1000001];
+LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0,w,d;
+string  s;
+
+MII A,B;
+
+map <LL,PII> D;
+
+PII fi,se;
+
+
+LL ans=INT_MAX/3;
+void go(LL a,LL b,LL cnt)
+{
+    LL mul=a*b;
+    if(A.find(mul)!=A.end())
+    {
+        if(A[mul]>cnt)
+        {
+            A[mul]=cnt;
+            D[mul]=make_pair(a,b);
+        }
+        return ;
+    }
+    A[mul]=cnt;
+
+    D[mul]=make_pair(a,b);
+    if(a%2==0)  go(a/2,b,cnt+1);
+    if(b%2==0)  go(a,b/2,cnt+1);
+    if(a%3==0)  go(a-a/3,b,cnt+1);
+    if(b%3==0)  go(a,b-b/3,cnt+1);
+}
+
+
+
+
+
+void goo(LL a,LL b,LL cnt)
+{
+    LL mul=a*b;
+
+    if(A.find(mul)!=A.end())
+    {
+
+        if( ans >(A[mul]+cnt))
+        {
+
+            ans=A[mul]+cnt;
+
+            fi=make_pair(a,b);
+
+            se=D[mul];
+
+        }
+        return ;
+    }
+
+
+    if(B.find(mul)!=B.end())    return;
+     B[mul]=cnt;
+    if(a%2==0)  goo(a/2,b,cnt+1);
+    if(b%2==0)  goo(a,b/2,cnt+1);
+    if(a%3==0)  goo(a-a/3,b,cnt+1);
+    if(b%3==0)  goo(a,b-b/3,cnt+1);
+}
+
+
+int main()
+{
+    //Fast;
+
+
+    cin>>a>>b;
+
+    go(a,b,0);
+
+    cin>>c>>d;
+
+
+    goo(c,d,0);
+
+    if(ans==INT_MAX/3) cout<<-1;
+
+    else
+    {
+        cout<<ans<<endl;
+
+
+         cout<<se.first<<" "<<se.second<<endl;
+
+        cout<<fi.first<<" "<<fi.second<<endl;
+
+    }
+
+
+
+
+   return 0;
+
+}

@@ -1,0 +1,47 @@
+
+long n,m,u,w,v,wi,f,cur,res[100005],s,l;
+vector<long> vc[100005],ar[100005];
+int main()
+{
+//ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+
+    cin>>n>>m>>s;
+    repl(i,n) res[i]=inf;
+
+        rep(i,m)
+        {
+            cin>>u>>v>>w;
+            vc[u].pb(v);
+            vc[v].pb(u);
+            ar[u].pb(w);
+            ar[v].pb(w);
+        }
+        cin>>l;
+        queue<long> q;
+        q.push(s);
+        res[s]=0;
+        while(!q.empty())
+        {
+            f=q.front();
+            q.pop();
+            rep(i,len(vc[f]))
+            {
+                cur=vc[f][i];
+                wi=(res[f]+ar[f][i]);
+                if(wi<res[cur])
+                {
+                    q.push(cur);
+                    res[cur]=wi;
+                }
+             //   cmin(ar[t][cur],);
+            }
+        }
+
+
+
+    // file or not???
+
+return 0;
+}

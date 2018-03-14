@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<bitset>
+#include<algorithm>
+#include<iostream>
+#include<vector>
+#define pb push_back
+#define mp make_pair
+#define fs first
+#define sc second
+using namespace std;
+#define Nmax 200100
+#define Lmax 20
+int rmqa[Lmax][Nmax],ar[Nmax],b[Nmax],lg[Nmax],N,br[Nmax];
+long long rez;
+
+void genLog(){
+    for(int i=2;i<=N;++i) {
+        lg[i] = lg[i/2]+1;
+    }
+}
+void RMQ() {
+    for(int i=1;i<=N;++i) {
+        rmqa[0][i] = ar[i];
+    }
+    for(int i=1;(1<<i)<=N;++i) {
+        for(int j=1;j+(1<<i)-1<=N;++j) {
+            rmqa[i][j] = min(rmqa[i-1][j],rmqa[i-1][j+((1<<(i-1)))]);
+        }
+    }
+}
+
+int query(int x,int y) {
+    int maxi = lg[y-x+1];
+    int sh = y-x+1-(1<<maxi);
+    return min(rmqa[maxi][x], rmqa[maxi][x+sh]);
+}
+int main() {
+    cin>>N;
+    for(int i=1;i<=N;++i) {
+        cin>>ar[i];
+    }
+
+    genLog();
+    RMQ();
+    for(int i=1;i<=N;++i) {
+
+            int st=i,end=N;
+
+            int r=i;
+    while(st<=end)
+    {
+        int mid=(st+end)/2;
+        int aa=query(i,mid);
+
+        if(aa>=ar[i])
+        {
+            r=mid;
+            st=mid+1;
+        }
+        else  end=mid-1;
+    }
+    st=1,end=i;
+    int r1=0;
+    int tot=0;
+    while(st<=end)
+    {
+        int mid=(st+end)/2;
+        int aa=query(mid,i);
+        if(aa>=ar[i])
+        {
+            r1=mid;
+            end=mid-1;
+        }
+        else  st=mid+1;
+
+    }
+   tot=(r-i)+(i-r1)+1;
+    br[tot]=max(ar[i],br[tot]);
+
+
+  //  cout<<tot<<" "<<br[tot]<<endl;
+    }
+
+    for(int i=N;i>=1;i--)
+    {
+        br[i]=max(br[i],br[i+1]);
+
+    }
+    for(int i=1;i<=N;i++)  cout<<br[i]<<" ";
+    return 0;
+}

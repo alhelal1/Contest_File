@@ -1,0 +1,43 @@
+LL dp[5005][5005];
+LL go(LL st,LL end)
+{
+    if(st>end)  return 0;
+    if(st==end) return 1;
+
+    LL mn=ar[st];
+    for(int i=st;i<=end;i++) mn=min(mn,ar[i]);
+    for(int i=st;i<=end;i++) ar[i]-=mn;
+    LL last=st;
+
+    LL ret=mn;
+
+    for(int i=st;i<=end;i++)
+    {
+        if(ar[i]==0)
+        {
+
+            ret+=go(last,i-1);
+            last=i+1;
+
+        }
+    }
+
+    ret+=go(last,end);
+
+    return min(ret,end-st+1);
+}
+
+
+int main()
+{
+    //Fast;
+    mem(dp,-1);
+
+    cin>>n;
+
+    repp(i,n)  cin>>ar[i];
+    cout<<go(1,n)<<endl;
+
+   return 0;
+
+}

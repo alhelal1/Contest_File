@@ -1,0 +1,15 @@
+ll n,m,k;
+
+     cin>>n>>m>>k;
+
+     rep(i,m)cin>>ar[i];
+
+     cin>>a;
+
+     ll ans=0;
+
+     rep(i,m)
+     {
+         if((__builtin_popcount(a^ar[i]))<=k)ans++;
+     }
+     cout<<ans;

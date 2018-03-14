@@ -1,0 +1,20 @@
+#define MX 100000
+int ar[MX+5];
+void num_of_primefactor()
+{
+    long n,c,j;
+    for(long i=2;i<=(MX)/2;i++)
+    {
+       if(ar[i]==0)
+       {
+           j=i;
+           while(j<=MX)
+           {
+               ar[j]++;
+               j+=i;
+           }
+       }
+    }
+   for(long i=MX/2;i<=MX;i++)
+     if(ar[i]==0) ar[i]=1;   
+}

@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+#include <map>
+
+
+ 
+struct trie
+{
+    int info[10],f;
+ 
+    trie()
+    {
+        Clear(info,-1);
+        f=-1;
+    }
+};
+ 
+vector<trie> T;
+ 
+char str[11];
+bool ans;
+ 
+void insert(int pos,int node)
+{
+    if(str[pos]=='\0')
+    {
+        if(T[node].f==-1) T[node].f=1;
+        else ans=false;
+        return;
+    }
+ 
+    int x=str[pos]-'0';
+ 
+    if(T[node].info[x]==-1)
+    {
+        T[node].info[x]=SZ(T);
+        T.pb(trie());
+    }
+    int nextnode=T[node].info[x];
+    if(T[node].f==1) ans=false;
+    else T[node].f=2;
+    insert(pos+1,nextnode);
+}
+ 
+ 
+int main()
+{
+    int test,i,j,Case=1,N;
+ 
+    scanf("%d",&test);
+ 
+    while(test--)
+    {
+        T.clear();
+        T.pb(trie());
+ 
+        ans=true;
+        scanf("%d",&N);
+        for(i=0;i<N;i++)
+        {
+            scanf("%s",str);
+            insert(0,0);
+        }
+ 
+        if(ans)
+            printf("Case %d: YES\n",Case++);
+        else printf("Case %d: NO\n",Case++);
+ 
+    }
+}

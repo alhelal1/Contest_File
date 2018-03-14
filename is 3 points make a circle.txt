@@ -1,0 +1,38 @@
+
+double dist_2point(double x1,double y1,double x2,double y2)
+{
+    double d;
+    d=sqrt(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)));
+    return d;
+}
+typedef pair<double,double> pr;
+double rx,ry;
+int is_circle(pr a,pr b,pr c)
+{
+    double m1x,m1y,m2x,m2y,a1,b1,temp,k1,a2,b2,k2;
+    m1x=(a.ff+b.ff)/2;
+    m1y=(a.ss+b.ss)/2;
+    a1=a.ss-b.ss; b1=b.ff-a.ff;
+    k1=a1*m1y-b1*m1x;
+
+
+    m2x=(b.ff+c.ff)/2;
+    m2y=(b.ss+c.ss)/2;
+    a2=b.ss-c.ss; b2=c.ff-b.ff;
+    k2=a2*m2y-b2*m2x;
+    //cout<<a1<<" "<<b1<<""<<a2<<" "<<b2<<endl;
+    if(a1*b2==a2*b1) return 0;
+    temp=a1;a1=b1;b1=-temp;
+    temp=a2; a2=b2;b2=-temp;
+
+    rx=(b1*k2-b2*k1)/(a1*b2-b1*a2);
+    ry=(a2*k1-a1*k2)/(a1*b2-b1*a2);
+    double d1,d2,d3;
+    d1=dist_2point(a.ff,a.ss,rx,ry);
+    d2=dist_2point(b.ff,b.ss,rx,ry);
+    d3=dist_2point(c.ff,c.ss,rx,ry);
+    //cout<<d1<<" "<<d2<<" "<<d3<<endl;
+    if(d1==d2&&d2==d3) return 1;
+    else return 0;
+
+}

@@ -1,0 +1,70 @@
+string s,ss,res;
+string dp[105][105];
+string rec(int i,int j)
+{
+    if(i<0||j<0) return "";
+    if(dp[i][j]!=".") return dp[i][j];
+    string r1="",r2,r3;
+      if(s[i]==ss[j])
+      r1=s[i]+rec(i-1,j-1);
+
+      r2=rec(i-1,j);
+      r3=rec(i,j-1);
+      if(len(r1)>=len(r2)&&len(r1)>=len(r3))
+      {
+          if(len(r1)==len(r2))
+              if(r1>r2) r1=r2;
+          if(len(r1)==len(r3))
+              if(r1>r3) r1=r3;
+              return dp[i][j]=r1;
+      }
+      else if(len(r2)>=len(r1)&&len(r2)>=len(r3))
+      {
+          if(len(r1)==len(r2))
+              if(r1<r2) r2=r1;
+          if(len(r2)==len(r3))
+              if(r2>r3) r2=r3;
+            return  dp[i][j]=r2;
+      }
+      else
+      {
+          if(len(r3)==len(r2))
+              if(r3>r2) r3=r2;
+          if(len(r1)==len(r3))
+              if(r1<r3) r3=r1;
+            return  dp[i][j]=r3;
+      }
+     //return dp[i][j]=max(max(r1,r2),r3);
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+ long t,k;
+cin>>t;
+for(k=1;k<=t;k++)
+{
+     rep(i,101)
+     rep(j,101) dp[i][j]=".";
+     cin>>s>>ss;
+    cout<<"Case "<<k<<": ";
+    reverse(all(s));
+    reverse(all(ss));
+    res=rec(len(s)-1,len(ss)-1);
+    if(len(res)==0)
+    cout<<":(\n";
+    else {
+    //res="";
+    //print(len(s)-1,len(ss)-1);
+    cout<<res;
+    cout<<endl;
+    }
+}
+     //cout<<"Case "<<k<<": ";
+
+
+
+
+return 0;
+}

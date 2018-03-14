@@ -1,0 +1,6 @@
+LL fact[1000001], inv[1000001];
+LL ncr(int n, int r, LL md){
+    if(n < r) return 0;
+    LL ret = (fact[n] * inv[r]) % md;
+    return (ret * inv[n-r]) % md;
+}

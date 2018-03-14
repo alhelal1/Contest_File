@@ -1,0 +1,46 @@
+int color[20005];
+vector<int> v[20005];
+int iscycle(int i,int dad)
+{
+    color[i]=true;
+        rep(j,len(v[i]))
+        {
+            if(color[v[i][j]]==false&&iscycle(v[i][j],i))
+                return true;
+            else if(v[i][j]!=dad) return true;
+        }
+    return false;
+}
+int main()
+{
+long tt,kk;
+cin>>tt;
+for(kk=1;kk<=tt;kk++)
+{
+     mem(color,0);
+     rep(i,20001)
+     v[i].clear();
+    // file or not???
+    long n,k=0,a,b,node;
+    cin>>node>>n;
+    rep(i,n)
+    {
+        cin>>a>>b;
+        v[a].pb(b);
+        v[b].pb(a);
+    }
+    int f=0;
+    rep(i,node)
+    {
+        if(color[i]==false&&iscycle(i,-1))
+        {
+            f=1;
+            break;
+        }
+    }
+    if(f) cout<<"Cicle\n";
+    else cout<<"No Cicle\n";
+}
+
+return 0;
+}

@@ -1,0 +1,21 @@
+string s1,s2;
+long dp[1005][1005],ls1,ls2;
+long rec(int i,int j)
+{
+    if(i>=ls1||j>=ls2) return 0;
+    if(dp[i][j]!=-1) return dp[i][j];
+    long r1=0,r2=0,r3=0;
+    if(s1[i]==s2[j]) r1=1+rec(i+1,j+1);
+    r2=rec(i,j+1);
+    r3=rec(i+1,j);
+    return dp[i][j]=max(r1,max(r2,r3));
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+    cin>>s1>>s2;
+    ls1=len(s1);ls2=len(s2);
+    mem(dp,-1);
+    cout<<rec(0,0)<<endl;
+return 0;
+}

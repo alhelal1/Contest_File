@@ -1,0 +1,32 @@
+LL go(LL st,LL end)
+{
+   if(end>=n) return 0LL;
+   LL &ret=dp[st][end];
+   if(ret!=-1)  return ret;
+
+   ret=inf;
+   ret=min(ret,1+go(st,end+1));
+   if((A[end]-A[st-1])<=(A[n]-A[end]))
+   {
+       LL aa=A[end]-A[st-1];
+       LL bb=lower_bound(A+1,A+n+1,A[end]+aa)-A;
+       ret=min(ret,bb-end-1+go(end+1,bb));
+   }
+   return ret;
+}
+int main()
+{
+    //READ;
+    //IOS;
+   cin>>n;repp(i,n)cin>>ar[i];
+   mem(dp,-1);
+   repp(i,n)
+   {
+       A[i]+=A[i-1];
+        A[i]+=ar[i];
+   }
+   cout<<go(1,1)<<"\n";
+
+     return 0;
+}
+///============= ALLAH HAFIZ ===================///

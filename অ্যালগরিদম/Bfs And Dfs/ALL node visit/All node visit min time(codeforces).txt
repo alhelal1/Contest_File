@@ -1,0 +1,63 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <deque>
+#include <queue>
+#include <set>
+#include <map>
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstdio>
+
+using namespace std;
+
+#define REP(i,n) for((i)=0;(i)<(int)(n);(i)++)
+#define foreach(c,itr) for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();itr++)
+
+typedef long long ll;
+#define INF (1ll<<60)
+
+vector <pair <int, int> > edge[100010];
+ll dist[100010];
+queue <int> q;
+
+int main(void){
+    int N,i,x,y,w;
+    ll ans = 0;
+    
+    scanf("%d",&N);
+    REP(i,N-1){
+        scanf("%d%d%d",&x,&y,&w); x--; y--;
+        edge[x].push_back(make_pair(y,w));
+        edge[y].push_back(make_pair(x,w));
+        ans += 2*w;
+    }
+    
+    REP(i,N) dist[i] = INF;
+    dist[0] = 0;
+    q.push(0);
+    
+    while(!q.empty()){
+        x = q.front(); q.pop();
+        REP(i,edge[x].size()){
+            y = edge[x][i].first;
+            if(dist[y] == INF){
+                dist[y] = dist[x] + edge[x][i].second;
+                q.push(y);
+            }
+        }
+    }
+    
+    ll big = 0;
+    REP(i,N) big = max(big,dist[i]);
+    
+    ans -= big;
+    cout << ans << endl;
+    
+    return 0;
+}

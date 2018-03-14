@@ -1,0 +1,67 @@
+stack<int> stk;
+bool color[10005];
+vector<int> v[10005],g[10005];
+void fil(int i)
+{
+    color[i]=true;
+    rep(j,len(v[i]))
+    {
+        if(color[v[i][j]]==false) fil(v[i][j]);
+    }
+    stk.push(i);
+}
+void dfs(int i)
+{
+    color[i]=1;
+    cout<<i<<" ";
+    rep(j,len(g[i])) if(color[g[i][j]]==false) dfs(g[i][j]);
+}
+int main()
+{
+    long test,kase;
+    cin>>test;
+    repl(kase,test){
+    long n,m,a,b;
+    cin>>n>>m;
+    rep(i,m)
+    {
+        cin>>a>>b;
+        v[a].pb(b);
+    }
+    mem(color,0);
+    rep(i,n)
+    {
+        if(color[i]==0)
+        {
+            fil(i);
+        }
+    }
+    rep(i,n)
+    {
+        rep(j,len(v[i]))
+        {
+            g[v[i][j]].pb(i);
+        }
+    }
+    mem(color,0);
+    long res=0;
+    while(!stk.empty())
+    {
+        int j=stk.top();
+        stk.pop();
+        if(color[j]==false)
+        {
+            dfs(j);
+            res++;
+            cout<<endl;
+        }
+    }
+    cout<<"Case "<<kase<<": "<<res<<endl;
+    rep(i,10001) v[i].clear();
+   // stk.clear();
+    }
+
+return 0;
+}
+
+

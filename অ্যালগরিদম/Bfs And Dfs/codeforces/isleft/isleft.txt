@@ -1,0 +1,27 @@
+template<typename T> LL isLeft(T a,T b,T c)             { return (c.x-a.x)*(b.y-a.y)-(b.x-a.x)*(c.y-a.y); }
+
+struct z
+{
+    LL x,y;
+};
+
+z a[MX];
+
+int main()
+{
+    int n;
+    S1(n);
+    n++;
+    F(i,1,n+1)
+    {
+        SL2(a[i].x,a[i].y);
+    }
+    int ans=0;
+    for(int i=2;i<=n-1;i++) {
+        LL now=isLeft(a[i-1],a[i],a[i+1]);
+        if(now<0) ans++;
+    }
+    printf("%d\n",ans);
+
+    return 0;
+}

@@ -1,0 +1,7 @@
+// Evert print seperate
+ ios_base::sync_with_stdio(false);
+   char chh[1000];
+
+   getline(cin,s);
+   sscanf(s.c_str(),"%s %lld-%lld",chh,&a,&b);
+  cout<<s<<" "<<a<<" "<<b<<endl;

@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int Px[1003] , Py[1003];
+
+int sx,sy,n;
+int Vis[1003];
+
+bool SameLine(int x1,int y1,int x2,int y2,int x3,int y3)
+{
+    return ( ( (x1*y2  + x2*y3 + x3*y1) - (x2*y1+x3*y2+x1*y3) ) == 0);
+}
+
+
+int main()
+{
+    scanf("%d%d%d",&n,&sx,&sy);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d%d",&Px[i] , &Py[i]);
+
+    }
+    int ans = 0;
+    for(int i=0;i<n;i++)
+    {
+        if(Vis[i]) continue;
+
+        ans++;
+        Vis[i] = 1;
+
+        for(int j=0;j<n;j++)
+        {
+            if(Px[i] == Px[j] && Py[i]==Py[j]) Vis[j] = 1;
+            else if(SameLine(sx,sy,Px[i],Py[i],Px[j],Py[j])) Vis[j] = 1;
+        }
+    }
+    cout<<ans<<endl;
+
+
+    return 0;
+}

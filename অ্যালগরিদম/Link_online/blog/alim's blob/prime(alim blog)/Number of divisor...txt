@@ -1,0 +1,48 @@
+/**  Algo: Sieve for number of divisor
+   Complexity:O(NloglogN)
+   Execution Time: 318ms(N=10^6)
+   Here, nod[i]=k means i has k divisors
+**/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+#define LL long long
+ 
+bool a[1000099];
+int nod[1000099];
+void sieve_for_number_of_divisor()
+{
+    LL i,j; nod[2]=2;
+    for(i=2;i<=1000000;i++)
+    {
+        if(a[i]==0)
+        {
+            nod[i]=2;
+            for(j=i+i;j<=1000000;j=j+i)
+            {
+                a[j]=1;
+                int co=0;
+                int temp=j;
+                while(temp%i==0)
+                {
+                    co++;
+                    temp=temp/i;
+                }
+                nod[j]=nod[j]*(co+1);
+            }
+        }
+    }
+}
+ 
+int main()
+{
+    int i,j,k,n,m,d;
+    for(i=1;i<=1000000;i++)
+        nod[i]=1;
+    sieve_for_number_of_divisor();
+    for(i=1;i<=20;i++)
+    {
+        printf("%d has %d divisors\n",i,nod[i]);
+    }
+    return 0;
+}

@@ -1,0 +1,51 @@
+
+
+LL ar[N],br[N],a,n,m,r=0,kk,ans=0;
+//string  s;
+
+LL T[N];
+void up(LL idx,LL val)
+{
+    while(idx<=n)
+    {
+       if(T[idx]<val)T[idx]=val;
+        idx=idx+(idx&-idx);
+    }
+
+}
+
+
+LL read(LL idx)
+{
+    r=0;
+    while(idx>0)
+    {
+        if(r<T[idx])r=T[idx];
+        idx=idx-(idx&-idx);
+    }
+
+    return r;
+}
+int main()
+{
+   //fastinput;
+   //mem(T,false);
+   //scanf("%d%d",&n,&m);
+   cn(n);cn(m);
+   rep(i,n)
+   {
+      cn(a);
+       ar[a]=i+1;
+   }
+   rep(i,m)
+   {
+        cn(a);
+        kk=read(ar[a]-1)+1;
+       up(ar[a],kk);
+       if(ans<kk)  ans=kk;
+   }
+   printf("%d\n",ans);
+
+   return 0;
+
+}

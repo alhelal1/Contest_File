@@ -1,0 +1,25 @@
+long mx=100000000;
+int status[3125005]={0};
+bool check(long n, long p)
+{
+    return (n&(1<<p));
+}
+void sieve()
+{
+    long l=long(sqrt(mx));
+    for(long i=3;i<=l;i+=2)
+    {
+        if(check(status[i>>5],i%31)==0)//i&31=i%31;
+        {
+            for(long j=i*i;j<=mx;j+=2*i)
+            {
+                status[j>>5]=(status[j>>5]|(1<<(j%31)));
+            }
+        }
+    }
+    for(long i=3;i<=100;i+=2)
+    {
+        if(check(status[i/32],i%31)==0)
+        printf("%ld ",i);
+    }
+}

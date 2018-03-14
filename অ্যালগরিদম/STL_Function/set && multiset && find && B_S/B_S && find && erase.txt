@@ -1,0 +1,50 @@
+LL ar[N],br[N],cr[N];LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0;
+string  s;
+
+
+multiset<LL>ALL,st;
+int main()
+{
+   fastinput;
+  cin>>n;
+  repp(i,n)  cin>>ar[i];
+ // repp(i,n) cin>>br[i];
+  //set<LL>st;
+  multiset<LL>::iterator it,it1;
+  repp(i,n)
+  {
+      a+=ar[i];  cr[i]=a;
+  }
+  st.insert(0);
+  st.insert(n+1);
+  ALL.insert(cr[n]);
+  ALL.insert(0);
+
+  LL aa;
+
+  repp(i,n)
+  {
+
+      cin>>aa;
+      it=st.lower_bound(aa);
+
+
+      LL r=*it;it--;LL l=*it;
+      ALL.erase(ALL.find(cr[r-1]-cr[l]));
+      ALL.insert(cr[r-1]-cr[aa]);
+      ALL.insert(cr[aa-1]-cr[l]);
+      it1=ALL.end();  it1--;
+      st.insert(aa);
+
+      cout<<*it1<<"\n";
+  }
+
+
+
+
+
+
+
+   return 0;
+
+}

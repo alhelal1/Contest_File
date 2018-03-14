@@ -1,0 +1,100 @@
+struct node
+{
+    int has;
+    int nxt[26];
+    node()
+    {
+        mem(nxt,-1);
+        has=0;
+    }
+};
+vector<node> v;
+string s;
+int win(int i)
+{
+    if(v[i].has==0)
+            return 1;
+
+    int ret=0;
+    rep(j,26)
+    {
+        if(v[i].nxt[j]==-1) continue;
+        ret|=win(v[i].nxt[j]);
+    }
+    if(i==0) return ret;
+    if(ret==0) return 1;
+    return 0;
+}
+int loss(int i)
+{
+    if(v[i].has==0)
+            return 1;
+
+    int ret=1;
+    rep(j,26)
+    {
+        if(v[i].nxt[j]==-1) continue;
+        ret&=loss(v[i].nxt[j]);
+    }
+    if(i==0) return ret;
+    if(ret==0) return 1;
+    return 0;
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+/*long t,kase;
+cin>>t;
+for(kase=1;kase<=t;kase++)
+{
+    cout<<"Case "<<kase<<": ";
+
+}*/
+  int n,m,cur,ps;
+   v.pb(node());
+   cin>>n>>m;
+   rep(i,n)
+   {
+       cin>>s;
+       cur=0;
+       rep(j,len(s))
+       {
+           ps=v[cur].nxt[s[j]-'a'];
+           v[cur].has=1;
+           if(ps==-1)
+           {
+               v.pb(node());
+               ps=len(v)-1;
+               v[cur].nxt[s[j]-'a']=ps;
+           }
+           cur=ps;
+       }
+
+
+   }
+  //cout<<loss(0);
+  int w,l;
+  w=win(0); l=loss(0)^1;
+  // cout<<w<<" "<<l<<endl;
+  if(w&&l==0)
+  {
+      if(m%2) cout<<"First\n";
+      else cout<<"Second\n";
+  }
+  else if(w==0&&l)
+  {
+      cout<<"Second\n";
+  }
+  else if(w&&l)
+  {
+      cout<<"First\n";
+  }
+  else
+  {
+       cout<<"Second\n";
+  }
+
+return 0;
+}

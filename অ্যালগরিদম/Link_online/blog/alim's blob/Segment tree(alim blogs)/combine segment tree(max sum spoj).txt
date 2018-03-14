@@ -1,0 +1,92 @@
+/*
+SPOJ Problem: GSS1
+Problem Summary: You are given a sequence A[1], A[2], ..., A[N].
+( |A[i]| = 15007 , 1 = N = 50000 ). A query is defined as follows:
+Query(x,y) = Max { a[i]+a[i+1]+...+a[j] ; x = i = j = y }.
+Given M queries, your program must output the results of these queries.
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+#define LL long long
+#define max3(a,b,c) max(a,max(b,c))
+#define max4(a,b,c,d) max(max(a,b),max(c,d))
+ 
+int inf=1500008;
+ 
+struct info
+{
+    int segsum,leftsum,rightsum,maxsum;
+};
+ 
+info tree[200009];
+int a[50009];
+ 
+info merge(info l,info r)
+{
+    info ret;
+    ret.segsum=l.segsum+r.segsum;
+    ret.leftsum=max4(l.segsum,l.leftsum,l.segsum+r.leftsum,l.segsum+r.segsum);
+    ret.rightsum=max4(r.segsum,r.rightsum,r.segsum+l.rightsum,r.segsum+l.segsum);
+    ret.maxsum=max3(l.maxsum,r.maxsum,l.rightsum+r.leftsum);
+    return ret;
+}
+ 
+void init(int node,int b,int e)
+{
+    if(b==e)
+    {
+        tree[node].leftsum=a[b];
+        tree[node].rightsum=a[b];
+        tree[node].maxsum=a[b];
+        tree[node].segsum=a[b];
+        return;
+    }
+    int left=node<<1;
+    int right=left+1;
+    int mid=(b+e)>>1;
+    init(left,b,mid);
+    init(right,mid+1,e);
+    tree[node]=merge(tree[left],tree[right]);
+}
+ 
+info query(int node,int b,int e,int i,int j)
+{
+    info ret;
+    if(b>j||e<i)
+    {
+        ret.leftsum=-inf;
+        ret.rightsum=-inf;
+        ret.segsum=-inf;
+        ret.maxsum=-inf;
+        return ret;
+    }
+    if(b>=i&&e<=j) return tree[node];
+    int left=node<<1;
+    int right=left+1;
+    int mid=(b+e)>>1;
+    info p1=query(left,b,mid,i,j);
+    info p2=query(right,mid+1,e,i,j);
+    ret=merge(p1,p2);
+    return ret;
+ 
+}
+ 
+int main()
+{
+    int i,j,k,n,m,d,test,t=0,x,y,q;
+    while(scanf("%d",&n)==1)
+    {
+        for(i=1;i<=n;i++)
+            scanf("%d",&a[i]);
+        init(1,1,n);
+        scanf("%d",&q);
+        while(q--)
+        {
+            scanf("%d%d",&x,&y);
+            info ans=query(1,1,n,x,y);
+            printf("%d\n",ans.maxsum);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstdio>
+
+#include <ext/rope>
+using namespace std;
+using namespace __gnu_cxx;
+int main(){
+
+
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(false);
+
+	rope<int> v;
+	int n,q;
+	cin>>n>>q;
+	int t,l,r;
+	int val;
+	for(int i=1;i<=n;i++){
+		cin>>val;
+		v.push_back(val);
+	}
+	for(int i=0;i<q;i++){
+		cin>>t>>l>>t;
+		rope<int> cur;
+		if(t==1){
+			l--;
+			r--;
+			cur=v.substr(l,r-l+1);
+			v.erase(l,r-l+1);
+			v.insert(v.mutable_begin(),cur);
+		}else{
+			l--;
+			r--;
+			cur=v.substr(l,r-l+1);
+			v.erase(l,r-l+1);
+			v.insert(v.mutable_end(),cur);
+		}
+	}
+	rope<int>::iterator it;
+	for(it=v.mutable_begin();it!=v.mutable_end();it++){
+		cout<<*it<<" ";
+	}
+}
+/*
+[ 1 l r ] modify the array by removing all the elements till index l (i.e., the sub-array A[1..l-1] )
+and place them after the element with index r.
+[ 2 l r ] modify the array by removing all the elements after index r (i.e., the sub-array A[r+1..N] )
+ and place them before the element with index l.
+8 5
+6 2 6 9 8 9 0 1
+1 4 6
+2 3 7
+2 2 5
+1 4 6
+1 5 6
+After Query 1, the array becomes 9 8 9 6 2 6 0 1.
+After Query 2, the array becomes 9 8 1 9 6 2 6 0.
+After Query 3, the array becomes 9 2 6 0 8 1 9 6.
+After Query 4, the array becomes 0 8 1 9 2 6 9 6.
+After Query 5, the array becomes 2 6 0 8 1 9 9 6.
+*/

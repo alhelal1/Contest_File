@@ -1,0 +1,55 @@
+using namespace std;
+
+#define MAXN 610000
+int nxt[MAXN][3];
+int is_end[MAXN];
+int sz = 1;
+int L;
+
+#define MAXL 610000
+char buf[MAXL];
+
+void insert() {
+  int cur = 0;
+  L = strlen(buf);
+  FOR(i, 0, L) {
+    int nc = buf[i] - 'a';
+    if (nxt[cur][nc] == -1) {
+      nxt[cur][nc] = sz++;
+    }
+    cur = nxt[cur][nc];
+  }
+  is_end[cur] = true;
+}
+
+bool solve(int pos, int ptr, bool mutated) {
+  if (ptr == -1) return false;
+  if (pos == L) {
+    return is_end[ptr] && mutated;
+  }
+  bool res = false;
+  FOR(i, 0, 3) {
+    if (buf[pos] - 'a' == i) {
+      res |= solve(pos + 1, nxt[ptr][i], mutated);
+    } else if (!mutated) {
+      res |= solve(pos + 1, nxt[ptr][i], true);
+    }
+  }
+  return res;
+}
+
+int main(int argc, char **argv){
+  memset(nxt, -1, sizeof(nxt));
+  int N, M;
+  cin >> N >> M;
+  FOR(i, 0, N) {
+    scanf("%s", buf);
+    insert();
+  }
+  FOR(i, 0, M) {
+    scanf("%s", buf);
+    L = strlen(buf);
+    puts(solve(0, 0, false) ? "YES" : "NO");
+  }
+  return 0;
+}

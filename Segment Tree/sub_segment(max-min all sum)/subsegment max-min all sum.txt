@@ -1,0 +1,222 @@
+/*********************************************************************\
+    codeforces = Alhelal_ONE  ||  topcoder = Al..helal                |
+    mail = alhelaliu@gmail.com                                        |
+    CSE,Islamic University,Kushtia                                    |
+                                                                      |
+**********************************************************************/
+
+using namespace std;
+#include<bits/stdc++.h>
+typedef long long int   LL;
+//typedef int   LL;
+typedef long long   ll;
+typedef   pair<LL,LL>  PII;
+typedef   vector< PII > VPII;
+typedef   vector<LL>   VI;
+typedef   vector<string>   VS;
+typedef   map<string,LL>  MSI;
+typedef   map<LL,LL>  MII;
+
+///Scanf
+#define sf(n)       scanf("%lld", &n)
+#define sff(a,b)    scanf("%lld %lld", &a, &b)
+#define sfff(a,b,c) scanf("%lld %lld %lld", &a, &b, &c)
+
+///Printf
+#define pf(a)  printf("%lld",a)
+#define pff(a,b)  printf("%lld %lld",a,b)
+#define pfff(a,b,c)  printf("%lld %lld %lld",a,b,c)
+#define nl printf("\n")
+#define spc printf(" ")
+#define line   printf("____________________________________\n")
+#define case(no) printf("Case %lld: ",++no)
+#define caseline(no) printf("Case %lld:\n",++no)
+#define casehash(no) printf("Case #%lld: ",++no)
+#define casehashline(no) printf("Case #%lld:\n",++no)
+
+///LOOP
+#define FORSTL(x,n) for(__typeof(n.begin()) x=n.begin();x!=n.end();x++)
+#define repp(x,n) for(__typeof(n) x=1;x<=(n);x++)
+#define rep(x,n) for(__typeof(n) x=0;x<(n);x++)
+#define reps(i,s) for(int i=0;i<s.size();i++)
+///Shortcut
+#define Unique(store) store.resize(unique(store.begin(),store.end())-store.begin())
+#define fasterinput  ios_base::sync_with_stdio(false); cin.tie(false);
+#define mem(ar,value) memset(ar,value,sizeof(ar))
+#define all(x) x.begin(),x.end()
+#define len(s) s.size()
+#define mp make_pair
+#define pb push_back
+#define EPS (1e-9)
+///DEBUG
+#define trace(x) cerr<<x<<endl;
+#define F(x) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<endl;
+#define FF(x,y) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<" | "#y" = "<<y<<endl;
+#define FFF(x,y,z) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<" | "#y" = "<<y<<" | "#z" = "<<z<<endl;
+#define FFFF(a,b,c,d) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#a" = "<<a<<" | "#b" = "<<b<<" | "#c" = "<<c<<" | "#d" = "<<d<<endl;
+#define FFFFF(a,b,c,d,e) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#a" = "<<a<<" | "#b" = "<<b<<" | "#c" = "<<c<<" | "#d" = "<<d<<" | "#e" = "<<e<<endl;
+#define FFFFFF(a,b,c,d,e,f) cerr<<__FUNCTION__<<":"<<__LINE__<<": "#a" = "<<a<<" | "#b" = "<<b<<" | "#c" = "<<c<<" | "#d" = "<<d<<" | "#e" = "<<e<<" | "#f" = "<<f<<endl;
+
+
+
+/**Define Bitwise operation**/
+template<class T> inline T lowbit(T n){return (n^(n-1))&n;}//NOTES:lowbit(
+template<class T> inline int countbit(T n){return (n==0)?0:(1+countbit(n&(n-1)));}
+#define check(n, pos) (n & (1<<(pos)))
+#define biton(n, pos) (n | (1<<(pos)))
+#define bitoff(n, pos) (n & ~(1<<(pos)))
+#define ledzero(n) (__builtin_clz(n))
+#define trailzero(n) (__builtin_ctz(n))
+#define onbit(n) (__builtin_popcount(n))
+
+///upper bound and lower bound
+#define LB(a,value) (lower_bound(all(a),value)-a.begin())
+#define UB(a,value) (upper_bound(all(a),value)-a.begin())
+#define inf (1e18*1LL)
+#define eps (1e-9)
+#define PI acos(-1.0)
+#define sz size()
+#define pi 3.14159265358979323846
+#define isEq(a,b) (fabs((a)-(b))<eps)
+#define DIST(x1,y1,x2,y2) (sqrt(sqr((x1)-(x2))+sqr((y1)-(y2))))
+#define spDist(lat1,long1,lat2,long2,r) ((r)*acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos((long1)-(long2))))
+#define area(x1,y1,x2,y2,x3,y3) ( x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2) )
+#define sqr(x) ((x)*(x))
+#define distSqr(x1,y1,x2,y2) ( sqr(x1-x2) + sqr(y1-y2) )
+#define dist4adj(x1,y1,x2,y2) ( abs(x1-x2) + abs(y1-y2) )
+#define dist8adj(x1,y1,x2,y2) max( abs(x1-x2) , abs(y1-y2) )
+#define IOS ios_base::sync_with_stdio(false), cin.tie(false)
+
+
+///File
+#define READ freopen("INPUT.txt","r",stdin)
+#define WRITE freopen("OUTPUT.txt","w",stdout)
+
+///NUMBER THEORY
+template<class T>T gcd(T a,T b){return b == 0 ? a : gcd(b, a % b);}
+template<typename T>T lcm(T a, T b) {return a / gcd(a,b) * b;}
+template<class T>T my_pow(T n,T p){if(p==0)return 1;T x=my_pow(n,p/2);x=(x*x);if(p&1)x=(x*n);return x;} ///n to the power p
+template<class T>T big_mod(T n,T p,T m){if(p==0)return (T)1;T x=big_mod(n,p/2,m);x=(x*x)%m;if(p&1)x=(x*n)%m;return x;}
+template<typename T> T ModInverse(T n,T m) { return BigMod(n,m-2,m); }
+///string to int
+template <class T> T extract(string s, T ret) {stringstream ss(s); ss >> ret; return ret;}///
+string itos(LL n){string s;while(n){s+=(n%10+48);n/=10;}reverse(all(s));return s;}
+LL stoi(string s){LL n=0;rep(i,len(s))n=n*10+(s[i]-48);return n;}
+/// GEOMETRY
+//double DEG(double x) { return (180.0*x)/(PI);}
+//double RAD(double x) { return (x*(double)PI)/(180.0);}
+//template<typename T> T DIS(T x1,T y1,T x2, T y2){return sqrt( (double)( (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) ) );}
+//template<typename T> T ANGLE(T x1,T y1,T x2, T y2){ return atan( double(y1-y2) / double(x1-x2));}
+//template<typename T> LL isLeft(T a,T b,T c) { return (c.x-a.x)*(b.y-a.y)-(b.x-a.x)*(c.y-a.y); }
+///Direction Array
+///int fx[]={1,-1,0,0}; int fy[]={0,0,1,-1};
+/// int fx[]={0,0,1,-1,-1,1,-1,1}; int fy[]={-1,1,0,0,1,1,-1,-1};
+///struct info{LL x,y;}arr[N];bool com(info a,info b){return (a.x<b.x) or (a.x==b.x and a.y<b.y);}
+///bool vis[N];LL prime(){vis[1]=true;for(int i=4;i<=N;i+=2)  vis[i]=1;LL aa=sqrt(N+.00001);for(int i=3;i<=aa;i+=2){for(int j=i*i;j<=N;j+=(2*i)) vis[j]=1;}}
+///========================================================================================================///
+const  int N=1e6+5,MOD=1e9+7;
+LL ar[N];
+LL a,b,c,r,rr,n,m,t,ks;
+
+struct node
+{
+    int x,y,z;
+}A[3*N][3];
+
+void build(int idx,int st,int end)
+{
+    if(st==end)
+    {
+        A[idx][1].x=ar[st];
+         A[idx][1].y=st;
+        A[idx][2].x=ar[st];  A[idx][2].y=st;
+         return ;
+    }
+    int mid=(st+end)>>1,lf=idx*2,rg=lf+1;
+    build(lf,st,mid); build(rg,mid+1,end);
+    if(A[lf][1].x<A[rg][1].x)  A[idx][1]=A[lf][1];
+     else   A[idx][1]=A[rg][1];
+
+     if(A[lf][2].x>=A[rg][2].x)  A[idx][2]=A[lf][2];
+     else   A[idx][2]=A[rg][2];
+     return ;
+}
+node pos(int idx,int st,int end,int i,int j,int f)
+{
+    if(st==i and end==j)
+    {
+        return A[idx][f];
+    }
+        int mid=(st+end)>>1,lf=idx*2,rg=lf+1;
+        if(j<=mid) return pos(lf,st,mid,i,j,f);
+        else if(i>mid) return pos(rg,mid+1,end,i,j,f);
+        else
+        {
+            node aa=pos(lf,st,mid,i,mid,f);
+            node bb=pos(rg,mid+1,end,mid+1,j,f);
+            if(f==1)
+            {
+                if(aa.x>bb.x) return bb;
+                else return aa;
+            }
+            else
+            {
+                if(aa.x<bb.x) return bb;
+                else return aa;
+            }
+        }
+
+}
+
+LL MAX(int left,int right)
+{
+    if(left>=right) return 0;
+    int dd=pos(1,1,n,left,right,2).y;
+
+    //F(dd);
+    LL tot=(ar[dd])*((dd-left+1)*1LL*(right-dd+1)-1LL)*1LL;
+    return tot+MAX(left,dd-1)+MAX(dd+1,right);
+}
+
+
+
+LL MAXX(int left,int right)
+{
+    if(left>=right) return 0;
+    int dd=pos(1,1,n,left,right,1).y;
+   // F(dd);
+    LL tot=(ar[dd])*((dd-left+1)*1LL*(right-dd+1)-1LL);
+    return tot*1LL+MAXX(left,dd-1)*1LL+MAXX(dd+1,right)*1LL;
+}
+
+
+int main()
+{
+
+    //READ;
+    IOS;
+
+
+    //repp(i,100005)P[i][1].fir
+
+    cin>>n; repp(i,n) cin>>ar[i];
+    build(1,1,n);
+
+
+    node aa=pos(1,1,n,2,3,1);
+
+    //FF(aa.x,aa.y);
+
+
+   // FF(P[1][1].first,P[1][2].first);
+
+   // pair<LL,LL>mm=go(1,1,n,1,n,2);
+   // F(mm.second);
+    LL ans=MAX(1,n); F(ans);ans-=MAXX(1,n);
+    cout<<ans<<"\n";
+
+
+
+     return 0;
+}
+///============= ALLAH HAFIZ ===================///

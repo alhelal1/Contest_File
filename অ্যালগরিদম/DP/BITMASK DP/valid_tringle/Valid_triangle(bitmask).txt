@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define ff first
+#define ss second
+#define mp make_pair
+#define memo(a,b) memset(a,b,sizeof(a))
+#define INF 1e9
+#define EPS 1e-8
+#define PI 3.14159265358979323846
+
+typedef long long ll ;
+typedef unsigned long long ull ;
+
+
+bool check(int N,int pos) { return (bool) (N&(1<<pos)); }
+int Set(int N,int pos) { return (N|(1<<pos)) ; }
+
+int arr[16] , N , dp[(1<<15)+10] ;
+
+bool triangle(int a,int b,int c)
+{
+    if(arr[a]+arr[b]<=arr[c]) return false ;
+    if(arr[c]+arr[b]<=arr[a]) return false ;
+    if(arr[a]+arr[c]<=arr[b]) return false ;
+    return true ;
+}
+
+int solve(int mask)
+{
+    int &ret = dp[mask] ;
+    if(ret!=-1) return ret ;
+    ret = 0 ;
+
+    for(int i=0;i<N;i++)
+    {
+        if(check(mask,i)==false)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(check(mask,j)==false&&i!=j)
+                {
+                    for(int k=0;k<N;k++)
+                    {
+                        if(check(mask,k)==false&&j!=k&&i!=k)
+                        {
+                            if(triangle(i,j,k))
+                            {
+                                int temp = mask ;
+                                temp = Set(temp,i);
+                                temp = Set(temp,j);
+                                temp = Set(temp,k);
+                                ret=max(ret,1+solve(temp));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return ret ;
+}
+
+int main()
+{
+   
+    cin >> N ;
+    for(int i=0;i<N;i++) scanf("%d",&arr[i]);
+    memo(dp,-1);
+    cout << solve(0) << endl ;
+    return 0;
+}

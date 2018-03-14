@@ -1,0 +1,25 @@
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+   // cin.tie(false);
+
+   int t;
+
+   cin>>t;
+   ll ks=0;
+
+   while(t--)
+   {
+   cin>>n;
+  ll aa=sqrt(n+0.5);
+  res=0;
+   for(int i=1;i<=aa;i++)
+   {
+       res+=n/i;
+   }
+   res=res*2-(aa*aa);
+  Ca(ks);
+  cout<<res<<endl;
+}
+   return 0;
+}

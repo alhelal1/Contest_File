@@ -1,0 +1,78 @@
+int arr[25];
+ll dp[23][2][10][10];
+
+void process(ll a)
+{
+    ms(arr,0);
+    int i=0;
+    while(a)
+    {
+        arr[i++]=a%10;
+        a/=10;
+    }
+}
+
+ll solve(int pos,bool flag,int first,int last)
+{
+    if(pos<0)
+    {
+        return first == last;
+    }
+
+    ll &ret=dp[pos][flag][first][last];
+
+    if(ret != -1ll)
+        return ret;
+
+    ret=0ll;
+    int i,ft=first;
+
+    if(flag)
+    {
+        for(i=0; i<10; i++)
+        {
+            if(first == 0)
+                ft=i;
+
+            ret+=solve(pos-1,1,ft,i);
+        }
+    }
+    else
+    {
+        for(i=0; i<10; i++)
+        {
+            if(first == 0)
+                ft=i;
+
+            if(arr[pos]>i)
+            {
+                ret+=solve(pos-1,1,ft,i);
+            }
+            else if(arr[pos] == i)
+            {
+                ret+=solve(pos-1,0,ft,i);
+            }
+        }
+    }
+
+    return ret;
+}
+
+int main ()
+{
+    int i,j;
+    ll a,b,c,d;
+    cin>>a>>b;
+    a--;
+    ms(dp,-1ll);
+    process(b);
+    ll ans;
+    c=solve(21,0,0,0);
+    ms(dp,-1ll);
+    process(a);
+    d=solve(21,0,0,0);
+    ans=c-d;
+    // deb(c,d);
+    deb(ans);
+    return 0;
+}

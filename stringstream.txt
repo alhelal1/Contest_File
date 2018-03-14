@@ -1,0 +1,16 @@
+string line;
+    getline(cin,line);
+    stringstream s(line);
+    string str;
+    while(s>>str)
+    {
+        ct<<str<<endl;
+    }
+
+    getline(cin,line);
+    stringstream ss(line);
+    long n;
+    while(ss>>n)
+    {
+        ct<<n<<endl;
+    }

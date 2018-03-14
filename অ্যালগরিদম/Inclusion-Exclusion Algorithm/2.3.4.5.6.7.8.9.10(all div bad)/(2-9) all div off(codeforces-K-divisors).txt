@@ -1,0 +1,38 @@
+
+int main()
+{
+    rep(i,9)ar[i]=i+2;
+
+   // cout<<(1<<9);
+
+   //fastinput;
+
+   cin>>n;
+
+   rep(i,(1LL<<9))
+   {
+       LL tt=1,c=0;
+       rep(j,9)
+       {
+           if(i&(1LL<<j))
+           {
+               tt=lcm(tt,ar[j]);
+               c++;
+           }
+       }
+
+      // D(tt);
+
+
+       if(c%2==0 and  c)    r-=(n/tt);
+       else if(c%2==1)r+=(n/tt);
+   }
+
+   cout<<(n-r);
+
+
+
+
+   return 0;
+
+}

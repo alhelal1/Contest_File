@@ -1,0 +1,106 @@
+
+
+LL A[303][180001];
+
+LL rec(LL idx,LL tot)
+{
+    if(idx>=n)
+    {
+        if(tot==0)return 0;
+        else return 1000000;
+    }
+
+
+    LL &ret=A[idx][tot+90000];
+
+    if(ret!=-1) return ret;
+
+    //ret=100
+
+
+
+
+
+     ret=1000000;
+
+    if(ar[idx]>0)
+    {
+        ret=min(ret,1+rec(idx+1,tot-ar[idx]));
+    }
+
+    if(ar[idx]<0)
+    {
+        ret=min(ret,1+rec(idx+1,tot-ar[idx]));
+    }
+
+    ret=min(ret,rec(idx+1,tot+ar[idx]));
+
+    return ret;
+}
+
+
+
+int main()
+{
+    //Fast;
+
+    //cin>>n;
+
+    mem(A,-1);
+
+    scanf("%d",&n);
+
+    LL r=0;
+
+
+
+
+
+
+
+    rep(i,n)
+    {
+        if(i==0)
+        {
+            scanf("%d",&ar[i]);
+        }
+        else
+        {
+
+            char ch[1];
+            //cin>>ch;
+
+            scanf("%s",ch);
+
+            //cin>>ch;
+
+            scanf("%d",&ar[i]);
+
+
+          //  r+=ar[i];
+
+            if(ch[0]=='-')
+            {
+
+
+            //cin>>ar[i];
+
+            ar[i]*=-1;
+
+            }
+        }
+
+
+    }
+
+    LL ans=rec(1,ar[0]);
+
+    if(ans==1000000)printf("-1\n");
+    else printf("%d\n",ans);
+
+   // cout<<rec(0,0)<<endl;
+
+
+   return 0;
+
+}

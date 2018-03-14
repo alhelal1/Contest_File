@@ -1,0 +1,41 @@
+int main()
+{
+   //_CIN;
+
+    while(cin>>n>>m)
+    {
+
+        LL r=1;
+        LL c2=0,c5=0;
+        for(int i=n;i>(n-m);i--)
+        {
+            //D(i);
+
+            LL aa=i;
+            while(aa%2==0)
+            {
+                c2++;
+
+                aa/=2;
+            }
+
+            while(aa%5==0)
+            {
+                c5++; aa/=5;
+            }
+
+            r=r*aa;
+
+            r%=10;
+
+        }
+
+        if(c2>c5)  r=r*big_mod(2LL,c2-c5,10LL);
+        else if(c5>c2)  r=r*big_mod(5LL,c5-c2,10LL);
+        r%=10;
+
+        cout<<r<<endl;
+    }
+
+
+

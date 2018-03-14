@@ -1,0 +1,103 @@
+/*
+Algorithm Used: Segment Tree with Lazy Propagation
+Problem Link: http://lightoj.com/volume_showproblem.php?problem=1183
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+struct info
+{
+    int lazy,sum;
+};
+ 
+info tree[400009];
+ 
+void init(int node,int b,int e)
+{
+    if(b==e)
+    {
+        tree[node].lazy=-1;
+        tree[node].sum=0;
+        return;
+    }
+    int left=node<<1,right=(node<<1)+1,mid=(b+e)>>1;
+    init(left,b,mid);
+    init(right,mid+1,e);
+    tree[node].sum=tree[left].sum+tree[right].sum;
+}
+ 
+void push(int node,int b,int e)
+{
+    int left=node<<1,right=(node<<1)+1,mid=(b+e)>>1;
+    tree[left].lazy=tree[node].lazy;
+    tree[left].sum=(mid-b+1)*tree[node].lazy;
+    tree[right].lazy=tree[node].lazy;
+    tree[right].sum=(e-mid)*tree[node].lazy;
+    tree[node].lazy=-1;
+}
+ 
+void update(int node,int b,int e,int i,int j,int val)
+{
+    if(b>j||e<i) return;
+    if(b>=i&&e<=j)
+    {
+        tree[node].lazy=val;
+        tree[node].sum=(e-b+1)*val;
+        return;
+    }
+    if(tree[node].lazy!=-1) push(node,b,e);
+    int left=node<<1,right=(node<<1)+1,mid=(b+e)>>1;
+    update(left,b,mid,i,j,val);
+    update(right,mid+1,e,i,j,val);
+    tree[node].sum=tree[left].sum+tree[right].sum;
+}
+ 
+int query(int node,int b,int e,int i,int j)
+{
+    if(b>j||e<i) return 0;
+    if(b>=i&&e<=j&&tree[node].lazy!=-1)
+    {
+        return tree[node].sum;
+    }
+    if(tree[node].lazy!=-1) push(node,b,e);
+    int left=node<<1,right=(node<<1)+1,mid=(b+e)>>1;
+    int p1=query(left,b,mid,i,j);
+    int p2=query(right,mid+1,e,i,j);
+    tree[node].sum=tree[left].sum+tree[right].sum;
+    return p1+p2;
+}
+ 
+int main()
+{
+    int i,j,k,n,m,d,x,y,z,test,t=0,q;
+    scanf("%d",&test);
+    while(test--)
+    {
+        scanf("%d%d",&n,&q);
+        memset(tree,0,sizeof(tree));
+        init(1,1,n);
+        printf("Case %d:\n",++t);
+        while(q--)
+        {
+            scanf("%d%d%d",&d,&x,&y);
+            if(d==1)
+            {
+                scanf("%d",&z);
+                update(1,1,n,x+1,y+1,z);
+            }
+            else
+            {
+                int ans=query(1,1,n,x+1,y+1);
+                int pp=y-x+1;
+                if(ans%pp==0) printf("%d\n",ans/pp);
+                else
+                {
+                    int g=__gcd(ans,pp);
+                    printf("%d/%d\n",ans/g,pp/g);
+                }
+            }
+        }
+    }
+    return 0;
+}

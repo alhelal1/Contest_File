@@ -1,0 +1,122 @@
+#include <set>
+#include <map>
+#include <list>
+#include <queue>
+#include <stack>
+#include <cstdio>
+#include <math.h>
+#include <cctype>
+#include <string>
+#include <vector>
+#include <limits>
+#include <bitset>
+#include <sstream>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <cstring>
+#include <utility>
+#include <iomanip>
+#include <iterator>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+map<string,int>mp;
+long long ress=0;
+long long nn;
+vector<long long> v[12005];
+long long color[12005]={0};
+long long path[12005];
+struct node
+{
+    int u,v,cost;
+}ar[12005];
+bool com(node a, node b)
+{
+  return a.cost<b.cost;
+}
+int findparent(int a)
+{
+    if(path[a]==a)
+        return a;
+    path[a]=findparent(path[a]);
+    return path[a];
+}
+void  bfs(long long  n)
+{
+        for(long long  i=0;i<v[n].size();i++)
+        {
+            if(color[v[n][i]]==false)
+            {
+                 ress++;
+                color[v[n][i]]=true;
+                bfs(v[n][i]);
+            }
+        }
+    }
+int main()
+{
+     long t,tt,tc;
+     string s,ss;
+     cin>>t;
+     long long kase=1;
+     int cnt=1;
+     long long n;
+     while(t--)
+     {
+         ress=0;
+
+         for(int i=0;i<12005;i++)
+         {
+             color[i]=0;
+             v[i].clear();
+         }
+         mp.clear();
+         cnt=1;
+         cin>>n;
+         for(int i=0;i<n;i++)
+         {
+         cin>>s>>ss>>ar[i].cost;
+         if(mp.find(s)==mp.end())
+         {
+             mp[s]=cnt;
+             cnt++;
+         }
+         if(mp.find(ss)==mp.end())
+         {
+             mp[ss]=cnt;
+             cnt++;
+         }
+         int k=mp[s];
+         int kk=mp[ss];
+         v[k].push_back(kk);
+         v[kk].push_back(k);
+         ar[i].u=k;
+         ar[i].v=kk;
+         }
+
+         bfs(1);
+         printf("Case %lld: ",kase++);
+         if(ress!=cnt-1)
+         {
+             printf("Impossible\n");
+             continue;
+         }
+         sort(ar, ar+n,com);
+         for(int i=0;i<=n;i++)
+            path[i]=i;
+            long long res=0;
+         for(int i=0;i<n;i++)
+         {
+             int aa=findparent(ar[i].u);
+             int bb=findparent(ar[i].v);
+             if(aa!=bb)
+             {
+                 path[aa]=bb;
+                 res+=ar[i].cost;
+             }
+         }
+         cout<<res<<endl;
+     }
+    return 0;
+}

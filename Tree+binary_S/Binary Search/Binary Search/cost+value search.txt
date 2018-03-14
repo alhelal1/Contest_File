@@ -1,0 +1,57 @@
+ll ar[100005][3];
+
+ll dfs(ll n,ll mid)
+{
+    ll sum=0;
+
+    //if(mid==0)return 1;
+
+    rep(i,n)
+    {
+        sum+=abs(mid-ar[i][0])*ar[i][1]*1LL;
+       // sum+=abs(mid-ar[i][1]);
+    }
+    return sum;
+}
+
+int main()
+{
+   // ios_base::sync_with_stdio(false);
+   // cin.tie(false);
+
+   ll t;
+   cin>>t;
+   while(t--)
+   {
+   cin>>n;
+   rep(i,n)cin>>ar[i][0];
+   rep(i,n)cin>>ar[i][1];
+  // sort(ar,ar+n,greater<ll>());
+
+  ll cc=LLONG_MAX;
+   ll ans=0;
+    ll low=0,high=200000LL;
+
+    while(low<=high)
+    {
+        ll mid=(low+high)>>1;
+        ll aa,bb;
+        if(mid>0)
+         aa=dfs(n,mid-1);
+         else aa=INT_MAX;
+         bb=dfs(n,mid);
+         cc=min(cc,bb);
+         if(aa<=bb)
+         {
+             high=mid-1;
+         }
+         else low=mid+1;
+   }
+
+   cout<<cc<<endl;
+
+   }
+   return 0;
+}
+
+

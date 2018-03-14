@@ -1,0 +1,111 @@
+struct  info
+{
+    ll x,y,z;
+}arr[100005];
+ll a,b,c,f=0,r=0,rr=0,res=0,n,m;
+ll p[1000005],ar1[1000005];
+
+
+bool com(info a,info b)
+{
+    return a.z<b.z;
+}
+
+
+ll parent(ll n)
+{
+    for(int i=0;i<=n;i++)
+    {
+        p[i]=i;
+    }
+}
+
+
+ll fparent(ll a)
+{
+    if(a==p[a])return a;
+    else return p[a]=fparent(p[a]);
+}
+
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+    ll t;
+    I(t);
+
+    ll ks=0;
+    while(t--)
+    {
+        I(n);
+
+        ll i=0;
+        while(true)
+        {
+            III(a,b,c);
+            arr[i].x=a;
+            arr[i].y=b;
+            arr[i].z=c;
+
+            ll cc=a+b+c;
+            if(cc==0)break;
+            i++;
+        }
+        sort(arr,arr+i,com);
+
+        parent(n);
+
+
+        ll cost=0;
+
+
+        for(int j=0;j<i;j++)
+        {
+            ll aa=fparent(arr[j].x);
+            ll bb=fparent(arr[j].y);
+            if(aa!=bb)
+            {
+                p[aa]=bb;
+
+                cost+=arr[j].z;
+            }
+        }
+        parent(n);
+
+
+        for(int j=i-1;j>=0;j--)
+        {
+            ll aa=fparent(arr[j].x);
+            ll bb=fparent(arr[j].y);
+            if(aa!=bb)
+            {
+                cost+=arr[j].z;
+
+                p[aa]=bb;
+            }
+        }
+
+       // d1(cost);
+
+        CA(ks);
+
+        if(cost%2==0)
+        {
+
+            cost/=2;
+            P(cost);NL;
+        }
+        else
+        {
+            printf("%lld/2\n",cost);
+        }
+        cost=0;
+    }
+
+
+   return 0;
+
+}

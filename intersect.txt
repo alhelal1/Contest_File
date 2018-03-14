@@ -1,0 +1,28 @@
+
+typedef pair<double,double> pr;
+double a,b,c;
+void abc(pr m, pr n)
+{
+    a=m.second-n.second;
+    b=-(m.first-n.first);
+    c=(-b)*m.second-a*m.first;
+}
+int intersec(pr p1,pr p2,pr p3, pr p4)
+{
+    double x,y,a1,a2,b1,b2,c1,c2;
+    abc(p1,p2);
+    a1=a;b1=b;c1=c;
+    abc(p3,p4);
+    a2=a;b2=b;c2=c;
+    if(a1*b2==a2*b1) return 0;
+    x=(b1*c2-b2*c1)/(a1*b2-b1*a2);
+    y=((c1*a2)-(a1*c2))/(a1*b2-b1*a2);
+    if((x>=p1.first&&x<=p2.first)||(x<=p1.first&&x>=p2.first))
+    if((x>=p3.first&&x<=p4.first)||(x<=p3.first&&x>=p4.first))
+    if((y>=p3.second&&y<=p4.second)||(y<=p3.second&&y>=p4.second))
+    if((y>=p1.second&&y<=p2.second)||(y<=p1.second&&y>=p2.second))
+    return 1;
+    return 0;
+
+
+}

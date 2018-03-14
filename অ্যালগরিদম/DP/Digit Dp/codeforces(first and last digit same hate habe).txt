@@ -1,0 +1,48 @@
+
+
+LL DP[20][2][10][10];
+int a[20];
+
+int toArray(LL n){
+    int l = 0;
+
+    while (n){
+        a[++l] = n%10;
+        n /= 10;
+    }
+
+    return l;
+}
+
+LL dp(int p,int c,int st,int pr){
+    if (p == 0)                     return st && st == pr ;
+    if (DP[p][c][st][pr] != -1 && c)return DP[p][c][st][pr];
+
+    LL &res = DP[p][c][st][pr];    res = 0;
+
+    int l = 0,h = a[p];
+
+    if (c)      h = 9;
+
+    for (int i=l;i<=h;i++){
+        res += dp(p-1,c|(i<h),st?st:i,i);
+    }
+
+    return res;
+}
+
+int main()
+{
+    LL n,m,ans;
+    int l;
+
+    cin >> n >> m;      n--;
+
+    SET(DP);
+
+    l = toArray(m);         ans = dp(l,0,0,0);
+    l = toArray(n);         ans = ans - dp(l,0,0,0);
+
+    cout << ans << endl;
+return 0;
+}

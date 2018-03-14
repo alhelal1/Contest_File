@@ -1,0 +1,17 @@
+
+long gcd(long a,long b)
+{
+while(b>0)
+{
+a=a%b;
+a=a^b;
+b=b^a;
+a=a^b;
+}
+return a;
+}
+long lcm(long a,long b)
+{
+    long x=(a*b)/gcd(a,b);
+    return x;
+}

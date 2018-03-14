@@ -1,0 +1,126 @@
+using namespace std;
+//freopen("in.txt","r",stdin);
+    /*int t,T;
+    scanf("%d",&T);
+    for(t=1;t<=T;t++)
+    {
+        printf("Case #%d: ",t);
+    }*/
+#include<bits/stdc++.h>
+typedef long long int ll;
+
+#define len(s) s.size()
+#define rep(i,n) for(int i=0;i<n;i++)
+
+#define mp make_pair
+#define pb push_back
+
+#define xx first
+#define yy second
+
+#define all(x) x.begin(),x.end()
+
+#define sqr(x) x*x
+
+#define mem(ar,value) memset(ar,value,sizeof(ar))
+#define pi acos(-1.0)
+
+
+#define min3(a,b,c) min(a,min(b,c))
+#define max3(a,b,c) max(a,max(b,c))
+#define min4(a,b,c,d) min(min(a,b),min(c,d))
+#define max4(a,b,c,d) max(max(a,b),max(c,d))
+#define maxall(v) *max_element(all(v))
+#define minall(v) *min_element(all(v))
+
+
+#define mod 1000000007
+
+template<class T> T power(T N,T P){ return (P==0)?  1: N*power(N,P-1); }
+/*double _dist(double x1,double y1,double x2,double y2){return sqrt(sqr(x1-x2)+sqr(y1-y2));}
+int distsq(int x1,int y1,int x2,int y2){return sqr(x1-x2)+sqr(y1-y2);}*/
+
+/*ll bigMod(ll a,ll b)
+{
+      if(!b) return 1;
+      ll x = bigMod(a,b/2);
+      ll temp = (x*x)%mod;
+      if(b%2) temp = (temp*a)%mod;
+      return temp;
+}
+ll modinv(ll a)
+{
+      return bigMod(a,mod-2);
+}*/
+/*long long c[1005][1005];
+void ncrdp()
+{
+    long i,j;
+    for(i=0;i<=1003;i++)
+    {
+        c[i][0]=c[i][i]=1;
+        for(j=1;j<i;j++)
+        c[i][j]=(c[i-1][j]+c[i-1][j-1])%mod;
+        if(c[i][j]>=mod)c[i][j]%=mod;
+    }
+}*/
+ll gcd(ll x,ll y)
+{
+    if(y==0) return x;
+    return gcd(y,x%y);
+}
+int isvowel(char s)
+{
+s=tolower(s);
+if(s=='a' || s=='e' || s=='i' || s=='o' || s=='u')
+return 1;
+return 0;
+}
+/*int dx[] = {1, -1, 0, 0};
+int dy[] = {0, 0, 1, -1};*/
+map<char,ll>MP;
+//pair<ll,ll>P[100100],PP[100100];
+ll a,b,n,m,res=0,c=0,t=0,ans=0,f=0,ff=0,cnt=0;
+unsigned long long  int ar[5000005];
+//ll ar1[500100];
+//ll dp[505][505];
+string s,ss;
+ll rr()
+{
+    for(int i=2;i<=5000000;i++)
+        ar[i]=i;
+    for(int i=2;i<=5000000;i++)
+    {
+        if(ar[i]==i)
+        {
+            ar[i]=ar[i]-1;
+            for(int j=i+i;j<=5000000;j+=i)
+            {
+                ar[j]-=ar[j]/i;
+            }
+        }
+    }
+   ar[0]=0;
+   ar[1]=0;
+   for(int i=2;i<=5000000;i++)
+   {
+       ar[i]=(unsigned long long)  (ar[i]*ar[i])+ar[i-1];
+   }
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    int t;
+       rr();
+       scanf("%d",&t);
+       int ks=1;
+       while(t--)
+       {
+           printf("Case %d: ",ks++);
+           scanf("%lld",&n);
+           scanf("%lld",&m);
+         printf("%llu\n",ar[m]-ar[n-1]);
+       }
+    return 0;
+}

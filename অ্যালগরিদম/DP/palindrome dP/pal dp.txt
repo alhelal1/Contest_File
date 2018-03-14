@@ -1,0 +1,33 @@
+bool DP1[507][507];
+bool vis[507][507];
+int s[MX];
+int DP[507][507];
+bool dpPal(int i,int j){
+    if (i == j)     return 1;
+    if (i > j)      return 0;
+    if (i+1 == j)   return s[i]==s[j];
+    if (vis[i][j])  return DP1[i][j];
+    vis[i][j] = 1;
+    if (s[i] == s[j])   DP1[i][j] = dpPal(i+1,j-1);
+    return DP1[i][j];
+}
+int dp(int i,int j){
+    if (i > j)          return 0;
+    if (i ==j)          return 1;
+    if (DP[i][j]!=-1)   return DP[i][j];
+    int &res = DP[i][j];
+    res = MOD;
+    if (dpPal(i,j)){
+        res = 1;return res;
+    }
+    if ( s[i] == s[j] ) res = dp(i+1,j-1);
+    for (int p = i;p<j;p++){
+        res = min( res, dp(i,p)+dp(p+1,j) );
+    }
+    return res;
+}
+int main(){
+    DI(n);
+    for (int i=1;i<=n;i++)  S1(s[i]);
+    SET(DP);cout << dp(1,n) << endl;
+}

@@ -1,0 +1,51 @@
+struct info
+{
+    ll x,y;
+}arr[100005];
+
+bool com(info a,info b)
+{
+    return ((a.x<b.x) or (a.x==b.x and a.y<b.y));
+}
+
+
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+    //ll ar[100005];
+
+    ll n,x1,y1;
+    cin>>n>>x1>>y1;
+
+    ll a,b;
+    rep(i,n)
+    {
+
+        cin>>a>>b;
+        arr[i].x=a*x1+b;
+        arr[i].y=a*y1+b;
+    }
+
+    sort(arr,arr+n,com);
+
+    ll f=0;
+
+    ll mx=-100000000000000LL;
+
+
+    for(int i=0;i<n-1;i++)
+    {
+        if(arr[i].x<arr[i+1].x and  arr[i+1].y<arr[i].y)f=1;
+
+    }
+    if(f)cout<<"yes";
+    else cout<<"no";
+
+
+   return 0;
+
+}

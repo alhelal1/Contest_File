@@ -1,0 +1,112 @@
+#include<bits/stdc++.h>
+
+#define xx first
+#define yy second
+#define LL long long
+#define inf 100000
+#define pb push_back
+#define vsort(v) sort(v.begin(),v.end())
+#define pi acos(-1)
+#define clr(a,b) memset(a,b,sizeof a)
+#define bclr(a) memset(a,false,sizeof a)
+#define pii pair<int,int>
+#define MOD 1000000007
+#define MP make_pair
+#define MX 1000006
+
+using namespace std;
+vector<int>G[100005];
+int par[100005][22];
+int level[100005],child[100005],st[100005],ed[100005];
+int tt=1;
+
+void dfs(int x,int p,int d){
+    st[x]=tt++;
+    child[x]=1;
+    level[x]=d;
+    par[x][0]=p;
+    for(int i=0;i<G[x].size();i++){
+        int adj=G[x][i];
+        if(adj==p) continue;
+        dfs(adj,x,d+1);
+        child[x]+=child[adj];
+    }
+    ed[x]=tt;
+}
+
+void sparse_table(int n){
+    for(int i=1;i<=20;i++){
+        for(int j=1;j<=n;j++){
+            int p=par[j][i-1];
+            if(p==-1) par[j][i]=-1;
+            else par[j][i]=par[p][i-1];
+        }
+    }
+}
+
+int LCA(int x,int y){
+    if(level[x]>level[y]) swap(x,y);
+    for(int k=20;k>=0;k--){
+        if(par[y][k]!=-1 && level[par[y][k]]>=level[x]) y=par[y][k];
+    }
+    if(x==y) return x;
+    for(int k=20;k>=0;k--){
+        if(par[x][k]!=-1 && par[x][k]!=par[y][k])
+            x=par[x][k],y=par[y][k];
+    }
+    return par[x][0];
+}
+
+int LCCA(int y,int d){
+   // if(d==0) return 0;
+    for(int k=20;k>=0;k--){
+        if(par[y][k]!=-1 && level[y]-level[par[y][k]]<=d){
+            d-=level[y]-level[par[y][k]];
+            y=par[y][k];
+            if(d==0) return y;
+        }
+    }
+    return y;
+}
+
+int main(){
+   // child[0]=1;
+    memset(par,-1,sizeof par);
+    int n;
+    scanf("%d",&n);
+    for(int i=1;i<n;i++){
+        int u,v;
+        scanf("%d%d",&u,&v);
+        G[u].pb(v);
+        G[v].pb(u);
+    }
+    dfs(1,-1,1);
+    sparse_table(n);
+    int m;
+    cin>>m;
+    for(int i=0;i<m;i++){
+        int u,v;
+        scanf("%d%d",&u,&v);
+        if(u==v){
+            cout<<n<<endl;
+            continue;
+        }
+        int p=LCA(u,v);
+        int dis=level[u]+level[v]-2*level[p];
+        if(dis&1) cout<<0<<endl;
+        else{
+            if(level[u]>level[v]) swap(u,v);
+            int res;
+            if(level[u]-level[p]==level[v]-level[p]){
+                res=n;
+                res-=child[LCCA(u,dis/2-1)];
+                res-=child[LCCA(v,dis/2-1)];
+            }
+            else{
+                res=child[LCCA(v,dis/2)]-child[LCCA(v,dis/2-1)];
+            }
+            cout<<res<<endl;
+        }
+    }
+    return 0;
+}

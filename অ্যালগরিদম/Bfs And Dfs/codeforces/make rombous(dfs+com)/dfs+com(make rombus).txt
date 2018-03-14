@@ -1,0 +1,65 @@
+VI v[100005];
+
+LL go(LL idx,LL dis,LL par)
+{
+
+    if(dis==2)
+    {
+        ar[idx]++;
+
+        return 0;
+    }
+    rep(i,len(v[idx]))
+    {
+
+        if(v[idx][i]!=par)
+        go(v[idx][i],dis+1,idx);
+    }
+
+    return 0;
+}
+int main()
+{
+    //Fast;
+
+    cin>>n;cin>>m;
+
+
+    swap(n,m);
+
+    rep(i,n)
+    {
+        cin>>a>>b;
+
+        v[a].pb(b);
+
+       // v[b].pb(a);
+    }
+
+    repp(i,m)
+    {
+        if(len(v[i]))
+        {
+            go(i,0,-1);
+
+
+            repp(j,3000)
+            {
+                if(ar[j]>0)
+                {
+                    LL aa=ar[j];
+                    r+=((aa)*(aa-1))/2;
+                }
+
+
+                ar[j]=0;
+            }
+
+
+        }
+    }
+
+    cout<<r;
+
+   return 0;
+}

@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <conio.h>
+ 
+ 
+int lowest,highest;
+int adj[1000][1000];
+ 
+void loadAdj(){
+  int from,to;
+  for(from=0;from<1000;from++){
+   for(to=0;to<1000;to++){
+     adj[from][to] = 0;
+   }
+  }
+  while(scanf("%d %d",&from,&to)==2 && !(from==0&&to==0)){
+   if(from<lowest)lowest = from;
+   if(to<lowest)lowest = to;
+   if(from>highest)highest = from;
+   if(to>highest)highest = to;
+   adj[from][to] = 1;
+  }    
+}
+ 
+void floydWarshall(){
+  int from,to,via;
+  for(via=lowest;via<=highest;via++){
+   for(from=lowest;from<=highest;from++){
+    for(to=lowest;to<=highest;to++){
+     if(adj[from][via]*adj[via][to]!=0 && from!=to){
+      if(adj[from][via]+adj[via][to]>adj[from][to]||adj[from][to]==0){
+       adj[from][to]= adj[from][via] + adj[via][to];
+      }
+     }
+    }
+   }
+  }
+}
+ 
+ 
+ 
+ 
+ 
+int main(){
+     
+    int testCase,source,max,node,m,serial=1,flag=0;
+    freopen("uva1000.txt","r",stdin);
+    while(scanf("%d",&testCase)==1 && testCase!=0){
+     scanf("%d",&source);
+      
+      
+     loadAdj();
+     floydWarshall();
+      
+     max = -1;
+     for(m=lowest;m<=highest;m++){
+      if(adj1[m]>max){
+       max = adj1[m];
+       node = m;
+      }
+     }
+      printf("Case %d: The longest path from %d has length %d, finishing at %d.\n\n",serial++,source,max,node);
+       
+    }
+    
+     
+    getch();
+    return 0;
+}

@@ -1,0 +1,37 @@
+ll bfs(ll n)
+{
+    queue<ll>q;
+    q.push(n);q.push(0);c++;
+    vis[n]=c;
+    while(len(q)>0)
+    {
+        ll aa=q.front();q.pop(); ll bb=q.front();q.pop();
+        ar[aa]+=bb;ar1[aa]++;
+        ll cc=aa/2;
+        if(cc>0 and vis[cc]!=c)
+        {
+            q.push(cc); q.push(bb+1);vis[cc]=c;
+        }
+        cc=aa*2;
+        if(cc<2000002 and vis[cc]!=c)
+        {
+            q.push(cc);q.push(bb+1);vis[cc]=c;
+        }
+    }
+}
+int main()
+{
+    cin>>n;
+    rep(i,n)
+    {
+        cin>>a;
+        bfs(a);
+    }
+    r=1000000000000LL;
+    rep(i,1000001)
+    {
+        if(ar1[i]==n)
+            r=min(r,ar[i]);
+    }
+    cout<<r;
+}

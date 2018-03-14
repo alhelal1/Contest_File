@@ -1,0 +1,30 @@
+bool possible(int pos, int ok )
+{
+    if ( pos == n ) return ok ;
+    int start = ok ? 0 : inp[pos]-'a';
+    int i ;
+    for ( i = start ; i < p ; i++ )
+    {
+        ans[pos] = i + 'a' ;
+        if ( pos > 0 && ans[pos-1] == ans[pos] ) continue ; // palindrome
+        if ( pos > 1 && ans[pos-2] == ans[pos]  ) continue ; // palindrome
+        if ( possible(pos+1 , ok | ( i > start ) ) ) return true;
+    }
+    return false;
+
+}
+int main()
+{
+  ios::sync_with_stdio(0);
+  read(n) , read(p);
+  scanf("%s",inp);
+  bool ok = 0 ;
+  int i ;
+  if(possible(0,0))
+  {
+      ans[n] = '\0';
+      printf("%s\n",ans);
+  }
+  else printf("NO\n");
+    return 0;
+}

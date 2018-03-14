@@ -1,0 +1,33 @@
+/*
+Algorithm: Extended Euclid Algorithm
+           d=ax+by where d=GCD(a,b)
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+#define LL long long
+ 
+int x,y,d;
+ 
+void ex_euclid(int a,int b)
+{
+    if(b==0)
+    {
+        x=1; y=0; d=a;
+        return;
+    }
+    ex_euclid(b,a%b);
+    int temp=x;
+    x=y;
+    y=temp-(a/b)*x;
+}
+int main()
+{
+    int i,j,k,n,m,a,b;
+    while(cin>>a>>b)
+    {
+        ex_euclid(a,b);
+        cout<<x<<" "<<y<<" "<<d<<endl;
+    }
+    return 0;
+}

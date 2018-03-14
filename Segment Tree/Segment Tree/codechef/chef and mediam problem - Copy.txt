@@ -1,0 +1,108 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+int n;
+void update(int BITT[] ,int x, int val)
+{
+      for(; x <= n; x += x&-x)
+        BITT[x] += val;
+}
+int query(int BITT[] ,int x)
+{
+     int sum = 0;
+     for(; x > 0; x -= x&-x)
+        sum += BITT[x];
+     return sum;
+}
+int main(void)
+{
+	cin>>n;
+	int arr[n+1];
+	int BIT2[n+1],BIT3[n+1],BIT5[n+1];
+int final2[n+1],final3[n+1],final5[n+1];
+memset(BIT2,0,sizeof(BIT2));
+memset(BIT3,0,sizeof(BIT3));
+memset(BIT5,0,sizeof(BIT5));
+memset(final5,0,sizeof(final5));
+memset(final2,0,sizeof(final2));
+memset(final3,0,sizeof(final3));
+	for(int i=1;i<=n;i++)
+		cin>>arr[i];
+	int m;
+     cin>>m;
+     while(m--)
+     {
+     	int a;
+     	cin>>a;
+     	if(a==1)
+     	{
+     		int l,r,k;
+     		cin>>l>>r;
+     		cin>>k;
+     		if(k==2)
+     			{ update(BIT2,l,1);
+     				update(BIT2,r+1,-1);
+     			}
+     			if(k==3)
+     			{
+     				update(BIT3,l,1);
+     				update(BIT3,r+1,-1);
+     			}
+     			if(k==5)
+     			{
+     				update(BIT5,l,1);
+     				update(BIT5,r+1,-1);
+     			}
+ 
+     	}
+     	if(a==2)
+     	{
+     		int pos,val;
+     		cin>>pos>>val;
+     		arr[pos]=val;
+     		int k=query(BIT2,pos);
+     		update(BIT2,pos,-k);
+     		update(BIT2,pos+1,k);
+     		k=query(BIT3,pos);
+     		update(BIT3,pos,-k);
+     		update(BIT3,pos+1,k);
+     		k=query(BIT5,pos);
+     		update(BIT5,pos,-k);
+     		update(BIT5,pos+1,k);
+     	}
+     }
+     for(int i=1;i<=n;i++)
+     {
+     	int k=arr[i];
+     	int two=query(BIT2,i);
+     	     	while(arr[i]%2==0&&two>0)
+     	{
+     		arr[i]=arr[i]/2;
+     		two--;
+     	}
+     	
+ 
+     	int three=query(BIT3,i);
+     	
+     	while(arr[i]%3==0&&three>0)
+     	{
+     		arr[i]=arr[i]/3;
+     		three--;
+     	}
+     	
+     	int five=query(BIT5,i);
+     	 while(arr[i]%5==0&&five>0)
+     	{
+     		arr[i]=arr[i]/5;
+     		five--;
+     	}
+     	
+ 
+     }
+     for(int i=1;i<=n;i++)
+     	cout<<arr[i]<<" ";
+     cout<<endl;
+ 
+ 
+ 
+} 

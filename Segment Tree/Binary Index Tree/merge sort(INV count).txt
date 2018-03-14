@@ -1,0 +1,115 @@
+/* ********************************************************
+   *      Jahangirnagar University          B     *
+   * C    Solved By B'ru khatri(Nepal)      I     *
+   * T    "I do programming for fun."       R     *
+   *                                        U     *
+********************************************************* */
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <set>
+#include <list>
+#define max(a,b) ((a>b)?a:b)
+#define min(a,b) ((a<b)?a:b)
+#define Max(a,b,c) max(a,max(b,c))
+#define Min(a,b,c) min(a,min(b,c))
+#define Pi acos(-1.0)
+#define clr(a) memset(a,0,sizeof(a))
+#define D double
+#define S(a) scanf("%lld",&a)
+#define s(a) scanf("%d",&a)
+#define P(a) push(a)
+#define mx 5000009
+#define pb push_back
+#define LL long long
+#define fr(i,a,b) for(int i=1;i<=b;i++)
+#define sf scanf;
+#define pf printf
+using namespace std;
+
+long a[1000010],b[1000010];
+long long swp;
+
+void sortl(long a[],long low, long high, long mid);
+
+void divide(long a[],long low,long high)
+{
+	long mid=(low+high)/2;
+
+	if (low<high)
+	{
+		divide (a,low,mid);
+		divide (a,mid+1,high);
+
+		sortl (a,low,high,mid);
+	}
+}
+
+void sortl(long a[],long low, long high, long mid)
+{
+	long L=low,R=mid+1,i=low,k=0;
+
+	while (L<=mid && R<=high)
+	{
+		if (a[L]<=a[R])
+		{
+			b[i++]=a[L++];
+			k++;
+		}
+
+		else
+		{
+			b[i++]=a[R++];
+			swp+=((mid+1-low)-k);
+		}
+	}
+
+	while (L<=mid)
+	{
+		b[i++]=a[L++];
+	}
+
+	while (R<=high)
+	{
+		b[i++]=a[R++];
+	}
+
+	for (long j=low;j<i;j++)
+	{
+		a[j]=b[j];
+	}
+}
+
+int main ()
+{
+	long n;
+
+	while (scanf ("%ld",&n)==1&&n)
+	{
+		for (long i=0;i<n;i++)
+		{
+			scanf ("%ld",&a[i]);
+		}
+
+		swp=0;
+
+		divide(a,0,n-1);
+       cout<<swp<<endl;
+
+
+	}
+	return 0;
+}

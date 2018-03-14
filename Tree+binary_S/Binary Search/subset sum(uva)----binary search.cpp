@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+typedef long long LL;
+
+
+string s;
+
+vector<LL>V;
+vector<LL>V1(vector<LL>V2)
+{
+
+    LL len=V2.size();
+    LL res=0;
+    vector<LL>V3;
+    for(int i=0;i<(1<<len);i++)
+    {
+        LL res=0;
+        for(int j=0;j<len;j++)
+        {
+            if(i&(1<<j))
+            {
+                res+=V2[j];
+            }
+        }
+        V3.push_back(res);
+        res=0;
+    }
+
+    return V3;
+
+}
+int main()
+{
+    vector<LL>aa,bb;
+    LL n,a;
+    LL m;
+
+    while(cin>>n>>m)
+    {
+
+
+    //cin>>n;LL m;cin>>m;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a;
+        if(n/2>i)aa.push_back(a);
+        else bb.push_back(a);
+    }
+
+    vector<LL>A,B;
+    A=V1(aa);
+    B=V1(bb);
+    sort(A.begin(),A.end());
+    LL ans=0;
+
+    for(int i=0;i<B.size();i++)
+    {
+        LL c1=upper_bound(A.begin(),A.end(),m-B[i])-A.begin();
+        LL c2=lower_bound(A.begin(),A.end(),m-B[i])-A.begin();
+        ans+=abs(c1-c2);
+    }
+    if(m==0)ans--;
+    cout<<ans<<endl;
+    A.clear();
+    B.clear();
+    aa.clear();
+    bb.clear();
+
+    }
+
+}

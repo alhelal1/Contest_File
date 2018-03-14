@@ -1,0 +1,133 @@
+const  int N=1e6+5,MOD=1e9+7;
+LL ar[N],br[N];
+LL a=0,b=0,c=0,r=0,rr=0,f=0,n,m,t=0,ks=0;
+string  s,ss;
+
+
+void prime()
+{
+    LL dd=sqrt(1000+1);
+    for(int i=4;i<=1000;i+=2)
+    {
+       ar[i]=1;
+    }
+    for(int i=3;i<=dd;i+=2)
+    {
+        for(int j=i*i;j<=1000;j+=(2*i))
+        {
+            ar[j]=1;
+        }
+    }
+    LL aa=2;
+    br[r++]=aa;
+    for(int i=3;i<=1000;i+=2)
+    {
+        if(ar[i]==0)
+        {
+            aa=i;
+            br[r++]=aa;
+        }
+
+    }
+
+    //D(r);
+}
+
+
+
+LL dp[N],ans[N];
+
+LL foo(LL idx)
+{
+    for(int i=0;i<r and   br[i]*br[i]<=idx;i++)
+    {
+        LL c=0;
+
+        if(idx%br[i]==0)
+        {
+            while(idx%br[i]==0)
+            {
+                c++;
+                idx/=br[i];
+            }
+        }
+        //dp[br[i]]=max(c,dp[br[i]]);
+
+        if(dp[br[i]]<c)
+        {
+            dp[br[i]]=c;
+
+            if(br[i]!=5  and br[i]!=2)
+            {
+
+
+
+            rr=rr*br[i];
+
+            //while(rr%10==0)rr/=10;
+            rr%=10;
+
+
+            }
+        }
+
+    }
+
+    if(idx>1    and  dp[idx]==0) // dp[idx]=max(dp[idx],1LL);
+
+    {
+        dp[idx]=1LL;
+        if(idx!=5  and idx!=2)
+            {
+
+
+
+            rr=rr*idx;
+
+            //while(rr%10==0)rr/=10;
+            rr%=10;
+
+
+            }
+    }
+
+    LL aa=dp[2];
+    LL bb=dp[5];
+    LL cc=min(aa,bb);
+
+    LL dd=1;
+
+    if(aa<bb)
+    {
+        dd=big_mod(5LL,bb-cc,10LL);
+    }
+    else  dd=big_mod(2LL,aa-cc,10LL);
+
+    ans[++t]=(rr*dd)%10;
+
+   // D(ans[t]);
+
+}
+
+int main()
+{
+   //_CIN;
+   prime();
+   rr=1;
+   repp(i,1000000)
+   {
+       foo(i*1LL);
+   }
+  while(cin>>n  and n)
+  {
+      mem(dp,false);
+
+      P(ans[n]);line;
+
+  }
+
+
+
+   return 0;
+
+}

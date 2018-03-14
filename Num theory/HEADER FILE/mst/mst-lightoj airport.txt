@@ -1,0 +1,50 @@
+//BISMILLAHIR RAHMANIR RAHIM
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+struct TT
+{
+    long u,v,w;
+}T[100010];
+long p[100010],node,edge,flag,i,j,p1,p2,t,cs=1,a,cost,sum;
+bool cmp(TT a,TT b)
+{
+    return a.w<b.w;
+}
+long find(long x)
+{
+    if(x==p[x])
+        return x;
+    return p[x]=find(p[x]);
+}
+main()
+{
+    scanf("%ld",&t);
+    while(t--)
+    {
+        scanf("%ld%ld%ld",&node,&edge,&cost);
+        for(i=1;i<=node;i++)
+            p[i]=i;
+        for(i=0;i<edge;i++)
+            scanf("%ld%ld%ld",&T[i].u,&T[i].v,&T[i].w);
+        sum=0;
+        a=node;
+        sort(T,T+edge,cmp);
+        for(i=0;i<edge;i++)
+        {
+            p1=find(T[i].u);
+            p2=find(T[i].v);
+            if(p1==p2||T[i].w>=cost)
+                continue;
+            sum+=T[i].w;
+            if(p1<p2)
+                p[p2]=p1;
+            else
+                p[p1]=p2;
+            a--;
+        }
+        sum+=(a*cost);
+        printf("Case %ld: %ld %ld\n",cs++,sum,a);
+    }
+    return 0;
+}

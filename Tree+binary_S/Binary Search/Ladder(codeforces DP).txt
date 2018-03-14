@@ -1,0 +1,67 @@
+ll ar[2000005],ar1[2000005];
+ll dp[100005][3];
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+string s,s1;
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+    cin>>n>>m;
+
+    repp(i,n)
+    {
+        cin>>ar[i];
+    }
+    r=0;
+    repp(i,n)
+    {
+        if(ar[i]>=ar[i-1])
+        {
+            r++;
+        }
+        else r=1;
+
+        dp[i][0]=r;
+    }
+    r=0;
+
+
+    for(int i=n;i>=1;i--)
+    {
+        if(ar[i]>=ar[i+1])
+        {
+            r++;
+        }
+        else r=1;
+        dp[i][1]=r;
+    }
+
+
+    while(m--)
+    {
+        cin>>a>>b;
+        ll aa=a,bb=b,f=0;
+        while(a<=b)
+        {
+            ll mid=(a+b)>>1;
+            if(mid-aa+1<=dp[mid][0]  and bb-mid+1<=dp[mid][1])
+            {
+                f=1;
+                break;
+            }
+            else if(mid-aa+1<=dp[mid][0])a=mid+1;
+            else  b=mid-1;
+        }
+        if(f==1)cout<<"Yes\n";
+        else cout<<"No\n";
+    }
+
+
+
+
+   return 0;
+
+}

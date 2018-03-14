@@ -1,0 +1,65 @@
+struct node
+{
+    bool finish;
+    node *next[27];
+    node()
+    {
+        finish=false;
+        for(int i=0;i<26;i++) next[i]=NULL;
+    }
+}*root;
+
+char s[1600],p[1600];
+int l,t,a[150],k,len,res;
+
+void insertnode(int len)
+{
+    node *curr=root;
+    int id;
+    for(int i=0;i<len;i++)
+    {
+      id=p[i]-'a';
+      if(curr->next[id]==NULL)
+      {
+          res++;
+          curr->next[id]=new node();
+      }
+      curr=curr->next[id];
+      curr->finish=true;
+    }
+}
+
+void del(node* curr)
+{
+    repc(i,0,25)
+    if(curr->next[i]) del(curr->next[i]);
+    delete(curr);
+}
+
+int main()
+{
+    root=new node();
+    SC(s);
+    l=strlen(s);
+    SC(p);
+    for(int i=0;i<26;i++) a['a'+i]=(p[i]-48==0?1:0);
+    S(k);
+    for(int i=0;i<l;i++)
+    {
+        t=0;
+        len=0;
+        for(int j=i;j<l;j++)
+        {
+            t+=a[s[j]];
+            if(t>k) break;
+            p[len++]=s[j];
+        }
+        if(len>0)
+        {
+            insertnode(len);
+        }
+    }
+    del(root);
+    pf("%d",res);
+    return 0;
+}

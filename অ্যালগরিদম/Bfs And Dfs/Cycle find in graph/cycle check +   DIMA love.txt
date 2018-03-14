@@ -1,0 +1,151 @@
+#include <algorithm>
+#include <cctype>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <ctime>
+
+
+# define FOR(i, a, b) for (int i=a; i<b; i++)
+# define REP(i, a) FOR(i,0,a)
+
+#define EPS 1e-11
+#define inf 1234567891
+#define LL long long
+
+#define abs(x) (((x)< 0) ? (-(x)) : (x))
+#define all(x) (x).begin(), (x).end()
+#define ms(x, a) memset((x), (a), sizeof(x))
+
+#define pb push_back
+#define FORIT(i,m) for(__typeof((m).begin()) i=(m).begin();i!=(m).end();i++)
+#define pii pair<int,int>
+#define UNIQUE(c) (c).resize( unique( all(c) ) - (c).begin() )
+
+#define READ(f) {ifstream infile(f) ;if(infile.good()) freopen(f, "r", stdin);}
+#define WRITE(f) freopen(f, "w", stdout)
+#define CIN ios_base::sync_with_stdio(0);
+int rrr[]={1,0,-1,0};int ccc[]={0,1,0,-1}; //4 Direction
+///int rrr[]={1,1,0,-1,-1,-1,0,1};int ccc[]={0,1,1,1,0,-1,-1,-1};//8 direction
+///int rrr[]={2,1,-1,-2,-2,-1,1,2};int ccc[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+///int rrr[]={2,1,-1,-2,-1,1};int ccc[]={0,1,1,0,-1,-1}; //Hexagonal Direction
+///int month[]={31,28,31,30,31,30,31,31,30,31,30,31}; //month
+
+using namespace std;
+char grid [1005][1005];
+vector <pii> st;
+int done [1005][1005];
+int fin [1005][1005];
+bool cycle [1005][1005];
+int ok = 1, cnt = 0;
+int n, m;
+int clr ;
+string ss = "DIMA";
+bool dfs(int r, int c, int idx){
+    fin[r][c]=1;
+    done[r][c]= 1;
+    for(int i=0;i<4 && ok;i++){
+        int nxtr = r + rrr[i];
+        int nxtc = c + ccc[i];
+        if(nxtr < 0 || nxtr >= n || nxtc < 0 || nxtc >= m) continue;
+        int nxtidx = (idx+1)%4;
+        if(grid[nxtr][nxtc] == ss[nxtidx]){
+            if(done[nxtr][nxtc]==2) continue;
+            if(done[nxtr][nxtc]== (0)){
+                fin[nxtr][nxtc] = 1;
+                if(dfs(nxtr, nxtc, nxtidx)){
+                    cycle[nxtr][nxtc]= 1;
+                    ok = 0;
+                    return true;
+                }
+            }else if(done[nxtr][nxtc]== (1)){
+                ok = 0;
+                return true;
+            }
+        }
+    }
+    done[r][c]= 2;
+    return false;
+}
+
+
+int mem [1005][1005];
+
+int dp(int r,int c,int idx){
+
+    if(mem[r][c] >  -1) return mem[r][c];
+    int ret = 0;
+    int add = 0;
+    if(grid[r][c]=='A'){
+        add++;
+        ret+=add;
+    }
+    for(int i=0;i<4 && ok;i++){
+        int nxtr = r + rrr[i];
+        int nxtc = c + ccc[i];
+        if(nxtr < 0 || nxtr >= n || nxtc < 0 || nxtc >= m) continue;
+        int nxtidx = (idx+1)%4;
+        if(grid[nxtr][nxtc] == ss[nxtidx]){
+            ret= max(ret, add + dp(nxtr, nxtc, nxtidx));
+        }
+    }
+    return mem[r][c] = ret;
+}
+
+int main(){
+    #if defined( faiyaz_pc )
+        READ("in.txt");
+    #endif
+
+    cin>>n>>m;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>grid[i][j];
+            if(grid[i][j]=='D'){
+                st.pb(pii(i,j));
+            }
+        }
+    }
+    int res = 0;
+    ms(mem,-1);
+    for(int i=0;i<st.size() && ok;i++){
+        if(done[st[i].first][st[i].second] != 2){
+            if(dfs(st[i].first, st[i].second,0)){
+                ok = 0;
+                break;
+            }
+        }
+        if(ok){
+            //cout<<st[i].first<<" "<<st[i].second<<" "<<dp(st[i].first, st[i].second,0)<<endl;
+            res = max(res, dp(st[i].first, st[i].second,0));
+        }
+        clr++;
+    }
+
+//    for(int i=0;i<n;i++){
+//        for(int j=0;j<m;j++){
+//            cout<<mem[i][j]<<" ";
+//        }
+//        cout<<endl;
+//    }
+    if(!ok){
+        cout<<"Poor Inna!\n";
+    }else{
+        if(!res){
+            cout<<"Poor Dima!\n";
+        }else{
+            cout<<res<<"\n";
+        }
+    }
+    return 0;
+}

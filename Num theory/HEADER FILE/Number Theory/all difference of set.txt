@@ -1,0 +1,35 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+typedef long long LL;
+
+LL array[100000];
+
+int main()
+{
+	int T;
+	cin >> T;
+	for(int t = 1; t <= T; t++)
+	{
+		LL K,C,n,a0;
+		cin >> K >> C >> n >> a0;
+		array[0] = a0;
+		for(int i=1;i<n;i++)
+		{
+			array[i] = (array[i-1] *K + C) % 1000007;
+		}
+		sort(array,array+n);
+		LL sum = 0;
+		LL left = 1;
+		LL right = n-1;
+		for(int i=1;i<n;i++)
+		{
+			sum += (array[i] - array[i-1])*left*right;
+			left++;
+			right--;
+		}
+		cout << "Case " << t << ": ";
+		cout << sum << endl;
+	}
+}

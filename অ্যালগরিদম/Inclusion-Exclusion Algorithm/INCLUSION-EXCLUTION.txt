@@ -1,0 +1,80 @@
+using namespace std;
+LL ar[22],inv[22];
+LL solve(LL n,LL r){
+    if(r>n) return 0;
+    n%=MOD;
+    LL ret=1ll;
+    for(int i=0;i<r;i++){
+        ret*=(n-i);
+        ret%=MOD;
+    }
+    ret*=inv[r];
+    ret%=MOD;
+    return ret;
+}
+LL bigmod(LL b,LL p){
+    if(p==0ll) return 1ll;
+    if(p&1ll) return (b*bigmod(b,p-1)%MOD)%MOD;
+    LL x=bigmod(b,p/2ll)%MOD;
+    return (x*x)%MOD;
+}
+
+int main(){
+    LL f=1ll;
+    inv[0]=1ll;
+    for(int i=1;i<=20;i++){
+        f*=(LL)i;
+        f%=MOD;
+        inv[i]=bigmod(f,MOD-2)%MOD;
+    }
+    int n;
+    LL s;
+    cin>>n>>s;
+    for(int i=0;i<n;i++) cin>>ar[i];
+    int lm=(1<<n);
+    LL res=0ll;
+    for(int i=0;i<lm;i++){
+        LL now=s;
+        int cnt=0;
+        for(int j=0;j<n;j++){
+            if(i&(1<<j)){
+                cnt++;
+                now-=ar[j]+1;
+            }
+        }
+        if(now<0) continue;
+        LL get=solve(now+n-1,n-1);
+        if(cnt&1) get*=-1ll;
+        res=(res+get)%MOD;
+        if(res<0) res+=MOD;
+    }
+    cout<<res<<endl;
+    return 0;
+}
+
+
+
+
+
+int main()
+{
+    rep(i,9)ar[i]=i+2;///2 theke 9 all div bad.
+   cin>>n;
+   rep(i,(1LL<<9))
+   {
+       LL tt=1,c=0;
+       rep(j,9)
+       {
+           if(i&(1LL<<j))
+           {
+               tt=lcm(tt,ar[j]);
+               c++;
+           }
+       }
+       if(c%2==0 and  c)    r-=(n/tt);
+       else if(c%2==1)r+=(n/tt);
+   }
+   cout<<(n-r);
+   return 0;
+
+}

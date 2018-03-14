@@ -1,0 +1,38 @@
+int main()
+{
+    //Fast;
+
+    double m;
+
+    cin>>n;cin>>m;
+
+    rep(i,n)  cin>>ar[i];
+
+
+    double  lo=0.0,hi=10000000.00;
+
+    while(hi-lo>EPS)
+    {
+        double mid=(lo+hi)/2.;
+        double r=0.,r1=0.;
+        rep(i,n)
+        {
+            if(ar[i]>=mid)  r=r+ar[i]-mid;
+            else   r1+=mid-ar[i];
+        }
+
+        if(r-(r1+((r*m)/100.))>=0.0)
+              lo=mid;
+        else  hi=mid;
+    }
+
+    cout<<fixed<<setprecision(9)<<lo;
+
+
+
+
+
+
+   return 0;
+
+}

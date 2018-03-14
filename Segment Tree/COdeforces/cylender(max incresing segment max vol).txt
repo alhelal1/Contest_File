@@ -1,0 +1,95 @@
+ll ar[2000005],ar1[2000005];
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+
+string s,s1,s2;
+
+
+void up(ll idx,ll st, ll end,ll i,ll val)
+{
+
+    if(st==end)
+    {
+        ar[idx]=max(ar[idx],val);
+        return ;
+    }
+    ll mid=(st+end)>>1,L=idx*2,R=L+1;
+    if(i<=mid)
+    {
+        up(L,st,mid,i,val);
+    }
+    else
+
+    {
+        up(R,mid+1,end,i,val);
+    }
+
+    ar[idx]=max(ar[L],ar[R]);
+}
+
+ll read(ll idx,ll st,ll end,ll i,ll j)
+{
+    if(st>end)return 0;
+    if(st==i and end==j)
+    {
+        return ar[idx];
+    }
+
+    ll mid=(st+end)>>1,L=idx*2,R=L+1;
+
+
+    if(j<=mid)
+    {
+        return read(L,st,mid,i,j);
+    }
+    else if(i>mid)
+    {
+        return read(R,mid+1,end,i,j);
+    }
+    else
+    {
+        ll p1=read(L,st,mid,i,mid);
+        ll p2=read(R,mid+1,end,mid+1,j);
+
+        return max(p1,p2);
+    }
+
+}
+
+int main()
+{
+
+   //Fast;
+
+   cin>>n;
+   rep(i,n)
+   {
+       cin>>a>>b;
+       arr[i].x=a*a*b;
+       arr[i].y=i+1;
+   }
+
+   sort(arr,arr+n,com);
+
+   rep(i,n)
+   {
+       //ll aa=read(arr[i].y)+arr[i].x;
+
+       ll aa=arr[i].y;
+
+       ll bb=read(1,1,n,1,aa)+arr[i].x;
+       rr=max(rr,bb);
+       up(1,1,n,arr[i].y,bb);
+
+   }
+
+
+   double ans=double(rr);
+   ans=ans*(acos(-1.0));
+   cout<<fixed<<setprecision(7)<<ans;
+
+
+
+
+   return 0;
+
+}

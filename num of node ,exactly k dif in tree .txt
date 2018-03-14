@@ -1,0 +1,31 @@
+int f[50001][505],k,n;
+long long res;
+vector<int> v[50001];
+void dfs(int cur,int par)
+{
+    f[cur][0]=1;
+    rep(i,len(v[cur]))
+    {
+        int next=v[cur][i];
+        if(next==par) continue;
+        dfs(next,cur);
+        rep(j,k)
+        res+=1LL*f[next][j]*f[cur][k-j-1];
+        rep(j,k)
+        f[cur][j+1]+=f[next][j];
+    }
+}
+int main()
+{
+    int a,b;
+    cin>>n>>k;
+    rep(i,n-1)
+    {
+        cin>>a>>b;
+        v[a].pb(b);
+        v[b].pb(a);
+    }
+    dfs(1,0);
+    cout<<res;
+return 0;
+}

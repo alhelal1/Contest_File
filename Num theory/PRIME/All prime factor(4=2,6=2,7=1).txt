@@ -1,0 +1,25 @@
+void pre()
+{
+    for(int i=2;i<=1000000;i++)
+    {
+        if(ar[i]==0)
+        {
+            for(int j=i;j<=1000000;j+=i)
+            {
+                ll aa=j;
+                while(aa%i==0)
+                {
+                    aa/=i;
+
+                    ar[j]++;
+                }
+            }
+        }
+    }
+    
+    
+    for(int i=2;i<=1000000;i++)
+    {
+        ar[i]=ar[i]+ar[i-1];
+    }
+}

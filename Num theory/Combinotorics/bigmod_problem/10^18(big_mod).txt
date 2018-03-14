@@ -1,0 +1,21 @@
+typedef long long vlong;
+vlong bigmul ( vlong a, vlong b, vlong c )
+{
+if ( b == 0 ) return 0;
+if ( b & 1 ) {
+return ( a + bigmul ( a, b - 1, c ) ) % c;
+}
+else {
+return ( 2 * bigmul ( a, b / 2, c ) ) % c;
+}
+}
+vlong bigmod ( vlong a, vlong p, vlong m )
+{
+vlong res = 1, x = a % m;
+while ( p ) {
+if ( p & 1 ) res = bigmul ( res, x, m );
+x = bigmul ( x, x, m );
+p >>= 1;
+}
+return res;
+}

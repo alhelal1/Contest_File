@@ -1,0 +1,20 @@
+
+string div(string a, long b)
+{
+		int l,i,temp,f;
+		string ret;
+    l=len(a);
+		temp=0;
+		f=0;
+	for(i=0;i<l;i++)
+	{
+	temp=temp*10+a[i]-48;
+	if(temp/b!=0)
+	f=1;
+	if(f)
+    ret+=((temp/b)+48);
+	temp=temp%b;
+	}
+	//reminder=temp;
+	return ret;
+}

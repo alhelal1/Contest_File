@@ -1,0 +1,3 @@
+REP(i, b){
+        if(__builtin_popcount(ar[i]^d) <= c) f++;
+    }

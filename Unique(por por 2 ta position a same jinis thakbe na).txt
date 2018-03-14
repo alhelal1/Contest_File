@@ -1,0 +1,1 @@
+#define uniq(c) (c).resize(unique(c.begin(),c.end())-(c).begin());

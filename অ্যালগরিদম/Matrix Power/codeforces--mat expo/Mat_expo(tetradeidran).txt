@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i,n) for(int i=0;i<n;i++)
+struct info{
+
+    long long  mat[5][5];
+
+};
+info a,b;
+long long n,m,MOD=1e9+7;
+info power(info a,info  b)
+{
+    info  res;
+    rep(i,4)
+    {
+        rep(j,4)
+        {
+            long long r=0;
+            rep(k,4)
+            {
+                r+=(a.mat[i][k]*b.mat[k][j]*1LL)%MOD;
+
+                //r%=MOD;
+
+                while(r>=MOD)r-=MOD;
+            }
+            res.mat[i][j]=r;
+        }
+    }
+    return res;
+}
+
+long long expo()
+{
+    while(n)
+    {
+        if(n%2==1)   b=power(b,a);
+          a=power(a,a);
+        n/=2;
+    }
+
+    return b.mat[3][3];
+}
+int main()
+{
+
+     cin>>n;
+     rep(i,4)  rep(j,4)
+     {
+         a.mat[i][j]=0;
+         b.mat[i][j]=0;
+     }
+     rep(i,4)  rep(j,4)
+     {
+      a.mat[i][j]=(i!=j);
+      b.mat[i][j]=(i==j);
+      }
+      long long aa =  expo();
+      cout<<aa;
+
+}

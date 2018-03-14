@@ -1,0 +1,40 @@
+string s;
+long pal[5001][5001];
+long dp[5001][5001];
+long ispal(int i,int j)
+{
+    if(i==j) return 1;
+    if(i>j) return 1;
+    if(pal[i][j]!=-1) return pal[i][j];
+
+    if(s[i]==s[j])
+    {
+       return pal[i][j]=ispal(i+1,j-1);
+    }
+    else return pal[i][j]=0;
+}
+long rec(int i,int j)
+{
+    if(i==j) return 1;
+    if(i>j) return 0;
+    if(dp[i][j]!=-1) return dp[i][j];
+    return dp[i][j]=rec(i+1,j)+rec(i,j-1)-rec(i+1,j-1)+ispal(i,j);
+}
+int main()
+{
+//ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+   mem(pal,-1);
+   mem(dp,-1);
+   cin>>s;
+ //  rec(0,len(s)-1);
+   long n,a,b;
+   cin>>n;
+   rep(i,n)
+   {
+       cin>>a>>b;
+       cout<<rec(a-1,b-1)<<endl;
+   }
+return 0;
+}

@@ -1,0 +1,125 @@
+/* *********************************************************************
+   *                       Algo - Floyd_Warshall                       *
+   *                      Time Complexity - O(n^3)                     *
+   *                    Coded By : Niloy - JU-CSE-21                   *
+   ********************************************************************* */
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <set>
+#include <list>
+#include <iterator>
+/* ********************
+   *     Defines      *
+   ******************** */
+#define max(a,b) ((a>b)?a:b)                        //finding max
+#define min(a,b) ((a<b)?a:b)                        //finding min
+#define Max(a,b,c) max(a,max(b,c))                  //finding max between 3 numbers
+#define Min(a,b,c) min(a,min(b,c))                  //finding min between 3 numbers
+#define Pi acos(-1.0)                               //defining Pi for mathematical uses
+#define Clear(a) memset(a,0,sizeof(a))              //clearing memory of an array
+#define setfalse(a) memset(a,false,sizeof(a))       //setting the array into false
+#define settrue(a) memset(a,true,sizeof(a))         //setting the array into true
+#define clrstr(a) memset(a,'\0',sizeof(a))          //setting string array to null
+#define open freopen("input.txt","r",stdin)         //opening input file
+#define close freopen ("output.txt","w",stdout)     //opening output file
+#define Case(a) printf("Case %d: ",a)               //printing case number
+#define caseh(a) printf("Case #%d\n",a)             //printing case number having '#'
+#define getcase(a) scanf("%d",&a)                   //scanning case number
+#define CHR getchar()                               //avoid the newline character problem
+#define caseloop(a,b) for(a=1;a<=b;a++)             //making case loop
+#define EPS 1e-9                                    //small value for avoiding preccesion error
+#define LL long long                                //long long short form
+#define MX 50000                                    //MAX size/value
+#define PB(x) push_back(x)                          //push in vector/string
+#define PP pop_back()                               //pop from vector
+#define PF(x) push_front(x)                         //push in vector/string/deque from front
+#define PPF(x) pop_front()                          //pop from vector/deque from front
+#define IN(x) insert(x)                             //insert element in set
+#define PS(x) push(x)                               //push element in stack/queue
+#define P(x) pop()                                  //pop element from stack/queue
+#define INF 1000000000
+using namespace std;
+
+int DP[105][105],n,r,q,st,ed;
+map<string,int> indx;
+
+void Draw_Graph()
+{
+    int cnt=0,w,x,y;
+    string a,b;
+
+    for (int i=0;i<r;i++)
+    {
+        cin >> a >> b >> w;
+
+        if (!indx[a])
+            indx[a] = ++cnt;
+
+        if (!indx[b])
+            indx[b] = ++cnt;
+
+        x = indx[a];y = indx[b];
+
+        DP[x][y] = w;
+        DP[y][x] = w;
+    }
+}
+
+void Floyd_Warshall()
+{
+    for (int k=1;k<=n;k++)
+    {
+        for (int i=1;i<=n;i++)
+        {
+            for (int j=1;j<=n;j++)
+            {
+                DP[i][j] = max(min(DP[i][k],DP[k][j]),DP[i][j]);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int cs=0;
+
+//    cout << 0x7f << endl;
+
+    while(cin >> n >> r)
+    {
+        if (!n && !r)
+            return 0;
+
+        Clear(DP);
+
+        Draw_Graph();
+
+        Floyd_Warshall();
+
+        string a,b;
+
+        cin >> a >> b;
+
+        //if (cs)
+          //  cout << endl;
+
+        cout << "Scenario #" << ++cs << endl;
+
+        cout << DP[indx[a]][indx[b]] << " tons"<< endl << endl;
+    }
+    return 0;
+}

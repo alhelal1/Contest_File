@@ -1,0 +1,63 @@
+#include<cstdio>
+#include<cstring>
+#include<string>
+#include<algorithm>
+#include<vector>
+#include<iostream>
+using namespace std;
+typedef long long LL;
+const int N = 5e5 + 10;
+#define lowbit(x) (x&(-x))
+int c[N], n;
+
+struct P{
+    int x, y, z;
+    P(){};
+}a[N];
+
+bool cmp(const P &a, const P &b){
+    return a.x > b. x;
+}
+
+bool cmp1(const P &a, const P &b){
+    return a.y < b.y;
+}
+
+LL Sum(int pos){
+    LL ret = 0;
+    while(pos > 0){
+        ret += c[pos];
+        pos -= lowbit(pos);
+    }
+    return ret;
+}
+
+void update(int pos, int k){
+    while(pos <= n){
+        c[pos] += k;
+        pos += lowbit(pos);
+    }
+}
+
+int main(){
+    while(scanf("%d", &n) == 1 && n != 0){
+        for(int i = 0; i < n; ++i){
+            scanf("%d", &a[i].x);
+            a[i].y = i;
+        }
+        sort(a, a + n, cmp);
+        for(int i = 0; i < n; ++i){
+            a[i].z = i;
+        }
+        sort(a, a + n, cmp1);
+
+        LL ans = 0;
+        memset(c, 0, sizeof(c));
+        for(int i = 0; i < n; ++i){
+            ans += Sum(a[i].z);
+            update(a[i].z + 1, 1);
+        }
+        printf("%lld\n", ans);
+    }
+    return 0;
+}

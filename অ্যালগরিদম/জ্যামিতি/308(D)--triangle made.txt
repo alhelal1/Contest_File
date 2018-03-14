@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define pii pair<double,double>
+#define mp make_pair
+#define pb push_back
+#define ff first
+#define ss second
+#define MOD 99991
+
+using namespace std;
+
+inline ll getnum()
+{
+    char c = getchar();
+    ll num;
+    bool sign=false;
+    for(;c<'0'||c>'9';c=getchar())if(c=='-')sign=true;
+    for(num=0;c>='0'&&c<='9';)
+    {
+        c-='0';
+        num = num*10+c;
+        c=getchar();
+    }
+    return sign?-num:num;
+}
+
+int gcd(int a, int b)
+{
+    return (a && b) ? gcd(b, a % b) : (a + b);
+}
+
+int A[500][500];
+int B[500][500];
+int XY[2006][2];
+int C[2006][2];
+
+int main()
+{
+    ll n=getnum();
+
+    ll ans=n*(n-1)*(n-2)/6;
+
+    for(int i=1;i<=n;i++)XY[i][0]=getnum(),XY[i][1]=getnum();
+
+    for(int i=1;i<=n;i++)
+    {
+        int ind=1;
+
+        for(int j=i+1;j<=n;j++)
+        {
+            int x=XY[j][0]-XY[i][0],y=XY[j][1]-XY[i][1];
+            int g=gcd(abs(x),abs(y));
+            x=x/g;
+            y=y/g;
+
+            if(x==0)y=abs(y);
+            else if(y==0)x=abs(x);
+            else if(x<0&&y<0)x=-x,y=-y;
+            else if(x<0||y<0)x=-1*abs(x),y=abs(y);
+            
+            x+=200,y+=200;
+
+            if(!A[x][y])C[ind][0]=x,C[ind++][1]=y;
+            A[x][y]++;
+        }
+        for(int i=1;i<ind;i++)
+        {
+            int x=C[i][0],y=C[i][1];
+            ll xx=A[x][y];
+            ans-=xx*(xx-1)/2;
+            A[x][y]=0;
+        }
+    }
+    cout<<ans;
+}

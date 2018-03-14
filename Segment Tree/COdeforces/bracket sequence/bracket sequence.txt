@@ -1,0 +1,91 @@
+-------------------------------------------------------- */
+//         0123456789
+#define MX 1000007
+
+struct node
+{
+    int s,e,m;
+
+    node(){}
+
+    node(int _,int __,int ___)
+    {
+        s = _;
+        e = __;
+        m = ___;
+    }
+};
+
+node tree[4*MX];
+char s[MX];
+int id[45];
+
+void Build(int idx,int l,int r)
+{
+    if (l == r)
+    {
+        tree[idx] = node(id[s[l]] == 0, id[s[l]] == 1, 0);
+        return ;
+    }
+
+    int mid= (l+r)>>1 , lft = idx<<1, rgt = lft|1;
+
+    Build(lft,l,mid);
+    Build(rgt,mid+1,r);
+
+    int minBalance = Min(tree[lft].s,tree[rgt].e);
+
+    tree[idx].s = tree[lft].s + tree[rgt].s - minBalance;
+    tree[idx].e = tree[lft].e + tree[rgt].e - minBalance;
+    tree[idx].m = tree[lft].m + tree[rgt].m + (minBalance<<1);
+}
+
+node Query(int idx,int l,int r,int st,int ed)
+{
+    if (st<=l && ed>=r)         return tree[idx];
+
+    int mid = (l+r)>>1, lft = idx<<1, rgt = lft|1;
+
+    if (ed <= mid)              return Query(lft,l,mid,st,ed);
+    else if (st > mid)          return Query(rgt,mid+1,r,st,ed);
+    else
+    {
+        node q1 = Query(lft,l,mid,st,ed);
+        node q2 = Query(rgt,mid+1,r,st,ed);
+        node Q;
+
+        int minBalance = Min(q1.s,q2.e);
+
+        Q.s = q1.s + q2.s - minBalance;
+        Q.e = q1.e + q2.e - minBalance;
+        Q.m = q1.m + q2.m + (minBalance<<1);
+
+        return Q;
+    }
+}
+
+int main ()
+{
+    id['('] = 0;
+    id[')'] = 1;
+
+    S("%s",s+1);
+
+    int n = strlen(s+1);
+
+    Build(1,1,n);
+
+    int q;
+
+    S1(q);
+
+    while (q--)
+    {
+        int x,y;
+
+        S2(x,y);
+
+        P("%d\n",Query(1,1,n,x,y).m);
+    }
+return 0;
+}

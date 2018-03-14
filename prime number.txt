@@ -1,0 +1,52 @@
+
+long is_prime(long n)
+{
+	long ii;
+if (n == 1)
+ return 0;
+if (n == 2)
+ return 1;
+if (n%2 == 0)
+ return 0;
+for (ii=3;ii*ii<=n;ii=ii+2)
+     if (n%ii == 0)
+           return 0;
+return 1;
+}
+
+
+///seive
+bool check(LL n, LL p)
+{
+       return (n&(1<<p));
+}
+
+LL status[N+5]={0};
+//prime[N]={0};
+map<long,long>prime;
+void sive()
+{
+     LL l = long(sqrt(N));
+     LL i,j,p=0;
+     prime[2]=1;
+    for(i=3;i<=l;i+=2)
+    {
+        if(check(status[i>>5],i%31)==0)
+        {
+            prime[i]=1;
+            for(j=i*i;j<=N;j+=2*i)
+            {
+                status[j>>5] = (status[j>>5]|(1<<(j%31)));
+            }
+        }
+    }
+    if(l%2==0)
+    l--;
+    for(i=l+2;i<=N;i+=2)
+    {
+        if( check(status[i/32],i%31 ) == 0)
+        {
+            prime[i]=1;
+        }
+    }
+}

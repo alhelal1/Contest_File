@@ -1,0 +1,42 @@
+ll ar[1115],ar1[11115];
+ll dp[505][505];
+ll ncr(ll n,ll r)
+{
+    if(n==r)return 1LL;
+    if(r==1)return n;
+    ll &ret=dp[n][r];
+    if(ret!=-1)return ret;
+    ll aa=ncr(n-1,r-1);
+    ll bb=ncr(n-1,r);
+    return ret=(aa+bb);
+}
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+    ll t;
+
+    cin>>n>>m>>t;
+
+    mem(dp,-1);
+
+    for(int i=1;i<=m;i++)
+    {
+        for(int j=4;j<=n;j++)
+        {
+
+            if(i+j==t)
+            {
+
+
+                r+=ncr(m,i)*ncr(n,j);
+
+            }
+
+        }
+    }
+    cout<<r;
+   return 0;
+
+}

@@ -1,0 +1,29 @@
+//1+1/2+1/3+1/4+1/5+.................
+ #define gamma  0.57721566490153286060651209
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+   // cin.tie(false);
+   int t;
+   cin>>t;
+   ar[0]=0.;
+   ll ks=0;
+   for(int i=1;i<=1000000;i++)
+   {
+       ar[i]=ar[i-1]+double(1./double(i));
+   }
+   while(t--)
+   {
+       cin>>n;
+       Ca(ks);
+       if(n<=1000000)
+       {
+           cout<<fixed<<setprecision(10)<<ar[n]<<"\n";
+           continue;
+       }
+       double aa;
+       aa=log(n+0.5)+gamma;
+       cout<<fixed<<setprecision(10)<<aa<<endl;
+}
+   return 0;
+}

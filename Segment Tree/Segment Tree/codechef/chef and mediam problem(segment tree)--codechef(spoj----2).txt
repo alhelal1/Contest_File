@@ -1,0 +1,148 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+
+using namespace std;
+
+int n;
+int m;
+int l, r, dd;
+int tree[500005][5];
+int upd[500005][5];
+int a[100005];
+int d[100005][5];
+int e[5];
+/*
+	Using 4 segment tree. Three of four trees are calculating degrees of prime divisor (2, 3, 5) and last tree is calculating value that
+	are leaved there. So, you have to learn how to add 1 to segment (l, r) in segment tree.
+*/
+
+void build(int v, int l, int r) {
+    if (l == r) {
+        for (int i = 0; i < 3; ++i)
+            tree[v][i] = d[l][i];
+        return;
+    }
+
+    int m = (l + r) / 2;
+    build(v + v, l, m);
+    build(v + v + 1, m + 1, r);
+}
+
+void update(int v, int l, int r, int ll, int rr, int type) {
+    if (l == ll && r == rr) {
+        upd[v][type] += 1;
+        return;
+    }
+    int m = (l + r) / 2;
+    if (m >= rr) update(v + v, l, m, ll, rr, type);
+    else if (m < ll) update(v + v + 1, m + 1, r, ll, rr, type);
+    else {
+        update(v + v, l, m, ll, m, type);
+        update(v + v + 1, m + 1, r, m + 1, rr, type);
+    }
+}
+
+void updateElementh(int v, int l, int r, int x, int d) {
+    for (int i = 0; i < 3; ++i)
+        e[i] += upd[v][i];
+    if (l == r) {
+        int f[3] = {0};
+        while (d % 2 == 0) {
+            d /= 2;
+            f[0]++;
+        }
+        while (d % 3 == 0) {
+            d /= 3;
+            f[1]++;
+        }
+        while (d % 5 == 0) {
+            d /= 5;
+            f[2]++;
+        }
+        a[l] = d;
+        for (int i = 0; i < 3; ++i)
+            tree[v][i] = e[i] + f[i];
+        return;
+    }
+    int m = (l + r) / 2;
+    if (m >= x) updateElementh(v + v, l, m, x, d);
+    else updateElementh(v + v + 1, m + 1, r, x, d);
+}
+
+void write(int v, int l, int r) {
+    for (int i = 0; i < 3; ++i)
+        e[i] += upd[v][i];
+    if (l == r) {
+        if (l != 0) printf(" ");
+        int ret = a[l];
+        for (int i = 0; i < tree[v][0] - e[0]; ++i)
+            ret *= 2;
+        for (int i = 0; i < tree[v][1] - e[1]; ++i)
+            ret *= 3;
+        for (int i = 0; i < tree[v][2] - e[2]; ++i)
+            ret *= 5;
+        for (int i = 0; i < 3; ++i) e[i] -= upd[v][i];
+        printf("%d", ret);
+        return;
+    }
+    int m = (l + r) / 2;
+    write(v + v, l, m);
+    write(v + v + 1, m + 1, r);
+    for (int i = 0; i < 3; ++i) e[i] -= upd[v][i];
+}
+
+int main()
+{
+    // number of elements in array
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &a[i]);
+	// degree of 2
+        while (a[i] % 2 == 0) {
+            a[i] /= 2;
+            d[i][0]++;
+        }
+	// degree of 3
+        while (a[i] % 3 == 0) {
+            a[i] /= 3;
+            d[i][1]++;
+        }
+	// degree of 5
+        while (a[i] % 5 == 0) {
+            a[i] /= 5;
+            d[i][2]++;
+        }
+    }
+    // creating trees
+    build(1, 0, n - 1);
+    // number of queries
+    scanf("%d", &m);
+    for (int i = 0; i < m; ++i) {
+        int type;
+        scanf("%d", &type);
+        if (type == 1) {
+            scanf("%d %d %d", &l, &r, &dd);
+            l--; r--;
+            if (dd == 2) dd = 0;
+            else if (dd == 3) dd = 1;
+            else dd = 2;
+            // updating tree with number dd, adding 1 to segment (l, r)
+            update(1, 0, n - 1, l, r, dd);
+        }
+        else if (type == 2) {
+            for (int j = 0; j < 3; ++j)
+                e[j] = 0;
+            scanf("%d %d", &l, &dd);
+            l--;
+	    // update four trees at one element at position l
+            updateElementh(1, 0, n - 1, l, dd);
+        }
+    }
+    for (int i = 0; i < 3; ++i) e[i] = 0;
+    // using all information writing all elements
+    write(1, 0, n - 1);
+    printf("\n");
+    return 0;
+}

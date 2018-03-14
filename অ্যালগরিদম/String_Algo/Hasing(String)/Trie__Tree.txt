@@ -1,0 +1,77 @@
+
+int cur;
+class node{
+    public:
+  //  int prefix;
+    int to[30];
+    int end;
+    node()
+    {
+      //  prefix=1;
+        end=0;
+        rep(i,26) to[i]=-1;
+    }
+};
+int cd[300];
+vector<node> v;
+int mx;long res;
+void ins(char s)
+{
+
+  //  rep(i,len(s))
+  //  {
+        int p=cd[s];
+        if(v[cur].to[p]==-1)
+        {
+            node nw;
+            v.pb(nw);
+            v[cur].to[p]=len(v)-1;
+            cur=len(v)-1;
+            res++;
+        }
+        else {
+            cur=v[cur].to[p];
+          //  v[cur].prefix++;
+           // cmax(mx,((i+1)*v[cur].prefix));
+        }
+  //  }
+   //end of a word
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+/*long t,kase;
+cin>>t;
+for(kase=1;kase<=t;kase++)
+{
+    cout<<"Case "<<kase<<": ";
+
+}*/
+    // file or not???
+    rep(i,26) cd[char('a'+i)]=i;
+
+    string s,a,temp;
+    int k,ar[1505]={0},tot;
+    cin>>s>>a>>k;
+
+    rep(i,len(a)) if(a[i]=='1') ar[i]=0;
+    else ar[i]=1;
+    node nd;
+    v.pb(nd);
+    rep(i,len(s))
+    {
+         cur=0;tot=0;
+        for(int j=i;j<len(s);j++)
+        {
+            tot+=ar[s[j]-'a'];
+            if(tot>k) break;
+            ins(s[j]);
+        }
+         v[cur].end=1;
+    }
+    cout<<res;
+
+return 0;
+}

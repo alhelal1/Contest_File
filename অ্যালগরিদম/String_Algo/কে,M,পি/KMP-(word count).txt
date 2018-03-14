@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<iostream>
+#include<string>
+#include<sstream>
+#include<ctype.h>
+#include<vector>
+#include<map>
+#include<queue>
+#include<math.h>
+#include<algorithm>
+#include<set>
+ 
+#define pb push_back
+#define PI acos(-1.0)
+#define SZ(a) (int)a.size()
+#define csprnt printf("Case %d: ", cas++);
+#define EPS 1e-9
+#define MAX 1000010
+#define INF (1<<30)
+#define pii pair<int, int>
+ 
+using namespace std;
+ 
+char T[MAX], S[MAX];
+int pf[MAX];
+ 
+void fl_func()
+{
+    int i, j;
+    pf[0]=-1;
+    j=-1;
+    for(i=1;S[i];i++)
+    {
+        while(j>-1 && S[j+1]!=S[i])
+            j=pf[j];
+        if(S[j+1]==S[i]) j++;
+        pf[i]=j;
+    }
+    return;
+}
+ 
+int kmp()
+{
+    fl_func();
+    int i, j, ret=0, len=strlen(S)-1;
+    j=-1;
+    for(i=0;T[i];i++)
+    {
+        while(j>-1 && S[j+1]!=T[i])
+            j=pf[j];
+        if(S[j+1]==T[i]) j++;
+        if(j==len)
+        {
+            j=pf[j];
+            ret++;
+        }
+    }
+    return ret;
+}
+ 
+int main()
+{
+    int t, cas=1;
+    scanf("%d", &t);
+    while(t--)
+    {
+        scanf("%s%s", &T, &S);
+        int ans = kmp();
+        csprnt;
+        printf("%d\n", ans);
+    }
+    return 0;
+}
+ 

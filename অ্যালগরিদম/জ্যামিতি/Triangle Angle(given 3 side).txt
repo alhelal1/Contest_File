@@ -1,0 +1,52 @@
+ll ar[200005],dp[200005][305];
+ll n,m,r,a,b,c;
+
+
+
+int main()
+{
+
+   // Fast;
+
+
+   in(n);
+   while(n--)
+   {
+       in3(a,b,c);
+
+       if(a+b<=c or a+c<=b or b+c<=a )
+       {
+           printf("-1\n");
+           continue;
+       }
+       double cc=(a*a)+(b*b)-c*c;
+       cc=cc/double(2.*a*b);
+       //d1(cc);
+       cc=acos(cc)*(180.0/PI);
+
+
+
+       double bb=(a*a)-(b*b)+c*c;
+       bb=bb/double(2.*a*c);
+
+
+       //d1(bb);
+       bb=acos(bb)*(180.0/PI);
+
+
+       double aa=-(a*a)+(b*b)+c*c;
+       aa=aa/double(2.*c*b);
+      // d1(aa);
+       aa=acos(aa)*(180.0/PI);
+
+       if(aa>=bb and aa>=cc)
+       {
+           cout<<fixed<<setprecision(3)<<aa<<"\n";
+       }
+       else if(bb>=aa and bb>=cc)    cout<<fixed<<setprecision(3)<<bb<<"\n";
+       else cout<<fixed<<setprecision(3)<<cc<<"\n";
+   }
+
+   return 0;
+
+}

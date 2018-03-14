@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+//krushkal
+ 
+int pr[10009];
+struct info
+{
+    int u,v,w;
+};
+ 
+bool better(info x,info y)
+{
+    if(x.w<y.w) return 1;
+    return 0;
+}
+ 
+int find(int r)
+{
+    if(pr[r]==r) return r;
+    return find(pr[r]);
+}
+ 
+int main()
+{
+    int i,j,k,node,edge,m,d,x,y,z;
+    while(cin>>node>>edge)
+    {
+        info p[100009];
+        for(i=0;i<edge;i++)
+            cin>>p[i].u>>p[i].v>>p[i].w;
+        sort(p,p+edge,better);
+        for(i=1;i<=node;i++)
+            pr[i]=i;
+        int co=0;
+        long long cost=0;
+        for(i=0;i<edge;i++)
+        {
+            int u=find(p[i].u);
+            int v=find(p[i].v);
+            if(u!=v)
+            {
+                pr[u]=v;
+                co++;
+                cost=cost+p[i].w;
+                if(co==node-1) break;
+            }
+        }
+        cout<<cost<<endl;
+    }
+    return 0;
+}

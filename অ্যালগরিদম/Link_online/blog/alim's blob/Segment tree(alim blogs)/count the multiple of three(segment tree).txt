@@ -1,0 +1,128 @@
+/*
+Problem : http://lightoj.com/volume_showproblem.php?problem=1135
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+struct info
+{
+    int zero,one,two,lazy;
+};
+ 
+info tree[400009];
+ 
+info Merge(info l,info r)
+{
+    info ret;
+    ret.lazy=0;
+    ret.one=l.one+r.one;
+    ret.two=l.two+r.two;
+    ret.zero=l.zero+r.zero;
+    return ret;
+}
+ 
+void init(int node,int b,int e)
+{
+    if(b==e)
+    {
+        tree[node].lazy=0;
+        tree[node].one=0;
+        tree[node].two=0;
+        tree[node].zero=1;
+        return;
+    }
+    int left=node<<1; int right=left+1; int mid=(b+e)>>1;
+    init(left,b,mid);
+    init(right,mid+1,e);
+    tree[node]=Merge(tree[left],tree[right]);
+}
+ 
+ 
+void PushDown(int node,int b,int e)
+{
+    int left=node<<1; int right=left+1; int mid=(b+e)>>1;
+    tree[left].lazy+=tree[node].lazy;
+    tree[right].lazy+=tree[node].lazy;
+    if(tree[node].lazy%3==1)
+    {
+        int t1=tree[left].one;
+        int t2=tree[left].two;
+        tree[left].one=tree[left].zero;
+        tree[left].zero=t2;
+        tree[left].two=t1;
+ 
+        t1=tree[right].one;
+        t2=tree[right].two;
+        tree[right].one=tree[right].zero;
+        tree[right].zero=t2;
+        tree[right].two=t1;
+    }
+    else if(tree[node].lazy%3==2)
+    {
+        int t1=tree[left].one;
+        int t2=tree[left].two;
+        tree[left].two=tree[left].zero;
+        tree[left].one=t2;
+        tree[left].zero=t1;
+ 
+        t1=tree[right].one;
+        t2=tree[right].two;
+        tree[right].two=tree[right].zero;
+        tree[right].one=t2;
+        tree[right].zero=t1;
+    }
+ 
+    tree[node].lazy=0;
+}
+ 
+void update(int node,int b,int e,int i,int j)
+{
+    if(b>j||e<i) return;
+    if(b>=i&&e<=j)
+    {
+        tree[node].lazy++;
+        int t1=tree[node].one;
+        int t2=tree[node].two;
+        tree[node].one=tree[node].zero;
+        tree[node].zero=t2;
+        tree[node].two=t1;
+        return;
+    }
+    int left=node<<1; int right=left+1; int mid=(b+e)>>1;
+    if(tree[node].lazy) PushDown(node,b,e);
+    update(left,b,mid,i,j);
+    update(right,mid+1,e,i,j);
+    tree[node]=Merge(tree[left],tree[right]);
+}
+ 
+int query(int node,int b,int e,int i,int j)
+{
+    if(b>j||e<i) return 0;
+    if(b>=i&&e<=j) return tree[node].zero;
+    int left=node<<1; int right=left+1; int mid=(b+e)>>1;
+    if(tree[node].lazy) PushDown(node,b,e);
+    int p1=query(left,b,mid,i,j);
+    int p2=query(right,mid+1,e,i,j);
+    tree[node]=Merge(tree[left],tree[right]);
+    return p1+p2;
+}
+ 
+int main()
+{
+    int i,j,k,n,m,d,test,t=0,q,x,y;
+    scanf("%d",&test);
+    while(test--)
+    {
+        scanf("%d%d",&n,&q);
+        init(1,1,n);
+        printf("Case %d:\n",++t);
+        while(q--)
+        {
+            scanf("%d%d%d",&d,&x,&y);
+            if(d==0) update(1,1,n,x+1,y+1);
+            else printf("%d\n",query(1,1,n,x+1,y+1));
+        }
+    }
+    return 0;
+}

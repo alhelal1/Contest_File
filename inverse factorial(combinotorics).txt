@@ -1,0 +1,102 @@
+using namespace std;
+ 
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <list>
+#include <map>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <vector>
+ 
+#define rep(i,n) for(__typeof(n) i=0; i<(n); i++)
+#define foreach(i,n) for(__typeof((n).begin())i =(n).begin();i!=(n).end();i++)
+#define inf (1<<30)
+#define linf (i64(1)<<58)
+#define eps 1e-9
+#define pb push_back
+#define clr clear()
+#define all(x) x.begin(),x.end()
+#define xx first
+#define yy second
+#define sz(x) int(x.size())
+#define rev reverse
+#define mem(x,val) memset((x),(val),sizeof(x));
+#define read(x) freopen(x,"r",stdin);
+#define rite(x) freopen(x,"w",stdout);
+#define mp make_pair
+#define on(bit,pos) ((bit)|(__typeof(bit))1<<(pos-1))
+#define off(bit,pos) (bit)& ~(1<<(pos-1))
+#define check(bit,pos) ((bit)==((bit)|(__typeof(bit))1<<(pos-1)))
+ 
+typedef long long i64;
+typedef unsigned long long ui64;
+typedef string st;
+typedef vector<int> vi;
+typedef vector<st> vs;
+typedef map<int,int> mii;
+typedef map<st,int> msi;
+typedef map<int,st> mis;
+typedef set<int> si;
+typedef set<st> ss;
+typedef pair<int,int> pii;
+ 
+template<class T> inline T gcd(T a,T b) {if(a<0)return gcd(-a,b);if(b<0)return gcd(a,-b);return (b==0)?a:gcd(b,a%b);}
+template<class T> inline T lcm(T a,T b) {if(a<0)return lcm(-a,b);if(b<0)return lcm(a,-b);return a*(b/gcd(a,b));}
+template<class T> inline T sqr(T x){return x*x;}
+template<class T> inline T power(T x,T p){if(!p) return 1;return x*power(x,p-1);}
+ 
+const int mx=1000000+10;
+const int mod=1000003;
+int dp[mx];
+ 
+template< class Int >
+struct Triple
+{
+    Int d, x, y;
+    Triple( Int q, Int w, Int e ) : d( q ), x( w ), y( e ) {}
+};
+ 
+template< class Int >
+Triple< Int > egcd( Int a, Int b )
+{
+    if( !b ) return Triple< Int >( a, Int( 1 ), Int( 0 ) );
+    Triple< Int > q = egcd( b, a % b );
+    return Triple< Int >( q.d, q.y, q.x - a / b * q.y );
+}
+ 
+template< class Int >
+Int inverse( Int a, Int n )
+{
+    Triple< Int > t = egcd( a, n );
+    if( t.d > Int( 1 ) ) return Int( 0 );
+    Int r = t.x % n;
+    return( r < Int( 0 ) ? r + n : r );
+}
+ 
+ 
+int main()
+{
+    dp[0]=1;
+    for(int i=1; i<=1000000; i++) dp[i]= (i64(dp[i-1])*i64(i))%mod;
+    int test,kas=0; scanf("%d",&test);
+    while(test--)
+    {
+        int n,k;
+        scanf("%d%d",&n,&k);
+        int up=dp[n];
+        int down=(i64(dp[k])*i64(dp[n-k]))%mod;
+        down=inverse(down,mod);
+        up= (i64(up)*i64(down))%mod;
+        printf("Case %d: %d\n",++kas,up);
+    }
+    return 0;
+}
+ 

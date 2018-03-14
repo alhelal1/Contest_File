@@ -1,0 +1,88 @@
+/**Bismillahir Rahmanir Rahim**/
+#include <bits/stdc++.h>
+using namespace std;
+#define inf           (1<<29)
+#define pb            push_back
+#define mp            make_pair
+#define eps           1e-9
+#define nl            printf("\n")
+#define spc           printf(" ")
+#define all(a)        a.begin(),a.end()
+#define mem(x,a)      memset(x,a,sizeof(x))
+#define rep(i,n)      for(int i(0),_n(n);i<_n;++i)
+#define repl(i,n)      for(int i(1),_n(n);i<=_n;++i)
+#define repe(it,c)    for(__typeof((c).begin()) it=(c).begin();it!=(c).end();++it)
+int dx[]={0,0,1,-1,1,-1,1,-1},dy[]={1,-1,0,0,1,-1,-1,1};
+typedef long long ll;
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef vector<vector<int> > vvi;
+using namespace std;
+
+template<class T> void cmin(T &a,T b){if(b<a) a=b;}
+template<class T> void cmax(T &a,T b){if(b>a) a=b;}
+template<class T> int len(const T&c){return (int)c.size();}
+
+int cur;
+class node{
+    public:
+    int prefix;
+    int to[5];
+    int end;
+    node()
+    {
+        prefix=1;
+        end=0;
+        rep(i,4) to[i]=-1;
+    }
+};
+int cd[200];
+vector<node> v;
+int mx;
+void insert(string s)
+{
+    cur=0;
+    rep(i,len(s))
+    {
+        int p=cd[s[i]];
+        if(v[cur].to[p]==-1)
+        {
+            node nw;
+            v.pb(nw);
+            v[cur].to[p]=len(v)-1;
+            cur=len(v)-1;
+           cmax(mx,i+1);
+        }
+        else {
+            cur=v[cur].to[p];
+            v[cur].prefix++;
+            cmax(mx,((i+1)*v[cur].prefix));
+        }
+    }
+    v[cur].end=1;//end of a word
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+cd['A']=0;cd['T']=1;cd['G']=2;cd['C']=3;
+long t,k;
+cin>>t;
+repl(k,t){
+    v.clear();
+    mx=0;
+   long n;
+   cin>>n;
+   string s;
+   node nd;
+   v.pb(nd);
+   cur=0;
+   rep(i,n)
+   {
+       cin>>s;
+       insert(s);
+   }
+   cout<<"Case "<<k<<": ";
+   cout<<mx<<endl;
+}
+return 0;
+}

@@ -1,0 +1,71 @@
+/*
+    Algorithm: Dijkstra with Printing Path
+    Straight-Forward Problem: http://codeforces.com/problemset/problem/20/C
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define LL long long
+LL dist[100009];
+const LL inf=10000000000007;
+LL parent[100009];
+ 
+int main()
+{
+    LL i,j,k,n,m,d,x,y,z,source,node,edge,destination;
+    while(cin>>node>>edge)
+    {
+        vector<pair<LL,LL> >adj[100009];
+        for(i=0;i<edge;i++)
+        {
+            cin>>x>>y>>z;
+            if(x==y) continue;
+            adj[x].push_back(make_pair(y,z));
+            adj[y].push_back(make_pair(x,z));
+        }
+        priority_queue<pair<LL,LL> >pq;
+        vector<LL>path;
+        for(i=0;i<=100002;i++)
+        dist[i]=inf;
+        dist[1]=0;
+        source=1;
+        destination=node;
+        pq.push(make_pair(0,source));
+        while(!pq.empty())
+        {
+            pair<LL,LL>p=pq.top(),pp;
+            pq.pop();
+            LL cost=p.first*-1;
+            LL u=p.second;
+            for(i=0;i<adj[u].size();i++)
+            {
+                pp=adj[u][i];
+                LL v=pp.first;
+                if(dist[v]>cost+pp.second)
+                {
+                    dist[v]=cost+pp.second;
+                    parent[v]=u;
+                    pq.push(make_pair(-dist[v],v));
+                }
+            }
+        }
+        if(dist[node]==inf) puts("-1");
+        else
+        {
+            LL p=node;
+            vector<LL>path;
+            path.push_back(p);
+            while(p!=1)
+            {
+                path.push_back(parent[p]);
+                p=parent[p];
+            }
+            reverse(path.begin(),path.end());
+            for(i=0;i<path.size();i++)
+                cout<<path[i]<<" ";
+            puts("");
+        }
+    }
+    return 0;
+}

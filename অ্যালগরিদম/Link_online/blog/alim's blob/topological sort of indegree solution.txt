@@ -1,0 +1,52 @@
+/*
+Uva Problem 10305 -Ordering Tasks,11686 - Pick up sticks
+Topological Sort(Indegree Solution)
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int indegree[109];
+ 
+int main()
+{
+    int i,j,k,n,m,d,node,edge,x,y;
+    while(cin>>node>>edge)
+    {
+        if(node==0&&edge==0) break;
+        memset(indegree,0,sizeof(indegree));
+        vector<int>adj[109];
+        for(i=0;i<edge;i++)
+        {
+            cin>>x>>y;
+            indegree[y]++;
+            adj[x].push_back(y);
+        }
+        queue<int>q;
+        for(i=1;i<=node;i++)
+        {
+            if(indegree[i]==0) q.push(i);
+        }
+        vector<int>topo;
+        while(!q.empty())
+        {
+            int ff=q.front();
+            q.pop();
+            topo.push_back(ff);
+            int sz=adj[ff].size();
+            for(i=0;i<sz;i++)
+            {
+                int u=adj[ff][i];
+                indegree[u]--;
+                if(indegree[u]==0) q.push(u);
+            }
+        }
+        //if node!=topo.size(), then no solution exists. Because an cycle occurs.
+        int sz=topo.size();
+        cout<<topo[0];
+        for(i=1;i<sz;i++)
+            cout<<" "<<topo[i];
+        puts("");
+    }
+    return 0;
+}

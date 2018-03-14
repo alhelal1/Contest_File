@@ -1,0 +1,140 @@
+ll a,b,c,f=0,r=0,rr=0,res=0,n,m;
+//ll ar[100005],ar1[100025],ar2[100025];
+
+
+ll ar[5000005];
+
+ll vis[5000005],dp[5000005];
+ll k=0;
+
+void SSS()
+{
+    ll aa=sqrt(5000001);
+
+
+   // cout<<" alhelal ";
+
+
+    for(int i=4;i<=5000000;i+=2)
+        vis[i]=1;
+
+
+      //ll aa=100;
+
+
+    //d1(123);
+
+
+    for(int i=3;i<=aa;i+=2)
+    {
+
+        if(vis[i]==0)
+        {
+
+            for(int j=i*i;j<=5000000;j+=(2*i))
+                vis[j]=1;
+        }
+    }
+
+
+   // d1(123);
+
+
+   // ll k=0;
+
+    ar[k++]=2;
+
+
+
+    for(int i=3;i<=5000000;i+=2)
+    {
+        if(vis[i]==0)ar[k++]=i;
+    }
+
+
+
+    dp[0]=0,dp[1]=0;
+
+
+    for(int i=2;i<=5000000;i++)
+    {
+
+
+
+        c=0;
+
+        ll bb=i;
+        for(int j=0;j<bb  and j<k;j++)
+        {
+            if(vis[bb]==0)
+            {
+                c++;
+                break;
+            }
+
+
+            if(bb%ar[j]==0)
+            {
+               // c++;
+                while(bb%ar[j]==0)c++,bb/=ar[j];
+            }
+
+
+            if(bb==1)break;
+        }
+
+
+        r+=c;
+        dp[i]=r;
+    }
+
+}
+
+
+
+
+
+int main()
+{
+   // ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+
+
+    SSS();
+
+
+   // rep(i,10)cout<<ar[i]<<" ";
+
+
+   ll t;
+
+
+   //scanf("%I64",&t);
+
+   scanf("%lld",&t);
+
+   while(t--)
+   {
+      // scanf("%I64%I64",&a,&b);
+     // cin>>a>>b;
+
+     scanf("%lld%lld",&a,&b);
+
+       //printf("%I64\n",dp[a]-dp[b]);
+
+      // cout<<dp[a]-dp[b]<<"\n";
+
+
+      printf("%lld\n",dp[a]-dp[b]);
+   }
+
+
+
+
+
+
+   return 0;
+
+}

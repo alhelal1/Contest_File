@@ -1,0 +1,55 @@
+long path[101];
+struct node
+{
+    int cost,u,v;
+    bool operator<(const node& p) const
+    {
+        return cost > p.cost;
+    }
+}temp;
+priority_queue<node> pq;
+int find(int n)
+{
+    if(path[n]==n)
+         return n;
+    return path[n]=find(path[n]);
+}
+int main()
+{
+long t,k;
+cin>>t;
+for(k=1;k<=t;k++)
+{
+  //  cout<<"Case "<<k<<": ";
+  long n,a,b,c;
+     cin>>n;
+      repl(i,n) path[i]=i;
+     while(1)
+     {
+         cin>>a>>b>>c;
+         if(!a&&!b&&!c) break;
+         temp.u=a;
+         temp.v=b;
+         temp.cost=c;
+         pq.push(temp);
+     }
+     long res=0;
+     while(!pq.empty())
+     {
+         temp=pq.top();
+         pq.pop();
+         a=find(temp.u);
+         b=find(temp.v);
+         if(a!=b)
+         {
+             path[a]=b;
+             res+=temp.cost;
+         }
+     }
+     cout<<res<<endl;
+
+}
+    // file or not???
+
+return 0;
+}

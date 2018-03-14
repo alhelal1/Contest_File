@@ -1,0 +1,7 @@
+/**Define Bitwise operation**/
+#define check(n, pos) (n & (1<<(pos)))
+#define biton(n, pos) (n | (1<<(pos)))
+#define bitoff(n, pos) (n & ~(1<<(pos)))
+#define ledzero(n) (__builtin_clz(n))
+#define trailzero(n) (__builtin_ctz(n))
+#define onbit(n) (__builtin_popcount(n))

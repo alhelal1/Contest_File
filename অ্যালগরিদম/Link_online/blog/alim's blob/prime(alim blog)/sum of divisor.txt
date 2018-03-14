@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int a[1000099];
+ 
+void sieve_for_sum_of_divisor()
+{
+    int i,j;
+    for(i=2;i<=1000000;i++)
+    {
+        for(j=i;j<=1000000;j=j+i)
+            a[j]=a[j]+i;
+    }
+}
+ 
+int main()
+{
+    int i,j,k,n,m,d;
+    sieve_for_sum_of_divisor();
+    for(i=1;i<=20;i++)
+        printf("SOD of %d is %d\n",i,a[i]+1);
+    return 0;
+}

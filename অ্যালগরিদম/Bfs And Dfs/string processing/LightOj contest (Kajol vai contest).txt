@@ -1,0 +1,70 @@
+bool vis[10001];
+
+VI v[10001];
+LL dfs(LL pos,LL pre)
+{
+    vis[pos]=1;
+    r++;
+    rep(i,len(v[pos]))
+    {
+        LL aa=v[pos][i];
+        if(vis[aa]==0)
+        {
+            dfs(aa,pos);
+        }
+    }
+}
+
+
+int main()
+{
+    //FAST;
+
+    R(t);
+
+    while(t--)
+    {
+       R(n);
+
+        LL cnt=1;
+
+        rep(i,1000)v[i].clear();
+
+        rep(i,1000)vis[i]=0;
+        A.clear();
+
+        rep(i,n)
+        {
+            cin>>s>>ss;
+
+
+
+            if(A.find(s)==A.end())
+            {
+                A[s]=cnt++;
+            }
+            if(A.find(ss)==A.end())
+            {
+                A[ss]=cnt++;
+            }
+
+            a=A[s];
+            b=A[ss];
+
+            v[a].PB(b);
+            v[b].PB(a);
+        }
+
+        r=0;
+
+        cin>>s;
+
+        dfs(A[s],-1);
+
+        case(ks);
+
+        P(r);
+    }
+
+
+}

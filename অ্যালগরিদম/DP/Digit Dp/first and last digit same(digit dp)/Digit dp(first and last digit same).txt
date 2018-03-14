@@ -1,0 +1,72 @@
+
+
+string s;
+int ln;
+LL dp[21][2][10][10];
+
+LL solve(int pos,int ch,int fst,int prev)
+{
+    //cout<<pos<< " "<<ch<< " "<<fst<<  " "<<prev<<endl;
+    if(pos==ln)
+    {
+        return (fst==prev);
+    }
+
+    LL &res=dp[pos][ch][fst][prev];
+    if(res!=-1) return res;
+
+    res=0;
+
+    int l=s[pos]-'0';
+    if(ch) l=9;
+
+    F(i,0,l+1)
+    {
+        if(fst)
+        {
+            res+=solve(pos+1,ch||(i<(s[pos]-'0')),fst,i);
+        }
+        else
+        {
+            res+=solve(pos+1,ch||(i<(s[pos]-'0')),i,i);
+        }
+
+    }
+    return res;
+
+}
+
+int main()
+{
+
+    LL a,b;
+    if(a>b) swap(a,b);
+    cin>>a>>b;
+    LL ans=1,ans1;
+    a--;
+    while(a)
+    {
+        s+=a%10+'0';
+        a/=10;
+    }
+    reverse(s.begin(),s.end());
+    ln=s.sz;
+    MEM(dp,-1);
+    if(s.sz) ans=solve(0,0,0,0);
+
+    s.clear();
+
+    while(b)
+    {
+        s+=b%10+'0';
+        b/=10;
+    }
+    ln=s.sz;
+    reverse(s.begin(),s.end());
+    MEM(dp,-1);
+    ans=solve(0,0,0,0)-ans;
+    cout<<ans<<endl;
+
+
+    return 0;
+}

@@ -1,0 +1,22 @@
+ll rr()
+{
+    for(int i=2;i<=5000000;i++)
+        ar[i]=i;
+    for(int i=2;i<=5000000;i++)
+    {
+        if(ar[i]==i)
+        {
+            ar[i]=ar[i]-1;
+            for(int j=i+i;j<=5000000;j+=i)
+            {
+                ar[j]-=ar[j]/i;
+            }
+        }
+    }
+   ar[0]=0;
+   ar[1]=0;
+   for(int i=2;i<=5000000;i++)
+   {
+       ar[i]=(unsigned long long)  (ar[i]*ar[i])+ar[i-1];
+   }
+}

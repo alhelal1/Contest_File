@@ -1,0 +1,89 @@
+#include<stdio.h>
+#include<bitset>
+#include<algorithm>
+#include<iostream>
+#include<vector>
+#define pb push_back
+#define mp make_pair
+#define fs first
+#define sc second
+using namespace std;
+
+#define M 100005
+#define Lmax 20
+
+int rmqa[18][1<<18][7],ar[M][7],lg[M],br[8],cr[8],n,m,tot;
+long long rez;
+
+void genLog(){
+    for(int i=2;i<=n;++i) {
+        lg[i] = lg[i/2]+1;
+    }
+}
+
+void insert(int J) {
+    for(int i=1;i<=n;++i) {
+        rmqa[0][i][J] = ar[i][J];
+    }
+    for(int i=1;(1<<i)<=n;++i) {
+        for(int j=1;j+(1<<i)-1<=n;++j) {
+            rmqa[i][j][J] = max(rmqa[i-1][j][J],rmqa[i-1][j+((1<<(i-1)))][J]);
+        }
+    }
+}
+
+
+
+int read(int x,int y,int J) {
+    int maxi = lg[y-x+1];
+    int sh = y-x+1-(1<<maxi);
+    return max(rmqa[maxi][x][J], rmqa[maxi][x+sh][J]);
+}
+
+
+int main() {
+
+    //cout<<(1<<18);
+      cin>>n;
+      cin>>m; cin>>tot;
+      for(int i=1;i<=n;i++) for(int j=1;j<=m;j++)  cin>>ar[i][j];
+      genLog();
+      for(int i=1;i<=m;i++)
+      {
+          insert(i);
+      }
+
+      int mx=0;
+      for(int i=1;i<=n;i++)
+      {
+          int lo=i,hi=n;
+          while(lo<=hi)
+          {
+              int r=0;
+              int mid=(lo+hi)/2;
+              for(int j=1;j<=m;j++)
+              {
+                  br[j]=read(i,mid,j);
+                  r+=br[j];
+              }
+
+              if(r<=tot)
+              {
+                  int aa=mid-i+1;
+
+                  if(aa>mx)
+                  {
+                      mx=aa;
+
+                      for(int j=1;j<=m;j++)    cr[j]=br[j];
+                  }
+
+                  lo=mid+1;
+              }
+
+              else hi=mid-1;
+          }
+      }
+      for(int i=1;i<=m;i++)  cout<<cr[i]<<" ";
+    return 0;
+}

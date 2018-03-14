@@ -1,0 +1,60 @@
+ll dfs(ll n,ll mid)
+{
+    ll sum=0;
+
+    //if(mid==0)return 1;
+
+    if(mid==0)return 0;
+
+    rep(i,n)
+    {
+
+       sum+=(ar[i]+mid-1)/mid;
+    }
+    return sum;
+}
+
+int main()
+{
+   // ios_base::sync_with_stdio(false);
+   // cin.tie(false);
+
+   ll t;
+  // cin>>t;
+   while(cin>>n>>m)
+   {
+
+       if(n<0 and m<0)break;
+   //cin>>n;cin>>m;
+   rep(i,n)cin>>ar[i];
+   ll l=1,h=(1LL<<25);
+
+   ll ans=0;
+
+
+   while(l<=h)
+   {
+       ll mid=(l+h)>>1;
+       if(dfs(n,mid)>m)
+       {
+           l=mid+1;
+       }
+
+       else if(dfs(n,mid)==m)
+       {
+           ans=max(ans,mid);
+           h=mid-1;
+       }
+       else
+       {
+           //ans=mid;
+           h=mid-1;
+       }
+   }
+   cout<<h+1<<endl;
+
+   }
+   return 0;
+}
+
+

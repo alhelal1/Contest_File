@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+typedef long long int ll;
+typedef unsigned long long int ull;
+#define pb push_back
+#define mp make_pair
+#define len(s) s.size()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define mod 1000000007
+#define mp make_pair
+#define pb push_back
+#define xx first
+#define yy second
+#define all(x) x.begin(),x.end()
+#define mem(ar,value) memset(ar,value,sizeof(ar))
+using namespace std;
+
+ll gcd(ll x,ll y)
+{
+    if(y==0) return x;
+    return gcd(y,x%y);
+}
+ll bigMod(ll a,ll b)
+{
+      if(!b) return 1;
+      ll x = bigMod(a,b/2);
+      ll temp = (x*x)%mod;
+      if(b%2) temp = (temp*a)%mod;
+      return temp;
+}
+ll modinv(ll a)
+{
+      return bigMod(a,mod-2);
+}
+int a,b,c=0,res=0,sum=0,f=0,ff=0,cnt=0;
+ll ar[500100];
+
+//string s,ss;
+int fun(int x)
+{
+    if(x==0)return 0;
+    if(x%2==1)return 1+fun(x/2);
+    else
+      fun(x/2);
+}
+
+ int n,m;
+ long long dp[2000][2000];
+int main()
+{
+    int n;
+    string s[11000];
+    long long ar[101000]={0};
+    long long br[101000]={0};
+    cin>>n;
+    mem(dp,0);
+    long long res=0;
+    rep(i,n)
+    {
+        cin>>ar[i]>>br[i];
+        ar[i]+=1000;
+        br[i]+=1000;
+        dp[ar[i]][br[i]]=true;
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            int ans=ar[i]+ar[j];
+            int anss=br[i]+br[j];
+            if(ans%2 or anss%2)
+                continue;
+            res+=dp[ans/2][anss/2];
+        }
+    }
+    cout<<res<<endl;
+
+    return 0;
+}

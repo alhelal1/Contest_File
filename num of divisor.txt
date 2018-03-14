@@ -1,0 +1,3 @@
+for(long i=1;i<m;i++)
+	    for(long j=i;j<m;j+=i) ar[j]++;
+ar[i] is the num of divisors of i

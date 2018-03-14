@@ -1,0 +1,76 @@
+ll n,m,a,b,c,r=0;
+ll ar[51005];
+string s[515];
+
+ll pos=0;
+
+ll vis[510][510];
+
+ll dfs(ll ii,ll jj)
+{
+    if(ii<0 or jj<0)return 0;
+    if(ii>=a or jj>=b)return 0;
+    if(vis[ii][jj] or s[ii][jj]=='#')return 0;
+
+
+    if(s[ii][jj]=='C')
+
+    ar[pos]++;
+    vis[ii][jj]=pos;
+    rep(i,4)
+    {
+        ll x=row[i]+ii,y=col[i]+jj;
+        dfs(x,y);
+    }
+}
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+   ll t=0,ks=0;
+   in(t);
+   while(t--)
+   {
+
+       pos=0;
+
+       mem(vis,false);
+       mem(ar,false);
+
+       //ll pos=0;
+       in3(a,b,c);
+       rep(i,a)
+       {
+
+
+       cin>>s[i];
+       }
+
+       rep(i,a)
+       {
+           rep(j,b)
+           {
+               if(s[i][j]=='.' or s[i][j]=='C')
+               {
+                   if(vis[i][j]==0)
+                   {
+                       pos++;
+                       dfs(i,j);
+                   }
+               }
+           }
+       }
+       casenl(ks);
+       while(c--)
+       {
+           in2(a,b);
+
+           out(ar[vis[a-1][b-1]]);
+       }
+
+   }
+
+   return 0;
+
+}

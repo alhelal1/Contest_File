@@ -1,0 +1,46 @@
+LL foo(LL idx)
+{
+
+    if(idx==n)  return 0;
+
+
+    LL &ret=dp[idx]; if(ret!=-1) return ret;
+    LL tot=0;
+
+     ret=0;
+    //if(s[idx]=='0')ret=foo(idx+1);
+
+    for(int i=0;(i+idx)<n;i++)
+    {
+        tot=tot*10LL+(s[idx+i]-'0');
+
+        if(tot<=INT_MAX)   ret=max(ret,tot+foo(idx+i+1));
+    }
+
+    return ret;
+
+
+
+}
+
+int main()
+{
+  // _CIN;
+
+
+  cin>>t; while(t--)
+  {
+      cin>>s; n=len(s);
+
+      mem(dp,-1);
+
+      cout<<foo(0)<<endl;
+  }
+
+
+
+
+
+   return 0;
+
+}

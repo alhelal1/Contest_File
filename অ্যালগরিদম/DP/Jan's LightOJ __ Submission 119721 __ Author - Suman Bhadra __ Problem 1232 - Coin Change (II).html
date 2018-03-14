@@ -1,0 +1,406 @@
+
+<!-- saved from url=(0056)http://www.lightoj.com/volume_showcode.php?sub_id=119721 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Jan's LightOJ :: Submission 119721 :: Author - Suman Bhadra :: Problem 1232 - Coin Change (II)</title>
+		
+		<link rel="stylesheet" type="text/css" href="./Jan's LightOJ __ Submission 119721 __ Author - Suman Bhadra __ Problem 1232 - Coin Change (II)_files/style.css">
+	</head>
+
+	<body>
+<style>
+div.tempMessage {
+  float: left;
+  font-size: 30;
+  margin-top: 10px;
+  margin-left: 300px;
+  position: absolute;
+  border: 2px solid white;
+  background: yellow;
+  border-radius: 5px;
+  padding: 2px;
+}
+div.tempMessage a {
+  text-decoration: underline;
+  color: red;
+}
+</style>
+<div class="topDiv">
+			<img src="./Jan's LightOJ __ Submission 119721 __ Author - Suman Bhadra __ Problem 1232 - Coin Change (II)_files/main.png" class="topImage" style="float: left;">
+                <!--<div class="tempMessage"><a href="http://lightoj.com/lightojv2/contest/215/problems" target=_blank>ACM ICPC Dhaka Regionals Online Preliminary Contest is scheduled here.</a></div>!-->
+			<div class="topMenuMessage" style="display: block; float: right; padding: 50 5 0 0;">
+				Server Time:
+				<a class="top_link" target="_blank" href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20160104T152743">
+					Mon Jan 4, 2016 9:27 pm				</a>
+			</div>
+		</div>
+		<div class="topMenu" align="center">
+			<table width="100%">
+				<tbody><tr>
+					<td width="10%">
+						<div class="topMenuMessage">
+							&nbsp;<a class="top_link" href="http://www.lightoj.com/index.php">
+								Home
+							</a>
+						</div>
+					</td>
+					<td width="10%">
+						<div class="topMenuMessage">
+							<a class="top_link" href="http://www.lightoj.com/volume_problemset.php">
+								Volume
+							</a>
+						</div>
+					</td>
+					<td width="10%">
+						<div class="topMenuMessage">
+							<a class="top_link" href="http://www.lightoj.com/contest_index.php">
+								Contest
+							</a>
+						</div>
+					</td>
+					<td width="10%">
+						<div class="topMenuMessage">
+							<a class="top_link" href="http://www.lightoj.com/article_showcategory.php">Training</a>
+						</div>
+					</td>
+					<td width="10%">
+						<div class="topMenuMessage">
+							<a class="top_link" href="http://www.lightoj.com/forum_index.php">Community</a>
+						</div>
+					</td>
+					<td width="10%">
+						<div class="topMenuMessage">
+							<a class="top_link" href="http://www.lightoj.com/credits_index.php">Credits</a>
+						</div>
+					</td>
+					<td width="60%" align="right">
+						<div class="topMenuMessage">
+							Welcome
+								<a class="top_link" href="http://www.lightoj.com/index_edituser.php">
+									AL-HELAL.								</a>
+							(<a class="top_link" href="http://www.lightoj.com/login_logout.php">
+								logout
+							</a>)&nbsp;
+						</div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div id="wrapper">
+			<div id="content" align="center">
+
+				<h1>Showing Code of Submission Id 119721</h1>
+
+				<table id="mytable3" cellspacing="0">
+					<tbody><tr>
+						<th class="top">Id</th>
+						<th class="top" width="60">Submission Time</th>
+						<th class="top">User</th>
+						<th class="top">Problem</th>
+						<th class="top">Source</th>
+						<th class="top">CPU</th>
+						<th class="top">Memory</th>
+						<th class="top">Verdict</th>
+					</tr>
+					<tr>
+						<th class="one">119721</th>
+						<td class="one">2012-08-04 02:00:27</td>
+						<td class="one">
+							<a class="user_link_one" href="http://www.lightoj.com/volume_userstat.php?user_id=3324">
+								Suman Bhadra							</a>
+						</td>
+						<td class="one">
+							<a class="user_link_one" href="http://www.lightoj.com/volume_showproblem.php?problem=1232">
+								1232 - Coin Change (II)							</a>
+						</td>
+						<td class="one">
+							C++						</td>
+						<td class="one">
+							0.265						</td>
+						<td class="one">
+							1548						</td>
+						<td class="one">
+							<div style="color: #0B610B;">
+								Accepted							</div>
+						</td>
+					</tr>
+				</tbody></table>
+				<br><br>
+				<table id="mytable3" cellspacing="0">
+					<tbody><tr><th class="top">Code</th>
+					</tr><tr>
+						<td class="showCode">
+							<script>
+			function toggle64376114() {
+				var x = '64376114a';
+				var y = '64376114b';
+				if( document.getElementById(x).style.display == 'block' ) {
+					document.getElementById(x).style.display = 'none';
+					document.getElementById(y).style.display = 'block';
+				}
+				else {
+					document.getElementById(x).style.display = 'block';
+					document.getElementById(y).style.display = 'none';
+				}
+			}
+			function openInCompiler64376114( language ) {
+				var getcode = document.getElementById('64376114c').value;
+
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "compiler_volume.php?problem=1232");
+
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "code");
+				hiddenField.setAttribute("value", getcode);
+
+				form.appendChild(hiddenField);
+
+
+				if( language == "cpp" ) language = "C++";
+				else if( language == "c" ) language = "C";
+				else if( language == "csharp" ) language = "C#";
+				else if( language == "java" ) language = "JAVA";
+				else if( language == "pascal" ) language = "PASCAL";
+				else if( language == "python" ) language = "PYTHON";
+
+				var hiddenField1 = document.createElement("input");
+				hiddenField1.setAttribute("type", "hidden");
+				hiddenField1.setAttribute("name", "language");
+				hiddenField1.setAttribute("value", language);
+
+				form.appendChild(hiddenField1);
+
+				document.body.appendChild(form);
+				form.setAttribute("target", "_blank");
+				form.submit();
+			}
+			</script><p></p><div style=" font: 10pt &#39;Trebuchet MS&#39;, Verdana; border: 1px solid #C1DAD7; border-radius: 5; padding: 2;">
+				Code:
+				<a class="user_link" style="cursor: pointer; color: #c75f3e;" onclick="toggle64376114(); ">(Toggle Highlighting)
+				</a>
+				<a class="user_link" style="cursor: pointer; color: #c75f3e;" onclick="openInCompiler64376114(&#39;cpp&#39;); ">(Open in Compiler)
+				</a>
+			</div><div id="64376114a" style="display: none;"><textarea id="64376114c" rows="47" readonly="yes" style="width: 100%; ;">#include&lt;cstdio&gt;
+#include&lt;iostream&gt;
+
+using namespace std;
+
+#define MOD 100000007
+
+int coins[105];
+int ways[10005];
+
+int main()
+{
+    int T,n,k,c=1;
+
+    scanf("%d",&amp;T);
+
+    while(T--)
+    {
+        scanf("%d%d",&amp;n,&amp;k);
+
+        for(int i=0;i&lt;n;i++)
+        {
+            scanf("%d",&amp;coins[i]);
+        }
+
+        for(int j=0;j&lt;=k;j++)
+        {
+            ways[j] = 0;
+        }
+
+        ways[0] = 1;
+
+        for(int i=0;i&lt;n;i++)
+        {
+            for(int j=coins[i];j&lt;=k;j++)
+            {
+                ways[j] += ways[ j - coins[i]];
+                ways[j]%=MOD;
+            }
+        }
+
+        printf("Case %d: %d\n",c++,ways[k]);
+    }
+
+return(0);
+}
+</textarea></div><div id="64376114b" style="display: block;"><div class="cpp" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #339933;">#include&lt;cstdio&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #339933;">#include&lt;iostream&gt;</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #000000; font-weight: bold;">using</span> <span style="color: #000000; font-weight: bold;">namespace</span> std<span style="color: #008080;">;</span></div></li>
+<li style="font-weight: bold; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #339933;">#define MOD 100000007</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #0000ff;">int</span> coins<span style="color: #009900;">[</span><span style="color: #686868;">105</span><span style="color: #009900;">]</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #0000ff;">int</span> ways<span style="color: #009900;">[</span><span style="color: #686868;">10005</span><span style="color: #009900;">]</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #0000ff;">int</span> main<span style="color: #009900;">(</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">{</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #0000ff;">int</span> T,n,k,c<span style="color: #000080;">=</span><span style="color: #686868;">1</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #d00000;">"%d"</span>,<span style="color: #000040;">&amp;</span>T<span style="color: #009900;">)</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">while</span><span style="color: #009900;">(</span>T<span style="color: #000040;">--</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">{</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #d00000;">"%d%d"</span>,<span style="color: #000040;">&amp;</span>n,<span style="color: #000040;">&amp;</span>k<span style="color: #009900;">)</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">for</span><span style="color: #009900;">(</span><span style="color: #0000ff;">int</span> i<span style="color: #000080;">=</span><span style="color: #686868;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>n<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">{</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">scanf</span><span style="color: #009900;">(</span><span style="color: #d00000;">"%d"</span>,<span style="color: #000040;">&amp;</span>coins<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">}</span></div></li>
+<li style="font-weight: bold; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">for</span><span style="color: #009900;">(</span><span style="color: #0000ff;">int</span> j<span style="color: #000080;">=</span><span style="color: #686868;">0</span><span style="color: #008080;">;</span>j<span style="color: #000080;">&lt;=</span>k<span style="color: #008080;">;</span>j<span style="color: #000040;">++</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">{</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ways<span style="color: #009900;">[</span>j<span style="color: #009900;">]</span> <span style="color: #000080;">=</span> <span style="color: #686868;">0</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">}</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; ways<span style="color: #009900;">[</span><span style="color: #686868;">0</span><span style="color: #009900;">]</span> <span style="color: #000080;">=</span> <span style="color: #686868;">1</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">for</span><span style="color: #009900;">(</span><span style="color: #0000ff;">int</span> i<span style="color: #000080;">=</span><span style="color: #686868;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>n<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">{</span></div></li>
+<li style="font-weight: bold; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">for</span><span style="color: #009900;">(</span><span style="color: #0000ff;">int</span> j<span style="color: #000080;">=</span>coins<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #008080;">;</span>j<span style="color: #000080;">&lt;=</span>k<span style="color: #008080;">;</span>j<span style="color: #000040;">++</span><span style="color: #009900;">)</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">{</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ways<span style="color: #009900;">[</span>j<span style="color: #009900;">]</span> <span style="color: #000040;">+</span><span style="color: #000080;">=</span> ways<span style="color: #009900;">[</span> j <span style="color: #000040;">-</span> coins<span style="color: #009900;">[</span>i<span style="color: #009900;">]</span><span style="color: #009900;">]</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ways<span style="color: #009900;">[</span>j<span style="color: #009900;">]</span><span style="color: #000040;">%</span><span style="color: #000080;">=</span>MOD<span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">}</span></div></li>
+<li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">}</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">printf</span><span style="color: #009900;">(</span><span style="color: #d00000;">"Case %d: %d<span style="color: #d00000; font-weight: bold;">\n</span>"</span>,c<span style="color: #000040;">++</span>,ways<span style="color: #009900;">[</span>k<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp; &nbsp; <span style="color: #009900;">}</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+<li style="font-weight: bold; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">return</span><span style="color: #009900;">(</span><span style="color: #686868;">0</span><span style="color: #009900;">)</span><span style="color: #008080;">;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #009900;">}</span></div></li>
+<li style="font-weight: normal; vertical-align:top; background: #F5FAFA "><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li>
+</ol></div></div><p></p>						</td>
+					</tr>
+				</tbody></table>
+				<br>
+
+			</div>
+		</div>
+<div id="navigation">
+	<div class="navcontainer">
+		<ul class="navlist">
+			<li class="menutitle">Volume</li>
+
+			<li>
+				<a href="http://www.lightoj.com/volume_index.php">
+					Volume Home
+				</a>
+			</li>
+			<li>
+				<a href="http://www.lightoj.com/volume_problemset.php">
+					Problem Set
+				</a>
+			</li>
+
+
+
+			<li>
+				<a href="http://www.lightoj.com/volume_problemcategory.php">
+					Problem Category
+				</a>
+			</li>
+			<li>
+				<a href="http://www.lightoj.com/volume_problemsetters.php">
+					Problem Setters
+				</a>
+			</li>
+			<li>
+				<a href="http://www.lightoj.com/volume_submit.php">
+					Submit Problem
+				</a>
+			</li>
+			<li id="active">
+				<a id="current" href="http://www.lightoj.com/volume_usersubmissions.php">
+					My Submissions
+				</a>
+			</li>
+			<li>
+				<a href="http://www.lightoj.com/volume_submissions.php">
+					Judge Status
+				</a>
+			</li>
+			<li>
+				<a href="javascript:handleSubMenu()">
+					Ranklist
+				</a>
+			</li>
+
+			<span id="subactive" style="display: none;">
+				<li>
+					<a class="submenu" href="http://www.lightoj.com/volume_ranklist.php">
+						Full Ranklist
+					</a>
+				</li>
+
+				<li>
+					<a class="submenu" href="http://www.lightoj.com/volume_country_ranklist.php">
+						Country Ranklist
+					</a>
+				</li>
+				<!--
+				<li >
+					<a class="submenu" href="asd">
+						University Ranklist
+					</a>
+				</li>
+				!-->
+				<li>
+					<a class="submenu" href="http://www.lightoj.com/volume_ranklist.php?type=friend">
+						Friends Ranklist
+					</a>
+				</li>
+			</span>
+
+			<li>
+				<a href="http://www.lightoj.com/volume_userstat.php">
+					User Statistics
+				</a>
+			</li>
+			<li>
+				<a href="http://www.lightoj.com/volume_compare_userstat.php">
+					Compare User Statistics
+				</a>
+			</li>
+			<li class="menubottom">&nbsp;</li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	function handleSubMenu( ) {
+		if( document.getElementById("subactive").style.display == "none" ) {
+			document.getElementById("subactive").style.display = "inline";
+		}
+		else {
+			document.getElementById("subactive").style.display = "none";
+		}
+	}
+</script>
+<div class="bottomDiv" align="center">
+	<table width="100%">
+		<tbody><tr>
+			<td width="50%">
+				<div class="midMessage">
+					Developed and Maintained by
+					<br><b>JANE ALAM JAN</b>
+				</div>
+
+			</td>
+			<td width="50%">
+				<div class="midMessage">
+					Copyright © 2012
+					<br><b>LightOJ, Jane Alam Jan</b>
+				</div>
+
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+	
+
+<div id="download_plus_animation"></div></body></html>

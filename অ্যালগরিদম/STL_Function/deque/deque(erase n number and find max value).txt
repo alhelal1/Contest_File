@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+char a[1003];
+deque<char> s;
+int main() {
+	int t,tt,n,m,u,v,i,j;
+	cin >>tt;
+	for(t=1;t<=tt;t++) {
+		cin >> n >> m >> a;
+		for(i=0;i<n;i++) {
+			while(!s.empty() && m) {
+				if(s.back()< a[i]) {
+					s.pop_back();
+					m--;
+				}
+				else
+					break;
+			}
+			s.push_back(a[i]);
+		}
+		while(m) {
+			s.pop_back();
+			m--;
+		}
+		cout<<"Case "<<t<<": ";
+		while(!s.empty()) {
+			printf("%c",s.front());
+			s.pop_front();
+		}
+		cout<<"\n";
+	}
+} 

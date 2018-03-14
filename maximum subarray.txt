@@ -1,0 +1,68 @@
+long mx[10001][10001],ar[10005],cu[10005];
+long mn[10001][10001],n,rt[10001][10001];
+long rec(int i ,int j)
+{
+    //cout<<i<<j<<endl;
+    if(i>j||i>=n) return 0;
+    if(rt[i][j]) return mx[i][j];
+    rt[i][j]=1;
+    if(i+1==j) return mx[i][j]=max(ar[i],max(ar[j],ar[i]+ar[j]));
+    long maxi=0,r1,r2,p;
+    for(int k=i;k<j;k++)
+    {
+        r1=rec(i,k);
+        r2=rec(k+1,j);
+        p=max(r1,r2);
+        if(p>maxi) maxi=p;
+    }
+    return mx[i][j]=max(maxi,cu[j+1]-cu[i]);
+}
+long rec2(int i ,int j)
+{
+    if(i>j||i>=n) return 1000000005;
+    if(rt[i][j]) return mn[i][j];
+    rt[i][j]=1;
+    if(i+1==j) return mn[i][j]=min(ar[i],min(ar[j],ar[i]+ar[j]));
+    long mini=(1000000005),r1,r2,p;
+    for(int k=i;k<j;k++)
+    {
+        r1=rec2(i,k);
+        r2=rec2(k+1,j);
+        p=min(r1,r2);
+        if(p<mini) mini=p;
+    }
+    return mn[i][j]=min(mini,cu[j+1]-cu[i]);
+
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+long t,k;
+cin>>t;
+for(k=1;k<=t;k++)
+{
+   cin>>n;
+
+   rep(i,n) {
+       cin>>ar[i];
+    mx[i][i]=ar[i];
+    mn[i][i]=ar[i];
+   }
+   cu[0]=0;
+   repi(i,0,n-1)
+   cu[i+1]=cu[i]+ar[i];
+   mem(rt,0);
+   rec(0,n-1);
+   mem(rt,0);
+   rec2(0,n-1);
+   long res=abs(mx[0][1]-mn[1][n-1]);
+   rep(i,n-1)
+   {
+       cmax(res,abs(mx[0][i]-mn[i+1][n-1]));
+       cmax(res,abs(mn[0][i]-mx[i+1][n-1]));
+   }
+   cout<<res<<endl;
+}
+    // file or not???
+return 0;
+}

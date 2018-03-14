@@ -1,0 +1,67 @@
+/**Bismillahir Rahmanir Rahim**/
+#include <set>
+#include <map>
+#include <cmath>
+#include <ctime>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <string>
+#include <cctype>
+#include <cstdio>
+#include <iomanip>
+#include <sstream>
+#include <cstdlib>
+#include <cassert>
+#include <climits>
+#include <complex>
+#include <numeric>
+#include <valarray>
+#include <iostream>
+#include <memory.h>
+#include <algorithm>
+using namespace std;
+#define MX 100005
+int tree[3*MX],ar[MX];
+void make_tree(int l,int r,int node)
+{
+    if(l==r)
+           {
+              tree[node]=ar[l]; 
+              return;
+           }
+        int mid=(l+r)/2;
+        int left=2*node;
+        int right=left+1;
+        make_tree(l,mid,left);
+        make_tree(mid+1,r,right);
+        tree[node]=tree[left]+tree[right];
+}
+void update(int l,int r,int i,int value,int node)
+{
+    if(i<l||i>r) return;
+    if(l==r&&l==i) {
+           tree[node]=value;
+           return;
+    }
+    int mid=(l+r)/2;
+    int left=2*node;
+    int right=left+1;
+    update(l,mid,i,value,left);
+    update(mid+1,r,i,value,right);
+}
+long csum(int l,int r,int i,int j,int node)
+{
+    if(i<=l&&j>=r) return tree[node];
+    if(i>r||j<l) return 0;
+    int mid=(l+r)/2;
+    int left=2*node;
+    int right=left+1;
+    long s1=csum(l,mid,i,j,left);
+    long s2=csum(mid+1,r,i,j,right);
+    return s1+s2;
+}
+int main()
+{
+    return 0;
+}

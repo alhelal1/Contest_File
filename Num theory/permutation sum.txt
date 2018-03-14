@@ -1,0 +1,36 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+using namespace std;
+#define foru(i, a, b) for (int i=a; i<=b; i++)
+#define ford(i, a, b) for (int i=a; i>=b; i--)
+#define N 13
+#define M 11000
+#define ll long long
+
+ll a[N], dx[N], fac[N];
+int n;
+int main(){
+    //freopen("G.txt", "r", stdin);
+    fac[0] = 1;
+    foru(i, 1, 12)
+        dx[i] = dx[i-1]*10 + 1, fac[i] = fac[i-1] * i;
+
+    while (scanf("%d", &n)!= EOF && n){
+        ll ans = 0, sum = 0;
+        memset(a, 0, sizeof(a));
+        foru(i, 1, n){
+            int x; cin >>x;
+            a[x] ++;
+            sum += x;
+        }
+        ans = fac[n - 1] * sum;
+        for (int i = 0; i < 10; ++i)
+            ans /= fac[a[i]];
+        printf("%lld\n", ans * dx[n]);
+    }
+
+    return 0;
+}

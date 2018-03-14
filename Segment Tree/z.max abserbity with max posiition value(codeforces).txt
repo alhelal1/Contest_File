@@ -1,0 +1,121 @@
+ll ar[2000005],tree[4000005];
+
+
+ll ar1[1000005];
+
+
+ll ar2[1000005][2];
+ll j=1;
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+//ll ar2[100005];
+
+
+void maketree(long node,long b,long e)
+{
+    if(b==e)
+    {
+        tree[node]=b;
+        return;
+    }
+
+    long left=node*2;
+    long right=node*2+1;
+    long mid=(b+e)/2;
+    maketree(left,b,mid);
+    maketree(right,mid+1,e);
+    tree[node]=(ar2[tree[left]][0]>=ar2[tree[right]][0])?tree[left]:tree[right];
+}
+
+
+
+long query(long node,long b,long e,long i,long j)
+{
+   // if(i>e||j<b)
+    //return 0;
+
+    if(b==i &&e==j)
+    return(tree[node]);
+
+    long left=node*2;
+    long right=node*2+1;
+    long mid=(b+e)/2;
+
+    if(j<=mid)
+    {
+        return query(left,b,mid,i,j);
+    }
+
+    else if(i>mid)
+    {
+        return query(right,mid+1,e,i,j);
+    }
+
+    else
+    {
+
+
+    long p=query(left,b,mid,i,mid);
+    long q=query(right,mid+1,e,mid+1,j);
+    return (ar2[p][0]>=ar2[q][0])?p:q;
+
+    }
+}
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+   // cin.tie(false);
+    cin>>n;
+    cin>>m;
+    repp(i,n)
+    {
+        cin>>ar[i];
+        r+=ar[i];
+        ar1[i]=r;
+    }
+
+    repp(i,n)
+    {
+        if(i+m-1>n)break;
+
+        ll aa=ar1[i+m-1]-ar1[i-1];
+
+       ar2[j][0]=aa;
+       ar2[j][1]=i;
+
+       //d2(ar2[j][0],ar2[j][1]);
+       j++;
+    }
+
+    maketree(1,1,j-1);
+
+
+    ll fst=0,scnd=0,ans=0;
+
+    for(int i=1;i<j;i++)
+    {
+        if(i+m>=j)   break;
+
+        ll aa=ar2[i][0];
+
+        //d2(i+m,j-1);
+
+        ll bb=query(1,1,j-1,i+m,j-1);
+
+        if(aa+ar2[bb][0]>ans)
+        {
+            fst=i,scnd=bb;
+
+            ans=aa+ar2[bb][0];
+        }
+
+    }
+    cout<<fst<<" "<<scnd;
+
+
+
+
+
+   return 0;
+
+}

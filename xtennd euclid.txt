@@ -1,0 +1,18 @@
+int euclidd,euclidx,euclidy;
+void extendedeuclid(int a,int b)
+{
+	if(b==0)
+	{
+		euclidd=a;
+		euclidx=1;
+		euclidy=0;
+		return ;
+	}
+	extendedeuclid(b,a%b);
+	int d1,x1,y1;
+	d1=euclidd;
+	x1=euclidx;
+	y1=euclidy;
+	euclidx=y1;
+	euclidy=x1-((a/b)*y1);
+}

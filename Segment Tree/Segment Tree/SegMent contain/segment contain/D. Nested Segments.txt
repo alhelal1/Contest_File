@@ -1,0 +1,79 @@
+LL ar[N],br[N];LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0;
+string  s;
+LL T[4*N];
+void up(LL idx,LL val)
+{
+   while(idx<=2*n)
+    {
+        T[idx]+=val;
+        idx+=idx&-idx;
+    }
+    return ;
+}
+
+
+LL read(LL idx)
+{
+    LL tot=0;
+   while(idx>0)
+   {
+        tot+=T[idx];
+        idx-=idx&-idx;
+
+   }
+    return tot;
+}
+
+
+
+
+int main()
+{
+  // fastinput;
+  cin>>n;
+  LL j=1;
+  rep(i,n)
+  {
+      cin>>arr[i].x>>arr[i].y;
+      arr[i].z=i;
+
+      ar[j++]=arr[i].x;
+      ar[j++]=arr[i].y;
+  }
+
+  sort(ar+1,ar+j+1);
+
+
+  rep(i,n)
+  {
+      arr[i].x=lower_bound(ar+1,ar+j+1,arr[i].x)-ar;
+      arr[i].y=lower_bound(ar+1,ar+j+1,arr[i].y)-ar;
+  }
+
+
+  sort(arr,arr+n,com);
+
+  rep(i,n)
+  {
+      up(arr[i].y,1LL);
+
+  }
+
+  rep(i,n)
+  {
+      up(arr[i].y,-1);
+      br[arr[i].z]=read(arr[i].y);
+  }
+
+  rep(i,n)
+  {
+      P(br[i]);
+  }
+
+
+
+
+
+   return 0;
+
+}

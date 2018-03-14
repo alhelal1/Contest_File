@@ -1,0 +1,50 @@
+#include<stdio.h>
+struct Mat
+{
+    int x1,x2;
+    int y1,y2;
+    Mat(){x1=1,x2=1,y1=1,y2=0;}
+};
+int power_int(int n,int p)
+{
+    if(p==1)return n;
+    int x=power_int(n,p/2);
+    x=x*x;
+    if(p&1)x=(x*n);
+    return x;
+}
+Mat multi(Mat a, Mat b,int mod)
+{
+    Mat temp;
+    temp.x1=(a.x1*b.x1+a.x2*b.y1)%mod;
+    temp.x2=(a.x1*b.x2+a.x2*b.y2)%mod;
+    temp.y1=(a.y1*b.x1+a.y2*b.y1)%mod;
+    temp.y2=(a.y1*b.x2+a.y2*b.y2)%mod;
+    return temp;
+}
+Mat power(int p,Mat a,int m)
+{
+    if(p==1)return a;
+    Mat x=power(p/2,a,m);
+    x=multi(x,x,m);
+    if(p&1)x=multi(x,a,m);
+    return x;
+}
+int main()
+{
+    int test,t;
+    scanf("%d",&test,&t);
+    for(t=1;t<=test;t++)
+    {
+        int a,b,n,m;
+        scanf("%d %d %d %d",&a,&b,&n,&m);
+        int M=power_int(10,m);
+        Mat A;
+        A=power(n-1,A,M);
+        int ans=(A.x1*b+A.x2*a)%M;
+        printf("Case %d: %d\n",t,ans);
+    }
+    return 0;
+}
+ 
+ 

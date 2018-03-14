@@ -1,0 +1,29 @@
+int main()
+{
+
+    //freopen("Input.txt","r",stdin);
+	//freopen("Output.txt","w",stdout);
+	long n;
+	while(cin>>n)
+    {
+        long j,k,cnt=0;
+        long p,p1,x[2002]={0},y[2002]={0};
+        rep(i,n)
+        cin>>x[i]>>y[i];
+        rep(i,n-1)
+        {
+            for(j=i+1;j<=n-2;j++)
+            {
+                for(k=j+1;k<=n-1;k++)
+                {
+                    p=(x[i]*y[j]-x[j]*y[i])+(x[i]*y[k]-x[k]*y[i])+(x[k]*y[j]-x[j]*y[k]);
+                    if(p!=0)cnt++;
+                }
+            }
+        }
+        cout<<cnt<<endl;
+    }
+return 0;
+}
+
+

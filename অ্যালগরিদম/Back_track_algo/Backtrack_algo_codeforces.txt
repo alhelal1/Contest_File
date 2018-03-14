@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef int  LL;
+#define rep(i,n)  for(int i=0;i<n;i++)
+//const int N=1e7+5;
+//LL ar[N],vis[N],cnt=0,n,m;
+//LL N,K,
+LL N,K,D;
+vector<LL>vv;
+vector< vector <LL> >v;
+LL r=false;
+LL rec(LL  pos)
+{
+    if(pos==D)
+    {
+        v.push_back(vv);
+        if(v.size()==N)
+        {
+            r=1;
+        }
+
+        return 0;
+    }
+
+    for(int i=1;i<=K;i++)
+    {
+        vv.push_back(i);
+        if(r) return 0;
+        rec(pos+1);
+        if(r)return 0;
+
+        vv.pop_back();
+    }
+}
+
+
+int main()
+{
+	// ios_base::sync_with_stdio(0);
+	// cin.tie(NULL); cout.tie(NULL);
+	// freopen("in.txt","r",stdin);
+
+	cin>>N>>K>>D;
+	rec(0);
+
+	if(v.size()==N)
+    {
+        rep(i,D)
+        {
+            rep(j,N)
+            {
+                cout<<v[j][i]<<" ";
+            }
+            cout<<endl;
+        }
+
+
+    }
+    else cout<<-1;
+
+
+
+	return 0;
+}

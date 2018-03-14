@@ -1,0 +1,53 @@
+void up(ll idx,ll val)
+{
+    while(idx<=n)
+    {
+        ar[idx]=max(ar[idx],val);
+
+        idx+=(idx&-idx);
+    }
+}
+ll read(ll idx)
+{
+
+
+    ll rr=0;
+
+    while(idx>0)
+    {
+
+          rr=max(rr,ar[idx]);
+
+
+          idx-=(idx & -idx);
+    }
+
+    return rr;
+}
+
+int main()
+{
+
+   // Fast;
+
+
+   cin>>n;
+   rep(i,n)
+   {
+       cin>>a;
+       arr[i].x=a;
+       arr[i].y=i+1;
+   }
+
+   sort(arr,arr+n,com);
+
+
+   rep(i,n)
+   {
+       ll aa=read(arr[i].y)+1;
+
+       r=max(r,aa);
+       up(arr[i].y,aa);
+   }
+
+   cout<<r;

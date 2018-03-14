@@ -1,0 +1,51 @@
+LL ar[N],br[N];LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0;string  s;
+int main()
+{
+  // fastinput;
+
+
+
+     cin>>s;
+     n=len(s);
+     mem(ar,-1);
+
+
+     for(int i=n-1;i>=0;i--)
+     {
+         ar[s[i]-'a']=i;
+
+         VI v;
+
+         rep(i,30)
+         {
+             if(ar[i]!=-1)v.pb(ar[i]);
+         }
+
+         v.pb((n));
+         sort(all(v));
+
+         rep(ii,len(v)-1)
+         {
+
+             br[ii]+=(v[ii+1]-v[ii]);
+
+         }
+     }
+
+
+     rep(i,30)if(ar[i]>=0)c++;
+
+     P(c);
+
+     rep(i,c)
+     {
+         cout<<br[i]<<endl;
+     }
+
+
+
+
+
+   return 0;
+
+}

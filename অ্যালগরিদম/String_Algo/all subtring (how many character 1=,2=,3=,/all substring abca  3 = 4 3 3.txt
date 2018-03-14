@@ -1,0 +1,40 @@
+int main()
+{
+    //Fast;
+
+    cin>>s;
+    n=len(s);
+
+    mem(ar,-1);
+
+    for( int ii=n-1;ii>=0;ii--)
+    {
+        ar[s[ii]-'a']=ii;
+        VI v;
+
+        rep(i,27)  if (  ar[i] >=0)  v.pb(ar[i]);
+        v.pb(n);
+
+
+        sort(all(v));
+
+
+        m=len(v);
+        m--;
+
+
+        rep(i,m)
+        {
+            br[i]+=(v[i+1]-v[i]);
+        }
+
+    }
+
+    rep(i,30)  if(ar[i]>=0)  c++;
+
+    cout<<c<<endl;
+    rep(i,c)  cout<<br[i]<<"\n";
+
+   return 0;
+
+}

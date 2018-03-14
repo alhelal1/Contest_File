@@ -1,0 +1,183 @@
+#include <stdio.h>
+
+#include <string.h>
+
+#include <math.h>
+
+#include <float.h>
+
+#include <ctype.h>
+
+#include <assert.h>
+
+#include <stdlib.h>
+
+#include <time.h>
+
+#include <vector>
+
+#include <map>
+
+#include <string>
+
+#include <sstream>
+
+#include <set>
+
+#include <queue>
+
+#include <list>
+
+#include <algorithm>
+
+#include <iostream>
+typedef long long ll;
+
+using namespace std;
+using namespace std;
+
+typedef long long ll;
+
+
+ll segmentree[101000];
+
+ll MaxVal=0;
+
+void add(ll idx,ll val)
+
+{
+   
+ while(idx<MaxVal)
+    
+{
+        
+segmentree[idx]+=val;
+     
+   idx+=(idx&-idx);
+   
+ }
+}
+ll query(ll idx)
+{
+   
+ ll sum=0;
+    
+while(idx>0)
+  
+  {
+    
+    sum+=segmentree[idx];
+    
+    idx-=(idx&-idx);
+  
+  }
+    return sum;
+
+}
+
+
+int main()
+
+{
+   
+ int t,C=1,q;
+    
+ll i,n,a,u,v,k,p;
+   
+ char str[10];
+  
+  scanf("%d",&t);
+   
+ assert(t>=1&&t<=10);
+    
+while(t--)
+  
+  {
+       
+ scanf("%lld %d",&n,&q);
+     
+   memset(segmentree,0,sizeof(segmentree));
+   
+     assert(n>=1&&n<=100000);
+       
+ assert(q>=1&&q<=100000);
+      
+  MaxVal=n+20;
+      
+  printf("Case %d:\n",C++);
+     
+   for(i=1;i<=n;i++)
+  
+      {
+           
+ scanf("%lld",&a);
+    
+        assert(a>=0&&a<=100000000000);
+   
+         add(i,a);
+          
+  add(i+1,-a);
+      
+  }
+     
+   while(q--)
+ 
+       {
+           
+ scanf("%s",str);
+       
+     if(str[0]=='w')
+         
+   {
+          
+      scanf("%lld %lld %lld",&u,&v,&k);
+    
+            assert(u>=1&&u<=n);
+            
+    assert(v>=1&&v<=n);
+              
+  assert(u<=v);
+              
+  assert(k>=0&&k<=100000000000);
+       
+         add(u,k);
+               
+ add(v+1,-k);
+          
+  }
+         
+   else if(str[0]=='m')
+          
+  {
+                scanf("%lld",&p);
+
+   
+             assert(p>=1&&p<=n);
+       
+         a=query(p);
+               
+ add(p,-a);
+               
+ add(p+1,a);
+       
+     }
+           
+ else
+        
+    {
+        
+        scanf("%lld",&p);
+   
+             assert(p>=1&&p<=n);
+             
+   printf("%lld\n",query(p));
+         
+   }
+      
+  }
+   
+ }
+  
+  return 0;
+}
+

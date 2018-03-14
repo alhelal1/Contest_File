@@ -1,0 +1,5 @@
+Let's define the Möbius function µ(X) for the integer X as
+
+µ(X) is zero if X is not a square-free integer.
+µ(X) is 1 if X is a square-free integer and the number of X's prime divisors is even.
+µ(X) is -1 if X is a square-free integer and the number of X's prime divisors is odd.

@@ -1,0 +1,61 @@
+int ar[10004],vis[10004];
+int dp[10004];
+//int a=0,b=0,c=0,r=0,rr=0,res=0,n,q,m,t=0,ks=0;
+int n,m,t;
+vector<int>v[10004];
+void Pp()
+{
+
+    int aa=100;
+
+    for(int i=4;i<=10000;i+=2)vis[i]=1;
+    for(int i=3;i<=aa;i+=2)
+    {
+        for(int j=i*i;j<=10000;j+=(2*i))
+        {
+            vis[j]=1;
+        }
+    }
+
+    int j=0;
+
+    ar[j++]=2;
+
+    for(int i=3;i<=10000;i+=2)
+    {
+        if(vis[i]==0)
+        {
+            ar[j++]=i;
+        }
+    }
+
+
+    for(int i=1;i<=10000;i++)
+    {
+        int bb=i;
+
+        for(int k=0;ar[k]*ar[k]<=i and k<j;k++)
+        {
+
+            if(bb%ar[k]==0)
+            {
+
+                v[i].PB(ar[k]);
+
+                while(bb%ar[k]==0)
+                {
+
+                    bb/=ar[k];
+
+                }
+
+            }
+
+            if(vis[bb]==0 or bb==1)break;
+
+        }
+
+        if(bb>1 and vis[bb]==0 and bb!=i)v[i].PB(bb);
+
+    }
+}

@@ -1,0 +1,84 @@
+multiset<LL>A,B,H,V;
+
+multiset<LL>::iterator x,y,z;
+
+int main()
+{
+  // fastinput;
+
+    //cin>>n;cin>>a>>b;
+
+    cin>>b>>a>>n;
+    H.insert(0);
+    H.insert(a);
+    V.insert(0);
+    V.insert(b);
+
+
+    A.insert(a);  B.insert(b);
+
+     rep(i,n)
+     {
+         char ch;
+
+         //getchar();
+         cin>>s;
+         ch=s[0];
+         if(ch=='H')
+         {
+             cin>>a;
+
+             x=H.lower_bound(a);
+             y=x;
+             x--;
+             LL aa=*y-*x;
+
+             z=A.find(aa);
+
+             //D(*z);
+             A.erase(z);
+
+             LL left=a-*x;
+             LL right=*y-a;
+
+            // DD(left,right);
+             A.insert(left);
+             A.insert(right);
+
+             H.insert(a);
+
+
+         }
+
+         else
+         {
+              cin>>a;
+
+             x=V.lower_bound(a);
+             y=x;
+             x--;
+             LL aa=*y-*x;
+             z=B.find(aa);
+             B.erase(z);
+
+             LL left=a-*x;
+             LL right=*y-a;
+
+             //DD(left,right);
+             B.insert(left);
+             B.insert(right);
+             V.insert(a);
+         }
+         LL cc=*A.rbegin();
+         LL dd=*B.rbegin();
+         cout<<cc*dd<<"\n";
+     }
+
+
+
+
+
+
+   return 0;
+
+}

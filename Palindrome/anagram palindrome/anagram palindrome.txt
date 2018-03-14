@@ -1,0 +1,56 @@
+const  long long N=5e5+5,MOD=1e9+7;
+LL ar[N],br[N];
+LL a=0,b=0,c=0,r=0,rr=0,f=0,n,m,t=0,ks=0;
+string  s,ss;
+
+int main()
+{
+
+    cin>>t;
+
+    br[0]=1,br[1]=1,br[2]=2;
+
+    for(int  i=3;i<=10000;i++ )
+    {
+        br[i]=(br[i-1]*i)%MOD;
+    }
+
+   //cout<<(br[6]);
+    while(t--)
+    {
+        r=0;
+        c=0;
+
+        rep(i,27)  ar[i]=0;
+        cin>>s;  reps(i,s)ar[s[i]-'a']++;
+
+        rep(i,27)  if(ar[i]%2==1)
+        {
+            r+=(ar[i]/2);
+            c++;
+        }
+        else  r+=ar[i]/2;
+
+        //cout<<r<<endl;
+
+        case(ks);
+
+        if(c>1) puts("0");
+        else
+        {
+            rr=(br[r]);
+            rep(i,27)
+            {
+
+                if(ar[i]<=1)  continue;
+                rr=rr*big_mod(br[ar[i]/2LL],MOD-2,MOD);
+                 rr%=MOD;
+            }
+        }
+        if(c<=1)  cout<<rr<<endl;
+
+    }
+
+   return 0;
+
+}

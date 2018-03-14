@@ -1,0 +1,98 @@
+#define MX   500007
+#define inf  1000000000
+#define MOD  1000000007
+
+int nxt[MX] , prv[MX];
+int ar[MX],aa[MX];
+
+
+struct data
+{
+    int id,mxval;
+    data(){}
+} tree[4*MX];
+
+void build(int idx,int s,int e)
+{
+    if(s==e)
+    {
+        tree[idx].mxval = ar[s];
+        tree[idx].id = s;
+        return;
+    }
+
+    int mid = (s+e)>>1 , l = (idx<<1)  , r = l|1;
+
+    build(l,s,mid);
+    build(r,mid+1,e);
+
+    if( tree[l].mxval<tree[r].mxval ) tree[idx] = tree[l];
+    else tree[idx] = tree[r];
+}
+
+
+void update(int idx,int s,int e,int pos,int val)
+{
+    if(s==e)
+    {
+        tree[idx].mxval = val;
+        return;
+    }
+
+    int mid = (s+e)>>1 , l = (idx<<1)  , r = l|1;
+
+    if(pos<=mid) update(l,s,mid,pos,val);
+    else update(r,mid+1,e,pos,val);
+
+    if( tree[l].mxval<tree[r].mxval ) tree[idx] = tree[l];
+    else tree[idx] = tree[r];
+}
+
+int main() {
+
+    _cin;
+    int tc,cas=1;
+    int a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z;
+
+    cin>>n;
+
+    FF(i,1,n) cin>>ar[i];
+
+    FF(i,1,n)
+    {
+        nxt[i] = i+1;
+        prv[i] = i-1;
+    }
+
+
+//    FF(i,1,n)    aa[i] = min( ar[nxt[i]],ar[prv[i]] );
+
+    build(1,1,n);
+
+//    update(1,1,n,1,inf);
+//    update(1,1,n,n,inf);
+
+    c = n-2;
+    LL ans = 0;
+
+    //while( c>0 )
+    FF(i,1,c)
+    {
+          data tt = tree[1];
+
+          x = prv[ tt.id ];
+          y = nxt[ tt.id ];
+
+          if(min(ar[x],ar[y])==0) ans+=ar[tt.id];
+          else ans+=min( ar[x],ar[y] );
+
+          nxt[x] = y;
+          prv[y] = x;
+
+          update(1,1,n,tt.id,inf);
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}

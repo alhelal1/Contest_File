@@ -1,0 +1,53 @@
+#include <iostream>  
+#include <cstdio>  
+#include <cstring>  
+using namespace std;  
+const int MAXN = 1e3+5;  
+int sg[MAXN];  
+int hash[MAXN];  
+void get_sg()  
+{  
+    memset(sg, 0, sizeof(sg));  
+    for(int i=1; i<MAXN; i++)  
+    {  
+        memset(hash, 0, sizeof(hash));  
+        for(int j=1; j<=i/2; j++)  
+        {  
+            hash[sg[i-j]] = 1;  
+        }  
+        int j;  
+        for(j=0; ;j++)  
+        {  
+            if(!hash[j])  
+                break;  
+        }  
+        sg[i] = j;  
+    }  
+    for(int i=1; i<=30; i++)  
+        cout<<sg[i]<<" ";  
+}  
+  
+  
+int main()  
+{  
+    ///get_sg();  
+    int T;  
+    scanf("%d",&T);  
+    for(int cas=1; cas<=T; cas++)  
+    {  
+        int m, x, ans=0;  
+        scanf("%d",&m);  
+        for(int i=0; i<m; i++)  
+        {  
+            scanf("%d",&x);  
+            while(x&1)  
+                x>>=1;  
+            ans ^= (x>>1);  
+        }  
+        if(!ans)  
+            printf("Case %d: Bob\n",cas);  
+        else  
+            printf("Case %d: Alice\n",cas);  
+    }  
+    return 0;  
+}  

@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define pii pair<int,int>
+#define piii pair<int,pair<int,int> >
+#define ff first
+#define ss second
+#define mp make_pair
+#define pb push_back
+#define SIZE 10000002
+#define MOD (ll)1000000007
+using namespace std;
+
+inline ll getnum()
+{
+    char c = getchar();
+    ll num,sign=1;
+    for(;c<'0'||c>'9';c=getchar())if(c=='-')sign=-1;
+    for(num=0;c>='0'&&c<='9';)
+    {
+        c-='0';
+        num = num*10+c;
+        c=getchar();
+    }
+    return num*sign;
+}
+
+struct mat
+{
+    ll M[104][104];
+}base;
+
+ll A[104],n,L[104],R[104];
+
+mat mul(mat x,mat y)
+{
+    mat t;
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            ll sum=0;
+            for(int k=1;k<=n;k++)sum=(sum+x.M[i][k]*y.M[k][j])%MOD;
+            t.M[i][j]=sum;
+        }
+    }
+    return t;
+}
+
+mat matmul(ll k)
+{
+    if(k==1)return base;
+
+    mat t=matmul(k/2);
+    mat x=mul(t,t);
+    if(k%2)x=mul(x,base);
+
+    return x;
+}
+
+int main()
+{
+    n=getnum();
+    ll k=getnum();
+
+    if(k==1){cout<<n;return 0;}
+
+    for(int i=1;i<=n;i++)A[i]=getnum();
+
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            ll x=A[i]^A[j];
+            x=__builtin_popcountll(x);
+            if(x%3==0)base.M[i][j]=1;
+        }
+    }
+
+    mat x=matmul(k-1);
+
+    ll ans=0;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)ans=(ans+x.M[i][j])%MOD;
+    }
+
+    cout<<ans;
+}

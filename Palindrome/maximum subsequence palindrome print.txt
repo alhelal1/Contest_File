@@ -1,0 +1,135 @@
+#include <cstring>
+#include <map>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <complex>
+#include <list>
+#include <climits>
+#include <cctype>
+#include <bitset>
+
+using namespace std;
+
+#define pb push_back
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+#define sz(v) ((int)v.size())
+#define rep(i,m) for(int i=0;i<(int)(m);i++)
+#define rep2(i,n,m) for(int i=n;i<(int)(m);i++)
+#define For(it,c) for(__typeof(c.begin()) it=c.begin();it!=c.end();++it)
+#define mem(a,b) memset(a,b,sizeof(a))
+#define mp make_pair
+#define dot(a,b) ((conj(a)*(b)).X)
+#define X real()
+#define Y imag()
+#define length(V) (hypot((V).X,(V).Y))
+#define vect(a,b) ((b)-(a))
+#define cross(a,b) ((conj(a)*(b)).imag())
+#define normalize(v) ((v)/length(v))
+#define rotate(p,about,theta) ((p-about)*exp(point(0,theta))+about)
+#define pointEqu(a,b) (comp(a.X,b.X)==0 && comp(a.Y,b.Y)==0)
+
+typedef stringstream ss;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef vector<pii> vpii;
+typedef vector<string> vs;
+typedef vector<int> vi;
+typedef vector<double> vd;
+typedef vector<vector<int> > vii;
+typedef long double ld;
+typedef complex<double> point;
+typedef pair<point, point> segment;
+typedef pair<double, point> circle;
+typedef vector<point> polygon;
+
+const int oo = (int) 1e9;
+const double PI = 2 * acos(0.0);
+const double eps = 1e-9;
+
+string s;
+int n, cnt[26];
+
+int dp[2666][2666];
+int calc(int st, int en) {
+    if (st > en)
+        return 0;
+    if (st == en)
+        return 1;
+    int& ret = dp[st][en];
+    if (ret != -1)
+        return ret;
+    ret = 0;
+    if (s[st] == s[en])
+        ret = calc(st + 1, en - 1) + 2;
+    ret = max(ret, calc(st + 1, en));
+    ret = max(ret, calc(st, en - 1));
+    return ret;
+}
+
+string s1, s2;
+
+void print(int st, int en, int cc) {
+    if (st > en || cc == 100)
+        return;
+    if (st == en)
+    {
+        s2 += s[st];
+        return;
+    }
+    int r1 = -oo;
+    if (s[st] == s[en])
+        r1 = calc(st + 1, en - 1) + 2;
+    int r2 = calc(st + 1, en);
+    int r3 = calc(st, en - 1);
+    if (r1 >= r2 && r1 >= r3)
+    {
+        s1 += s[st];
+        print(st + 1, en - 1, cc + 2);
+    } 
+   else if (r2 >= r1 && r2 >= r3)
+    {
+        print(st + 1, en, cc);
+    } 
+   else 
+    {
+        print(st, en - 1, cc);
+    }
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("a.txt", "rt", stdin);
+    //freopen("b.txt", "wt", stdout);
+#endif
+    while (cin >> s) 
+      {
+        n = sz(s);
+        rep(i,n)
+        {
+            cnt[s[i] - 'a']++;
+            if (cnt[s[i] - 'a'] == 100) {
+                cout << string(100, s[i]) << endl;
+                return 0 ;
+            }
+        }
+        mem(dp, -1);
+        s1 = s2 = "";
+        print(0, n - 1, 0);
+        cout << s1 << s2;
+        reverse(all(s1));
+        cout << s1 << endl;
+    }
+    return 0;
+}

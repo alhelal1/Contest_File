@@ -1,0 +1,99 @@
+#include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include <complex>
+#include <cstring>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <cstdio>
+#include <cmath>
+#include <map>
+#include <set>
+using namespace std;
+//#pragma comment(linker,"/STACK:102400000,102400000")
+
+int n, turns;
+int nextNode[200001][26];
+int z = 0;
+
+void add(string s)
+{
+	int node = 1;
+	for(int i = 0; i < s.length(); i++)
+	{
+		int which = nextNode[node][s[i]-'a'];
+		if(which == 0)
+		{
+			z ++;
+			nextNode[node][s[i]-'a'] = z;
+			which = z;
+		}
+		node = which;
+	}
+}
+
+int calc(int cur, int ifNone)
+{
+	int ret = 0;
+	int haveSon = false;
+	for(int i = 0; i < 26; i++)
+		if(nextNode[cur][i] != 0)
+		{
+			haveSon = true;
+			if(calc(nextNode[cur][i], ifNone) == 0)
+				ret = 1;
+		}
+	if(haveSon == false)
+		ret = ifNone;
+	return ret;
+}
+
+int MAIN()
+{
+	memset(nextNode, 0, sizeof(nextNode));
+	cin >> n >> turns;
+	z ++;
+
+	for(int i = 1; i <= n; i++)
+	{
+		string s;
+		cin >> s;
+		add(s);
+	}
+
+	int calcWin = calc(1, 0), calcLose = calc(1, 1);
+	//cout << calcWin << " " << calcLose << endl;
+	if(calcWin && calcLose)
+	{
+		cout << "First" << endl;
+	}
+	else if(calcWin == true && calcLose == false)
+	{
+		if(turns % 2 == 1)
+			cout << "First" << endl;
+		else
+			cout << "Second" << endl;
+	}
+	else if(calcWin == false && calcLose == true)
+	{
+		cout << "Second" << endl;
+	}
+	else
+	{
+		cout << "Second" << endl;
+	}
+	
+	return 0;
+}
+
+int main()
+{
+	#ifdef LOCAL_TEST
+		freopen("in.txt", "r", stdin);
+		freopen("out.txt", "w", stdout);
+	#endif
+	ios :: sync_with_stdio(false);
+	cout << fixed << setprecision(16);
+	return MAIN();
+}

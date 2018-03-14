@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+#define cs const
+#define sf scanf
+#define pf printf
+#define rt return
+typedef long long LL;
+cs int N = 1e6+3;
+int phi[N];
+LL total[N];
+
+void deal()
+{
+	int i, j, k;
+	for(i = 2; i < N; i++) phi[i] = i;
+	for(i = 2; i < N; i++) if(phi[i] == i)
+			for(j = i; j < N; j += i)
+				phi[j] -= phi[j]/i;
+	for(i = 2; i < N; i++)
+		total[i] = phi[i];
+	for(i = 2; i < 1001; i++)
+	{
+		total[i*i] += phi[i]*i;
+		for(j = i*i+i, k=i+1; j < N; j += i, k++)
+			total[j] += i*phi[k] + k*phi[i];
+	}
+	for(i = 1; i < N; i++)
+		total[i] += total[i-1];
+}
+
+int main()
+{
+	int n; deal();
+	while(sf("%d",&n), n)
+		pf("%lld\n", total[n]);
+	rt 0;
+}

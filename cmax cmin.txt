@@ -1,0 +1,3 @@
+template<class T> void cmin(T &a,T b){if(b<a) a=b;}
+
+template<class T> void cmax(T &a,T b){if(b>a) a=b;}

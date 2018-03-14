@@ -1,0 +1,34 @@
+int dfs(int u, int w) {
+    int ret = uni[u];
+    repe(v, adj[u]) {
+        if (v != w) {
+            int t = dfs(v, u);
+            ans += min(t, 2*k-t);
+            ret += t;
+        }
+    }
+    return ret;
+}
+
+int main () {
+    std::ios_base::sync_with_stdio(false);
+    cin >> n >> k;
+    adj.resize(n);
+    uni.resize(n);
+    fill(all(uni), 0);
+    ans = 0;
+    rep(i, 2*k) {
+        int x;
+        cin >> x;
+        uni[x-1] = 1;
+    }
+    rep(i, n-1) {
+        int u, v;
+        cin >> u >> v;
+        adj[u-1].push_back(v-1);
+        adj[v-1].push_back(u-1);
+    }
+    dfs(0, 0);
+    cout << ans;
+    return 0;
+}

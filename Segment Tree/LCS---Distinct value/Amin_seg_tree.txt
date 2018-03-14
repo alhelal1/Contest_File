@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define fi(i,a,b)   for(long long i=a;i<=b;i++)
+#define fr(i,a)     for(long long i=0;i<a;i++)
+#define fd(i,a,b)   for(long long i=b;i>=a;i--)
+#define clr(x)      memset(x,0,sizeof(x))
+#define cln(x)      memset(x,-1,sizeof(x))
+#define __          printf(" ")
+#define _           printf("\n")
+#define stree       long long lft=node<<1,rht=(node<<1)|1,mid=(s+e)>>1
+
+
+long long tree[300030];
+vector<long long>vec[1000100];
+long long a[100010],b[100010];
+
+long long E;
+long long qry(long long s,long long e,long long node){
+     if(e<=E) return tree[node];
+     if(s>E) return 0;
+     stree;
+     return max(qry(s,mid,lft),qry(mid+1,e,rht));
+}
+
+long long V;
+void update(long long s,long long e,long long node){
+    if(s==e) {
+        tree[node]=V;
+        return;
+    }
+    stree;
+    if(E<=mid) update(s,mid,lft);
+    else update(mid+1,e,rht);
+    tree[node]=max(tree[lft],tree[rht]);
+    return;
+}
+
+
+main(){
+    clr(tree);
+    long long n,m;
+    scanf("%lld %lld",&n,&m);
+    fi(i,1,n) scanf("%lld",a+i);
+    fi(i,1,m) scanf("%lld",b+i);
+    fd(i,1,n) vec[a[i]].push_back(i);
+    long long ans=0;
+    fi(i,1,m){
+       long long x=b[i];
+       if(!vec[x].empty()){
+          long long Size=vec[x].size();
+          fr(i,Size){
+             E=vec[x][i];
+             V=qry(0,n,1)+1;
+             update(0,n,1);
+          }
+       }
+    }
+    printf("%lld\n",tree[1]);
+    return 0;
+}

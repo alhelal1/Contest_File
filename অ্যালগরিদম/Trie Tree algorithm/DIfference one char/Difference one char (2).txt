@@ -1,0 +1,94 @@
+struct node
+{
+    int has;
+    int nxt[26];
+    node()
+    {
+        mem(nxt,-1);
+        has=0;
+    }
+};
+
+vector<node> v;
+string ss;
+int l;
+int dfs(int cur,int sp,int cnt)
+{
+    if(cnt>1) return 0;
+    if(sp==l)
+    {
+        if(cnt==1&&v[cur].has==1) return 1;
+        return 0;
+    }
+
+    int p=ss[sp]-'a';
+
+    //int cp=v[cur].nxt[p];
+    int ret=0;
+  //  if(cp==-1)
+  //  {
+       // if(cnt==1) return 0;
+        rep(j,3)
+         if(v[cur].nxt[j]!=-1)
+            {
+                ret|= dfs(v[cur].nxt[j],sp+1,cnt+(j!=p));
+            }
+   // }
+   // else
+   // {
+    //   ret|= dfs(cp,sp+1,cnt,v[cur].has);
+ //   }
+    return ret;
+}
+
+int main()
+{
+ios_base::sync_with_stdio(false);
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+/*long t,kase;
+cin>>t;
+for(kase=1;kase<=t;kase++)
+{
+    cout<<"Case "<<kase<<": ";
+
+}*/
+
+  v.pb(node());
+  string s;
+  int n,m,cur,ps;
+   cin>>n>>m;
+   rep(i,n)
+   {
+       cin>>s;
+       cur=0;
+       rep(j,len(s))
+       {
+           ps=v[cur].nxt[s[j]-'a'];
+         //  v[cur].has=1;
+           if(ps==-1)
+           {
+               v.pb(node());
+               ps=len(v)-1;
+               v[cur].nxt[s[j]-'a']=ps;
+           }
+           cur=ps;
+       }
+      v[cur].has=1;
+
+   }
+
+   rep(i,m)
+   {
+       cin>>ss;
+       l=len(ss);
+
+       if(dfs(0,0,0)) cout<<"YES\n";
+       else cout<<"NO\n";
+
+
+   }
+
+
+return 0;
+}

@@ -1,0 +1,43 @@
+
+
+    #include <bits/stdc++.h>
+    #define pb push_back
+    #define pp pop_back
+    #define mp make_pair
+    #define ld long double
+    #define f first
+    #define s second
+    #define ll long long
+    using namespace std;
+    const int N = 1e5 + 5;
+    const int len = 400;
+    const int mod = 1e9 + 7;
+    ll n;
+    int ans;
+    int bp(int a, ll n, int mod)
+    {
+      int ans = 1;
+      while(n)
+      {
+        if (n & 1) ans = 1ll * ans * a % mod;
+        a = 1ll * a * a % mod;
+        n >>= 1;
+      }
+      return ans;
+    }
+    int fast(ll n)
+    {
+      int ans;
+      ans = bp(2, n, mod - 1);
+      ans = bp(2, ans, mod);
+      ans -= 1;
+      if (ans < 0) ans += mod;
+      return ans;
+    }
+    int main()
+    {
+      cin >> n;
+      cout << fast(n) << endl;
+      return 0;
+    }
+

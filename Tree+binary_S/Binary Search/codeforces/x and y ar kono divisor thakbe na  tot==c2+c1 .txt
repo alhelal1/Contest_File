@@ -1,0 +1,29 @@
+LL ar[N],br[N];LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0;
+string  s;
+int main()
+{
+  // fastinput;
+
+  LL c1,c2,x,y;
+  cin>>c1>>c2>>x>>y;
+
+  LL lo=0LL,hi=1LL*1e19;
+  LL mn=1LL*1e18;
+  while(lo<=hi)
+  {
+      LL mid=(lo+hi)>>1;
+      LL f1=mid-mid/x;
+      LL f2=mid-mid/y;
+      LL tot=mid-mid/(lcm(x,y));
+      if(f1>=c1  && f2>=c2  &&  tot>=(c1+c2))
+      {
+          mn=min(mn,mid);
+          hi=mid-1;
+      }
+      else  lo=mid+1;
+  }
+  cout<<mn;
+
+   return 0;
+
+}

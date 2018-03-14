@@ -1,0 +1,55 @@
+struct trie {
+    int nxt[3], ep;
+    trie(){
+        memset(nxt, -1, sizeof nxt);
+        ep = 0;
+    }
+} ar[2000001];
+char pp[600011];
+int cnt = 0;
+void insert(char *s, int idx){
+    if(s[0] == '\0'){
+        ar[idx].ep = 1;
+        return;
+    }
+    int x = s[0] - 'a';
+    if(ar[idx].nxt[x] == -1) {
+        cnt++;
+        ar[cnt] = trie();
+        ar[idx].nxt[x] = cnt;
+    }
+    insert(s + 1, ar[idx].nxt[x]);
+}
+int query(char *s, int idx, int q){
+    if(s[0] == '\0'){
+        if(q == 1 && ar[idx].ep == 1) return 1;
+        return 0;
+    }
+    int x = s[0] - 'a';
+    REP(i, 3){
+        if(i != x && q == 0 && ar[idx].nxt[i] != -1) {
+            if(query(s + 1, ar[idx].nxt[i], 1)) return 1;
+        }
+        if(i == x && ar[idx].nxt[x] != -1){
+            if(query(s + 1, ar[idx].nxt[x], q)) return 1;
+        }
+    }
+    return 0;
+}
+int main() {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    int n, m; cin >> n >> m;
+    ar[0] = trie();
+
+
+    cout<<ar[0]<<endl;
+    REP(i, n){
+        cin >> pp;
+        insert(pp, 0);
+    }
+    REP(i, m){
+        cin >> pp;
+        if(query(pp, 0, 0) == 1) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+}

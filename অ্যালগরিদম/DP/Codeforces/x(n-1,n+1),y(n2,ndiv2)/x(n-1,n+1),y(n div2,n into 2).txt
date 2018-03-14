@@ -1,0 +1,30 @@
+LL go(LL n)
+{
+   if(n==1)  return a;
+
+   LL &ret=ar[n]; if(ret!=-1)  return ret;
+   ret=0;
+
+   if(n%2==1)
+   {
+       ret=min(a+go(n-1),a+go(n+1));
+   }
+   else ret=min(a*(n/2) ,b)  +   go(n/2);
+
+   return ret;
+}
+int main()
+{
+  // fastinput;
+
+  mem(ar,-1);
+
+   cin>>n>>a>>b;
+
+   cout<<go(n);
+
+
+
+   return 0;
+
+}

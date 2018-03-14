@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int graph[109][109];
+int visited[109];
+vector<int>v;
+int n,e;
+void dfs(int u)
+{
+    if(visited[u]) return;
+    visited[u]=1;
+    for(int i=1;i<=n;i++)
+    {
+        if(graph[u][i]) dfs(i);
+    }
+    v.push_back(u);
+}
+ 
+int main()
+{
+    int i,j,k,m,d,x,y;
+    while(cin>>n>>e)
+    {
+        if(n==0&&e==0) break;
+        memset(graph,0,sizeof(graph));
+        memset(visited,0,sizeof(visited));
+        for(i=0;i<e;i++)
+        {
+            cin>>x>>y;
+            graph[x][y]=1;
+        }
+        for(i=1;i<=n;i++)
+        {
+            if(visited[i]==0)
+                dfs(i);
+        }
+        printf("%d",v[n-1]);
+        for(i=n-2;i>=0;i--)
+            printf(" %d",v[i]);
+            puts("");
+        v.clear();
+    }
+    return 0;
+}

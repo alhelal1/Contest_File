@@ -1,0 +1,51 @@
+vector<LL>v[5005];
+LL  go(LL idx)
+{
+
+    if(idx==n)  return 0LL;
+
+    LL &ret=dp[idx]; if(ret!=-1)  return ret;
+    //ret=0;
+    ret=go(idx+1);
+    mem(A,false); LL cnt=0,r=0;
+    for(int i=idx;i<n;i++)
+    {
+        A[ar[i]]++;
+        if(A[ar[i]]==1)r^=ar[i],cnt++;
+        LL  aa=v[ ar[i] ].size();
+        if(v[ar[i] ][0]>=idx  and v[ar[i]][--aa]==i)  cnt--;
+
+        if(not cnt)  ret=max(ret,r+go(i+1));
+    }
+
+    return ret;
+
+
+
+}
+int main()
+{
+    //READ;
+   // ios_base::sync_with_stdio(false); cin.tie(false);
+
+     mem(dp,-1);
+
+
+     cin>>n;rep(i,n)  cin>>ar[i];
+     rep(i,n)
+     {
+         v[ ar[i] ].pb(i);
+     }
+     //rep(i,n)A[ar[i]]++;
+
+
+
+
+     pf(go(0));nl;
+
+
+
+
+
+     return 0;
+}

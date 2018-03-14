@@ -1,0 +1,135 @@
+struct inf1{
+   double tn,cc;
+}inff[100010];
+
+vector<double>a0,b0;
+
+
+bool com(inf1 a,inf1 b)
+{
+    return (a.tn<b.tn) or (a.tn==b.tn and a.cc<b.cc);
+}
+
+
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+    int  t,n,m;
+    double a,b,c;
+
+    cin>>t;
+    while(t--)
+    {
+
+
+        a0.clear();
+        b0.clear();
+       cin>>n;
+       int x,y,z;
+       x=y=z=0;
+       for(int i=0;i<n;i++){
+        cin>>a>>b>>c;
+        if(a!=0&&b!=0){
+            inff[x].tn=double(double(a)/double(b));
+            inff[x++].cc=double(c/b);
+        }
+        else if(a==0){
+            a0.push_back(double(c)/double(b));
+        }
+        else {
+            b0.push_back(double(c)/double(a));
+        }
+       }
+       sort(a0.begin(),a0.end());
+       sort(b0.begin(),b0.end());
+
+
+       sort(inff,inff+x,com);
+       ll cnt;
+
+       ll mx=0;
+
+
+       set<double>st;
+       st.clear();
+       if(x>0)
+       st.insert(inff[0].cc);
+
+
+      for(int i=1;i<x;i++)
+       {
+
+           if(inff[i].tn==inff[i-1].tn)
+           {
+              // cnt++;
+
+
+              st.insert(inff[i].cc);
+
+
+           }
+
+           else
+           {
+
+               ll aa=st.size();
+               mx=max(mx,aa);
+               st.clear();
+
+
+               st.insert(inff[i].cc);
+
+               //cnt=1;
+           }
+       }
+
+       ll aa=st.size();
+
+       mx=max(mx,aa);
+
+       cnt=1;
+
+       for(int i=1;i<a0.size();i++)
+       {
+           //cout<<inff[i].tn<<" "<<inff[i].c   c<<endl;
+
+           if(a0[i]!=a0[i-1])
+           {
+               cnt++;
+           }
+
+       }
+
+       mx=max(mx,cnt);
+
+
+
+       cnt=1;
+
+       for(int i=1;i<b0.size();i++)
+       {
+           //cout<<inff[i].tn<<" "<<inff[i].cc<<endl;
+
+           if(b0[i]!=b0[i-1])
+           {
+               cnt++;
+           }
+       }
+
+       mx=max(mx,cnt);
+
+       cout<<mx<<endl;
+
+
+
+
+
+
+    }
+
+
+   return 0;
+
+}

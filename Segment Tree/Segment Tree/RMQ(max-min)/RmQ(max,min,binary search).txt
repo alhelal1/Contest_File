@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<bitset>
+#include<algorithm>
+#include<iostream>
+#include<vector>
+#define pb push_back
+#define mp make_pair
+#define fs first
+#define sc second
+using namespace std;
+
+#define Nmax 200100
+#define Lmax 20
+
+int rmqa[Lmax][Nmax],rmqb[Lmax][Nmax],a[Nmax],b[Nmax],lg[Nmax],N;
+long long rez;
+ 
+void genLog(){
+    for(int i=2;i<=N;++i) {
+        lg[i] = lg[i/2]+1;
+    }
+}
+ 
+void genRmqA() {
+    for(int i=1;i<=N;++i) {
+        rmqa[0][i] = a[i];
+    }
+    for(int i=1;(1<<i)<=N;++i) {
+        for(int j=1;j+(1<<i)-1<=N;++j) {
+            rmqa[i][j] = max(rmqa[i-1][j],rmqa[i-1][j+((1<<(i-1)))]);
+        }
+    }
+}
+
+void genRmqB() {
+    for(int i=1;i<=N;++i) {
+        rmqb[0][i] = b[i];
+    }
+    for(int i=1;(1<<i)<=N;++i) {
+        for(int j=1;j+(1<<i)-1<=N;++j) {
+            rmqb[i][j] = min(rmqb[i-1][j],rmqb[i-1][j+((1<<(i-1)))]);
+        }
+    }
+}
+
+int queryA(int x,int y) {
+    int maxi = lg[y-x+1];
+    int sh = y-x+1-(1<<maxi);
+    return max(rmqa[maxi][x], rmqa[maxi][x+sh]);
+}
+
+int queryB(int x,int y) {
+    int maxi = lg[y-x+1];
+    int sh = y-x+1-(1<<maxi);
+    return min(rmqb[maxi][x], rmqb[maxi][x+sh]);
+}
+
+int main() {
+    cin>>N;
+    for(int i=1;i<=N;++i) {
+        cin>>a[i];
+    }
+    for(int i=1;i<=N;++i) {
+        cin>>b[i];
+    }
+    genLog();
+    genRmqA();
+    genRmqB();
+    
+    for(int l=1;l<=N;++l) {
+        int st = l, dr = N, ret1 = -1;
+        while(st <= dr) {
+            int mij = (st+dr)/2;
+            int A = queryA(l,mij);
+            int B = queryB(l,mij);
+            if(A==B) ret1 = mij;
+            if(A>=B) {
+                dr = mij-1;
+            } else {
+                st = mij+1;
+            }
+        }
+        st = l, dr = N;
+        int ret2 = -1;
+        while(st <= dr) {
+            int mij = (st+dr)/2;
+            int A = queryA(l,mij);
+            int B = queryB(l,mij);
+            if(A==B) ret2 = mij;
+            if(A<=B) {
+                st = mij+1;
+            } else {
+                dr = mij-1;
+            }
+        }
+        if(ret1 != -1) {
+            rez += (ret2 - ret1 + 1);
+        }
+    }
+    cout<<rez;
+    
+    return 0;
+}

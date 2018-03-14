@@ -1,0 +1,50 @@
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+bool isprime[5000005];
+int prime[1000000];
+const int maxm = 5000000;
+int primecnt;
+void init()
+{
+    primecnt=0;
+    memset(isprime,1,sizeof(isprime));
+    for(int i=2;i*i<=maxm;i++)
+    if(isprime[i])
+    for(int j=i*i;j<=maxm;j+=i) isprime[j]=0;
+    for(int i=2;i<=maxm;i++) if(isprime[i]) prime[++primecnt]=i;
+}
+int build(int n)
+{
+    int cnt=0;
+    for(int i=1;prime[i]*prime[i]<=n;i++)
+    while(n%prime[i]==0)
+    {
+        n/=prime[i];
+        cnt++;
+    }
+    if(n>1) cnt++;
+    return cnt;
+}
+int a[5000005];
+int main()
+{
+    init();
+    a[1]=0;
+    for(int i=2;i<=5000000;i++)
+    {
+        a[i]=build(i);
+        a[i]+=a[i-1];
+    }
+   // return 0;
+   // printf("%d\n",a[5000000]);
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int r,l;
+        scanf("%d %d",&r,&l);
+        printf("%d\n",a[r]-a[l]);
+    }
+}

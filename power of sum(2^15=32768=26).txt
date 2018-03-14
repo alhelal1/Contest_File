@@ -1,0 +1,28 @@
+int main()
+{
+    int i,j,k,d,n;
+    int nn;
+    cin>>nn;///2^(10000) anane n=10000;
+    int mm;
+    cin>>mm;///mai je power ar sum ber korte chai tar num
+        vector<int>v; v.pb(mm);
+
+        for(i=0;i<nn-1;i++)/// ami 1 ta already vec a push koresi tai akta kom nilam
+        {
+           int m=v.size();
+           int rem=0;
+           for(j=0;j<m;j++)
+           {
+              int p=v[j]*mm+rem;
+              v[j]=p%10;
+              rem=p/10;
+              if(j==m-1&&rem!=0)
+              v.pb(rem);
+           }
+        }
+        int sum=0;
+        for(i=v.size()-1;i>=0;i--)
+            sum=sum+v[i];
+        cout<<sum<<endl;
+    return 0;
+}

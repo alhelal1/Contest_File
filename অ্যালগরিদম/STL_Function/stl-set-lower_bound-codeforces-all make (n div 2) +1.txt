@@ -1,0 +1,36 @@
+multiset<LL>st;
+int main()
+{
+  // fastinput;
+
+     cin>>n;  rep(i,n)
+     {
+         cin>>a;st.insert(a);
+     }
+     multiset<LL>::iterator it;
+     LL aa=1e18*1LL;
+
+
+     while(true)
+     {
+         it=st.lower_bound(aa);
+         it--;
+         LL bb=*it;
+         LL aa=bb;
+         bb/=2;
+         while(st.find(bb)!=st.end())   bb/=2;
+         if(bb==0)  break;
+         st.erase(aa);
+         st.insert(bb);
+
+
+
+     }
+
+     for(it=st.begin();it!=st.end();it++) cout<<*it<<" ";
+
+
+
+   return 0;
+
+}

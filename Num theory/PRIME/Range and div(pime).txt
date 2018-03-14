@@ -1,0 +1,107 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i,n)      for(int i(0),_n(n);i<_n;++i)
+#define repr(i,n)     for(int i=n;i>=0;i--)
+#define repi(i,a,b)   for(int i(a),_b(b);i<=_b;++i)
+#define repl(i,n)     for(int i(1),_n(n);i<=_n;++i)
+#define repir(i,a,b)  for(int i=a;i>=b;i--)
+#define chk(a,k) ((bool)(a&(1<<(k))))
+#define off(a,k) (a&(~(1<<(k))))
+#define on(a,k) (a|(1<<(k)))
+#define ll long long
+#define ff            first
+#define ss            second
+#define all(a)        a.begin(),a.end()
+#define mem(x,a)      memset(x,a,sizeof(x))
+#define repe(it,c)    for(__typeof((c).begin()) it=(c).begin();it!=(c).end();++it)
+int dx[]={0,0,1,-1,1,-1,1,-1},dy[]={1,-1,0,0,1,-1,-1,1};
+typedef vector<int> vi;
+typedef vector<long> vl;
+typedef vector<long long> vll;
+typedef vector<string> vs;
+typedef vector<vector<int> > vvi;
+template<class T> void cmin(T &a,T b){if(b<a) a=b;}
+template<class T> void cmax(T &a,T b){if(b>a) a=b;}
+template<class T> int len(const T&c){return (int)c.size();}
+template<class T> int len(char c[]){return (int)strlen(c);}
+string itos(long n){string s;while(n){s+=(n%10+48);n/=10;}reverse(all(s));return s;}
+long stoi(string s){long n=0;rep(i,len(s))n=n*10+(s[i]-48);return n;}
+
+long mx=10000000,pri[700000],pricnt;
+int status[312505]={0};
+bool check(long n, long p)
+{
+    return (n&(1<<p));
+}
+void sieve()
+{
+    long l=long(sqrt(mx));
+    for(long i=3;i<=l;i+=2)
+    {
+        if(check(status[i>>5],i%31)==0)
+        {
+            for(long j=i*i;j<=mx;j+=2*i)
+            {
+                status[j>>5]=(status[j>>5]|(1<<(j%31)));
+            }
+        }
+    }
+    pri[0]=2;
+    pricnt=1;
+    for(long i=3;i<=mx;i+=2)
+    {
+        if(check(status[i/32],i%31)==0)
+            pri[pricnt++]=i;
+    }
+}
+long ar[10000004],sum[10000004]={0};
+void pro(long n)
+{
+
+    for(long j=0;pri[j]*pri[j]<=n;j++)
+    {
+        if(n%pri[j]==0)
+        {
+            while(n%pri[j]==0)
+            {
+                n/=pri[j];
+            }
+            ar[pri[j]]++;
+        }
+    }
+    if(n>1){
+       ar[n]++;
+    }
+}
+
+
+int main()
+{
+    sieve();
+    long n,m,poo;
+    scanf("%ld",&n);
+    rep(i,n)
+    {
+        scanf("%ld",&m);
+        pro(m);
+    }
+    sum[0]=0;
+    for(int i=2;i<=10000000;i++)
+    {
+        sum[i]=sum[i-1]+ar[i];
+    }
+    long q,a,b;
+    long long l,r;
+    scanf("%ld",&q);
+    rep(i,q)
+    {
+        scanf("%I64d %I64d",&l,&r);
+        long long aa=min(l,10000000LL);
+        long long bb=min(r,10000000LL);
+        cout<<sum[r]-sum[l-1]<<endl;
+    }
+
+
+
+return 0;
+}

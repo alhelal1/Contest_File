@@ -1,0 +1,120 @@
+ll ar[2000005],dp[2000005];
+ll a=0,b=0,c=0,r=0,rr=0,res=0,n,m;
+
+//string s,s1,s2;
+
+vi v[100005],cost[100005];
+
+
+
+struct data
+{
+
+    int city,dist;
+    data(int a,int b)
+    {
+        city = a;
+        dist = b;
+
+    }
+    bool operator < (const data& p) const
+    {
+
+        return dist>p.dist;
+    }
+};
+
+
+
+ll go(ll src,ll dest)
+{
+    priority_queue<data>pq;
+
+    pq.push(data(src,0));
+
+
+    dp[src]=0;
+
+    while(len(pq)>0)
+    {
+        data dd=pq.top();
+        pq.pop();
+        ll aa=dd.city;
+
+        if(aa==dest)
+        {
+
+           // d1(dp[dest]);
+
+          // d1(aa);
+            return dp[dest];
+        }
+
+        rep(i,len(v[aa]))
+        {
+            ll bb=v[aa][i];
+
+            if(dp[bb]>dp[aa]+cost[aa][i])
+            {
+                ar[bb]=aa;
+                dp[bb]=dp[aa]+cost[aa][i];
+
+                pq.push(data(bb,dp[bb]));
+            }
+        }
+    }
+
+    return -1;
+}
+
+
+void print(ll val)
+{
+    if(val==-1)return ;
+    print(ar[val]);
+
+    cout<<val<<" ";
+}
+
+int main()
+{
+
+   //Fast;
+
+
+   cin>>n>>m;
+
+   rep(i,m)
+   {
+       cin>>a>>b>>c;
+
+       v[a].pb(b);
+       v[b].pb(a);
+
+       cost[a].pb(c);
+       cost[b].pb(c);
+   }
+
+
+   mem(dp,1000000);
+
+   mem(ar,-1);
+
+
+
+
+   ll ans=go(1,n);
+
+   if(ans==-1)cout<<-1;
+   else
+   //cout<<ans;
+
+   print(n);
+
+
+
+
+
+   return 0;
+
+}

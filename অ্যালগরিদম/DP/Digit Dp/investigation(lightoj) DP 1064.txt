@@ -1,0 +1,69 @@
+#define M 100005
+#define MD 1000000007LL
+ 
+int p[2][2][10][90][90],cs;
+int bl[2][2][10][90][90];
+char a[11],b[11];
+int K;
+ 
+int dp(bool bg,bool sm,int i,int md,int s)
+{
+    if(i==10)
+    {
+        if(md==0&&s==0)
+            return 1;
+        return 0;
+    }
+ 
+    int &pr=p[bg][sm][i][md][s];
+    if(bl[bg][sm][i][md][s]==cs)
+        return pr;
+    bl[bg][sm][i][md][s]=cs;
+    pr=0;
+ 
+ 
+    int mn,mx;
+    bool nsm,nbg;
+ 
+    mn=(bg==1)?0:a[i]-'0';
+    mx=(sm==1)?9:b[i]-'0';
+ 
+    for(int k=mn;k<=mx;k++)
+    {
+        nbg=(bg==1)?1:(k>mn);
+        nsm=(sm==1)?1:(k<mx);
+ 
+        pr+=dp(nbg,nsm,i+1, (md*10+k)%K , (s+k)%K );
+    }
+    return pr;
+}
+ 
+int main()
+{
+    int t,i,j;
+    int u,v;
+    cs=1;
+ 
+    sc(t);
+    while(t--)
+    {
+        sc3(u,v,K);
+        for(i=9;i>-1;i--)
+        {
+            a[i]=u%10+'0';
+            b[i]=v%10+'0';
+            u/=10;
+            v/=10;
+        }
+//        cout<<a<<" "<<b<<endl;
+ 
+        if(K>81)
+            printf("Case %d: 0\n",cs);
+        else
+            printf("Case %d: %d\n",cs,dp(0,0,0,0,0));
+        cs++;
+    }
+ 
+    return 0;
+}
+ 

@@ -1,0 +1,77 @@
+/**Bismillahir Rahmanir Rahim**/
+#include <set>
+#include <map>
+#include <cmath>
+#include <ctime>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <string>
+#include <cctype>
+#include <cstdio>
+#include <iomanip>
+#include <sstream>
+#include <cstdlib>
+#include <cassert>
+#include <climits>
+#include <complex>
+#include <numeric>
+#include <valarray>
+#include <iostream>
+#include <memory.h>
+#include <algorithm>
+#define MX 100005
+using namespace std;
+long ar[MX];
+struct st{
+ long long sum,prop;
+}tree[MX*3];
+void make_tree(int l,int r,int node)
+{
+    if(l==r)
+    {
+        tree[node].sum=ar[l];
+        return ;
+    }
+    int mid=(l+r)/2;
+    int left=2*node;
+    int right=left+1;
+    make_tree(l,mid,left);
+    make_tree(mid+1,r,right);
+    tree[node].sum=tree[left].sum+tree[right].sum;
+}
+void update(int l,int r,int i,int j,int node,long value)
+{
+    if(r<i||l>j) return ;
+    if(l>=i&&r<=j)
+    {
+        tree[node].sum+=value*(r-l+1);
+        tree[node].prop+=value;
+        return;
+    }
+    int mid=(l+r)/2;
+    int left=2*node;
+    int right=left+1;
+    update(l,mid,i,j,left,value);
+    update(mid+1,r,i,j,right,value);
+    tree[node].sum=tree[left].sum+tree[right].sum+(r-l+1)*tree[node].prop;
+}
+long long query(int l,int r,int i,int j,int node,long carry)
+{
+    if(r<i||l>j) return 0;
+    if(l>=i&&r<=j)
+    {
+        return tree[node].sum+carry*(r-l+1);
+    }
+    int mid=(l+r)/2;
+    int left=2*node;
+    int right=left+1;
+    long long s1=query(l,mid,i,j,left,carry+tree[node].prop);
+    long long s2=query(mid+1,r,i,j,right,carry+tree[node].prop);
+    return s1+s2;
+}
+int main()
+{
+
+    return 0;
+}

@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <set>
+using namespace std;
+
+char s[100010];
+int size;
+pair<int, int> cont[32];
+
+bool comp(pair<int, int> a, pair<int, int> b) {
+    if(a.second == b.second) {
+        return a.first < b.first;
+    } else {
+        return a.second > b.second;
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        for(int i=0; i<32; i++) {
+            cont[i].first = i;
+            cont[i].second = 0;
+        }
+
+        scanf("%s", s);
+        size = strlen(s);
+        for(int i=0; i<size; i++) {
+            cont[ s[i]-'a' ].second++;
+        }
+        sort(cont, cont+32, comp);
+        //for(int i=0; i<32; i++) printf("%c %d\n", cont[i].first+'a', cont[i].second);
+
+        if((size%2 == 0 and cont[0].second > size/2) or (size%2 == 1 and cont[0].second > size/2+1)) {
+            printf("%d\n", -1);
+            continue;
+        }
+
+        int pos = 0;
+        for(int i=0; i<32; i++) {
+            while(cont[i].second--) {
+                s[pos] = cont[i].first+'a';
+
+                pos += 2;
+                if(pos >= size) {
+                    pos = 1;
+                }
+            }
+        }
+        printf("%s\n", s);
+    }
+}

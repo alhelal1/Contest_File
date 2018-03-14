@@ -1,0 +1,30 @@
+
+long long num_of_divisors(long long n)
+{
+    long long c=0,res=1;
+    if(n%2==0)
+    {
+        c=0;
+        while(n%2==0)
+        {
+            n=n/2;
+            c++;
+        }
+        res*=(c+1);
+    }
+    for(long long p=3;p<=sqrt(n);p+=2)
+    {
+        if(n%p==0)
+        {
+            c=0;
+            while(n%p==0)
+            {
+                n/=p;
+                c++;
+            }
+            res*=(c+1);
+        }
+    }
+    if(n>1) res=res*2;
+    return res;
+}

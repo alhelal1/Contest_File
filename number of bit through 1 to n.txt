@@ -1,0 +1,14 @@
+long long pro(long long n)
+{
+    if(n<=0) return 0;
+    if(n==1) return 1;
+    if(n==2) return 2;
+    long long s=0;
+    for(long i=0;;i++)
+    {
+        if(n<(1LL<<(i+1)))
+            return s+=1+(n-(1LL<<(i)))+pro(n-(1LL<<(i)));
+        else
+            s+=s+(1LL<<i);
+    }
+}

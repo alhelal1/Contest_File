@@ -1,0 +1,49 @@
+LL ar[1001],dp[1001][1001];
+LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0,w;
+string  s;
+
+
+LL go(LL idx,LL f)
+{
+
+
+    //if(idx>n)return 100000000;
+
+
+    if(idx==(n))  return 0;
+    LL &ret=dp[idx][f];
+
+    if(ret!=-1)      return ret;
+
+    ret=1000000000LL;
+    if((idx+f+1)<=(n))
+    {
+        ret=min(ret,ar[idx+f+1]+go(idx+f+1,f+1));
+    }
+    if(idx-f!=idx  and idx-f>=1)
+    {
+        ret=min(ret,ar[idx-f]+go(idx-f,f));
+    }
+
+    return ret;
+
+
+}
+
+int main()
+{
+    //Fast;
+   R(t);
+    while(t--)
+    {
+        mem(dp,-1);
+       R(n);
+
+        repp(i,n)  R(ar[i]);
+
+        case(ks);
+        printf("%lld\n",go(1,0));
+    }
+   return 0;
+
+}

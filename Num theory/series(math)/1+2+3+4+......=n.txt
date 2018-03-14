@@ -1,0 +1,4 @@
+ll s,x;
+       cin>>x;
+       s = (-1 + sqrt(1. + 8*x))/2.;
+       cout<<s;

@@ -1,0 +1,41 @@
+int main()
+{
+
+    cin>>t;
+    br[0]=1,br[1]=1,br[2]=2;
+
+    for(int  i=3;i<=10000;i++ )
+    {
+        br[i]=(br[i-1]*i)%MOD;
+    }
+    while(t--)
+    {
+        r=0;
+        c=0;
+        rep(i,27)  ar[i]=0;
+        cin>>s;  reps(i,s)ar[s[i]-'a']++;
+        rep(i,27)  if(ar[i]%2==1)
+        {
+            r+=(ar[i]/2);
+            c++;
+        }
+        else  r+=ar[i]/2;
+        case(ks);
+        if(c>1) puts("0");
+        else
+        {
+            rr=(br[r]);
+            rep(i,27)
+            {
+                if(ar[i]<=1)  continue;
+                rr=rr*big_mod(br[ar[i]/2LL],MOD-2,MOD);
+                 rr%=MOD;
+            }
+        }
+        if(c<=1)  cout<<rr<<endl;
+
+    }
+
+   return 0;
+
+}

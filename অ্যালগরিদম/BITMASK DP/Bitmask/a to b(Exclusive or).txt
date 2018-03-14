@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+#include <algorithm>
+#include <math.h>
+#include <memory.h>
+
+
+using namespace std;
+
+int main()
+{
+    unsigned long long L, R;
+    cin >> L >> R;
+    unsigned long long res = 0;
+    for (int i = 62; i >= 0; i--)
+        if ( (L & (1LL<<i)) != (R & (1LL<<i)) )
+        {
+            res = 1LL << (i+1);
+            res--;
+            break;
+        }
+    cout << res << "\n";
+    
+
+    return 0;
+}

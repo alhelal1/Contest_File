@@ -1,0 +1,27 @@
+long long npr(long n,long r)
+{
+    long long ret=1,i;
+    for(i=1;i<=r;i++) ret*=(n-i+1); return ret;
+}
+
+
+long c[61][61];
+void ncrdp()
+{
+    long i,j;
+    for(i=0;i<=50;i++)
+    {
+        c[i][0]=c[i][i]=1;
+        for(j=1;j<i;j++)
+        c[i][j]=c[i-1][j]+c[i-1][j-1];
+    }
+}
+long long ncr(long n,long r)
+{
+    long long ret=1,i;
+    for(i=1;i<=r;i++){
+    ret*=(n-i+1);
+    ret/=i;
+    }
+    return ret;
+}

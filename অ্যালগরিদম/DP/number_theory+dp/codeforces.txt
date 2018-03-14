@@ -1,0 +1,62 @@
+void   prime()
+{
+   for(int i=1;i<=N;i++)ar[i]=i;
+   for(int i=2;i*i<=N;i++)
+   {
+       if(ar[i]!=i) continue;
+       for(int j=i;j<=N;j+=(i))
+        ar[j]=min(i*1LL,ar[j]);
+   }
+
+
+   // rep(i,10)F(ar[i]);
+}
+
+LL  nc2(LL f,LL ff)
+{
+    ff--;
+    LL dd=f*ff;
+    return dd/2LL;
+}
+LL dp[N];
+LL go(LL idx)
+{
+    if(idx==1)return 0LL;
+            LL &ret=dp[idx]; if(ret!=-1)return dp[idx];
+            if(idx==ar[idx])return nc2(idx,idx);
+            ret=inf;
+            ret=min(ret,nc2(idx,idx));
+            ret=min(ret,go(idx/ar[idx])+nc2(idx,ar[idx]));
+            return ret;
+}
+int main()
+{
+    //IOS;//READ;
+    mem(dp,-1);
+    prime();
+
+    //F(go(3));
+    for(int i=2;i<=N;i++)
+    {
+
+        A[i]=go(i);
+        A[i]%=MOD;
+
+    }
+
+
+
+    cin>>t>>n>>m;
+    LL tt=1;
+    LL ret=0;
+    for(LL i=n;i<=m;i++)
+    {
+        ret=ret+(A[i]*tt)%MOD; ret%=MOD;
+        //F(ret);
+        tt=tt*t; tt%=MOD;
+    }
+    cout<<ret;
+
+     return 0;
+}
+///============= ALLAH HAFIZ ===================///

@@ -1,0 +1,45 @@
+string s,s1,s2;
+
+
+
+int main()
+{
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(false);
+
+
+    cin>>n;
+    while(n--)
+    {
+
+        cin>>s>>s1;
+
+        ll f=0;
+
+        if(len(s)!=len(s1))f=1;
+        else
+        {
+            s=s+s;
+            ll aa=s.find(s1);
+
+
+            if(s.find(s1)<=len(s))
+            {
+                f=0;
+            }
+            else f=1;
+
+
+
+        }
+
+
+        if(!f)printf("YES\n");
+        else printf("NO\n");
+    }
+
+
+
+   return 0;
+
+}

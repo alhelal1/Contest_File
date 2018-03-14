@@ -1,0 +1,66 @@
+/*
+Problem: http://lightoj.com/volume_showproblem.php?problem=1112
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int tree[100009],n;
+void update(int idx,int val)
+{
+    while(idx<=n)
+    {
+        tree[idx]+=val;
+        idx+=idx&-idx;
+    }
+}
+ 
+int query(int idx)
+{
+    int ret=0;
+    while(idx>0)
+    {
+        ret+=tree[idx];
+        idx-=idx&-idx;
+    }
+    return ret;
+}
+ 
+int main()
+{
+    int i,j,k,q,m,d,test,t=0,x,y,z;
+    scanf("%d",&test);
+    while(test--)
+    {
+        memset(tree,0,sizeof(tree));
+        scanf("%d%d",&n,&q);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&d);
+            update(i,d);
+        }
+        printf("Case %d:\n",++t);
+        while(q--)
+        {
+            scanf("%d",&d);
+            if(d==1)
+            {
+                scanf("%d",&x);
+                int ans=query(x+1)-query(x);
+                printf("%d\n",ans);
+                update(x+1,-ans);
+            }
+            else if(d==2)
+            {
+                scanf("%d%d",&x,&y);
+                update(x+1,y);
+            }
+            else
+            {
+                scanf("%d%d",&x,&y);
+                printf("%d\n",query(y+1)-query(x));
+            }
+        }
+    }
+    return 0;
+}

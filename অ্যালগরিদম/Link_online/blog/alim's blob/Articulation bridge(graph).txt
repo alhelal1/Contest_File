@@ -1,0 +1,93 @@
+/*
+Algorithm: Articulation Bridge
+Problem: Lightoj-1026
+ 
+An Articulation bridge in a connected graph is an edge that,
+if delete, would break the graph into two or more pieces.
+ 
+Input: An undirected graph G(V,E)
+Output: Number of Articulation Bridge and Show the edges
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+struct info
+{
+    int x,y;
+};
+info p[100009];
+ 
+int node,edge;
+vector<int>adj[100009];
+int discovery[10009];
+int low[10009];
+int tt=0;
+int kk=0;
+ 
+bool better(info r1,info r2)
+{
+    if(r1.x<r2.x) return 1;
+    if(r1.x==r2.x&&r1.y<r2.y) return 1;
+    return 0;
+}
+ 
+void articulation_bridge(int u,int parent)
+{
+    discovery[u]=++tt;
+    low[u]=discovery[u];
+    int sz=adj[u].size();
+    for(int i=0;i<sz;i++)
+    {
+        int v=adj[u][i];
+        if(low[v]==-1) // a tree-edge
+        {
+            articulation_bridge(v,u);
+            low[u]=min(low[u],low[v]);
+            if(low[v]>discovery[u])
+            {
+                int temp1=u,temp2=v;
+                if(temp1>=temp2) swap(temp1,temp2);
+                p[kk].x=temp1;
+                p[kk].y=temp2;
+                kk++;
+            }
+        }
+        else if(v!=parent) //a back-edge
+            low[u]=min(low[u],discovery[v]);
+    }
+}
+ 
+int main()
+{
+    int i,j,k,n,m,test,t=0,x,y,q;
+    string s;
+    scanf("%d",&test);
+    while(test--)
+    {
+        scanf("%d%d",&node,&edge);
+        tt=0; kk=0;
+        memset(low,-1,sizeof(low));
+        memset(discovery,0,sizeof(discovery));
+        for(i=0;i<edge;i++)
+        {
+            scanf("%d%d",&x,&y);
+            adj[x].push_back(y);
+            adj[y].push_back(x);
+        }
+        for(i=1;i<=node;i++)
+        {
+            if(low[i]==-1)
+                articulation_bridge(i,i);
+        }
+        sort(p,p+kk,better);
+        printf("Case %d:\n%d critical links\n",++t,kk);
+        for(i=0;i<kk;i++)
+        {
+            printf("%d - %d\n",p[i].x,p[i].y);
+        }
+        for(i=0;i<=100004;i++)
+            adj[i].clear();
+    }
+    return 0;
+}

@@ -1,0 +1,86 @@
+LL ar[100001],br[100001],par[100005];
+LL a=0,b=0,c=0,r=0,rr=0,res=0,n,m,t=0,ks=0,w;
+string  s;
+
+
+
+LL find(LL x)
+{
+    if(par[x]==x) return x;
+    else
+    {
+      return par[x]=find(par[x]);
+    }
+}
+int main()
+{
+    //Fast;
+
+    R(t);
+    while(t--)
+    {
+
+        R(n);R(m);
+        rep(i,n+2)par[i]=i;
+
+        mem(br,false);
+        mem(ar,false);
+
+        rep(i,n)  R(ar[i]);
+
+        r=0;
+
+
+        rep(i,m)
+        {
+            R(a);R(b);a--;
+
+            LL aa=find(a);
+
+            while(aa<n)
+            {
+
+               // DD(b,aa);
+                if( (br[aa]+b) >=ar[aa]  and aa<n  and b>0)
+                {
+
+                    b=b-(ar[aa]-br[aa]);
+                    br[aa]=ar[aa];
+                    LL bb=find(aa+1);
+
+                    par[aa]=bb;
+
+                    aa=bb;
+                   // D(aa);
+                }
+
+                else
+                {
+                    br[aa]+=b;
+
+                    b=0;
+                    break;
+                }
+            }
+
+
+        r+=b;
+
+        }
+
+        P(r);
+
+        rep(i,n)
+        {
+            if(i)printf(" ");
+            printf("%lld",br[i]);
+        }
+
+        printf("\n");
+
+
+    }
+
+   return 0;
+
+}

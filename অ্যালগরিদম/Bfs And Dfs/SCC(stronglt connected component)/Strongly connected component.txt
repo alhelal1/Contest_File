@@ -1,0 +1,75 @@
+/*
+Related Problem: Uva 11838 - Come and Go, 11709 - Trust groups
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+vector<int>adj[2009];
+vector<int>radj[2009];
+int visited[2009];
+vector<int>v;
+int node,edge;
+void dfs(int u)
+{
+    if(visited[u]) return;
+    visited[u]=1;
+    int sz=adj[u].size();
+    for(int i=0;i<sz;i++)
+    {
+        int x=adj[u][i];
+        if(visited[x]==0) dfs(x);
+    }
+    v.push_back(u);
+}
+void adfs(int u)
+{
+    if(visited[u]) return;
+    visited[u]=1;
+    int sz=radj[u].size();
+    for(int i=0;i<sz;i++)
+    {
+        int x=radj[u][i];
+        if(visited[x]==0) adfs(x);
+    }
+}
+ 
+int main()
+{
+    int i,j,k,m,d,x,y,z;
+    while(cin>>node>>edge)
+    {
+        if(node==0&&edge==0) break;
+        memset(visited,0,sizeof(visited));
+        for(i=0;i<edge;i++)
+        {
+            cin>>x>>y;
+            adj[x].push_back(y);
+            radj[y].push_back(x);
+        }
+        for(i=1;i<=node;i++)
+        {
+            if(visited[i]==0)
+                dfs(i);
+        }
+        int co=0;
+        int sz=v.size();
+        reverse(v.begin(),v.end());
+        memset(visited,0,sizeof(visited));
+        for(i=0;i<sz;i++)
+        {
+            if(visited[v[i]]==0)
+            {
+                co++;
+                adfs(v[i]);
+            }
+        }
+        printf("SCC=%d\n",co);
+        v.clear();
+        for(i=0;i<2002;i++)
+            adj[i].clear();
+        for(i=0;i<2002;i++)
+            radj[i].clear();
+    }
+    return 0;
+}

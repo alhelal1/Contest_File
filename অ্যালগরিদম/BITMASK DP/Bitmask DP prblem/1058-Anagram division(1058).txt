@@ -1,0 +1,49 @@
+
+int   arr[1<<11][1002];
+int   vis[1<<11][1002],tt=1;
+string s;
+int   go(int mask,int tot,int cnt,int moD,int tt)
+{
+   if(mask==(1LL<<len(s))-1)
+   {
+       if(cnt==len(s)  )return tot==0;
+   }
+    int  &ret=arr[mask][tot];
+    if(vis[mask][tot]==tt) return ret;
+    vis[mask][tot]=tt;
+    int ar[12];
+    for(int i=0;i<11;i++)   ar[i]=0;
+    ret=0;
+     for(int i=0;i<s.size();i++)
+     {
+         int aa=s[i]-'0';
+         int  bb=mask&(1<<i);
+         int  cc=mask|(1<<i);
+         //if(cnt==0 and aa==0)  continue;
+         if(bb==0   and    ar[aa]==0)
+         {
+             ar[aa]=1;
+             ret+=go(cc,(tot*10+aa)%moD,cnt+1,moD,tt);
+         }
+     }
+     return ret;
+}
+int main()
+{
+   int m,i,ks=0,t;
+    cin>>t;
+    while(t--)
+    {
+    //memset(arr,-1,sizeof(arr));
+    cin>>s>>m;
+    //sort(all(s));
+    tt++;
+    sort(all(s));
+    printf("Case %d: ",++ks);
+    printf("%d\n",go(0,0,0,m,tt));
+    }
+
+
+   return 0;
+
+}

@@ -1,0 +1,3 @@
+string itos(long n){string s;while(n){s+=(n%10+48);n/=10;}reverse(all(s));return s;}
+
+long stoi(string s){long n=0;rep(i,len(s))n=n*10+(s[i]-48);return n;}
